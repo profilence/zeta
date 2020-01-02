@@ -1,0 +1,121 @@
+﻿syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.profilence.zeta";
+option java_outer_classname = "DriverProto";
+
+package profilence.zeta;
+
+import "wrappers.proto";
+import "empty.proto";
+
+message StartRunRequest {
+	string run_name = 1;
+	string set_name = 2;
+	string project = 3;
+	string version = 4;
+	string primary_device_serial = 5;
+	string secondary_device_serial = 6;
+	string profiling_settings = 7;
+	map<string, string> tags = 8;
+}
+
+message PingMessage {	
+}
+
+message PongMessage {	
+	int32 result = 1;
+}
+
+message StartRunResponse {
+	string run_id = 1;
+}
+
+message UseCaseStartRequest {
+	string run_id = 1;
+	string use_case_name = 2;
+	string use_case_id = 3;
+	string target_process = 4;
+	string requirement_id = 5;
+}
+
+message LogStepRequest {
+	string run_id = 1;
+	string step_name = 2;
+	bool result = 3;
+	bool take_screenshot = 4;	
+}
+
+message LogTraceRequest {
+	string run_id = 1;
+	string data = 2;
+}
+
+message UseCaseEndRequest {
+	string run_id = 1;
+	bool result = 2;
+	int64 activeRunTime = 3;
+	string fail_cause = 4;
+	bool reset_intended = 5;
+}
+
+message StopRunRequest {
+	string run_id = 1;
+	bool discard_results = 2;
+}
+
+message TestRequestAck {
+	string status = 1;
+	string run_id = 2;
+	repeated string log = 3;
+	bool result = 5;
+	string fail_cause = 6;
+}
+
+message TestRequest {	
+	string run_id = 24;
+	string run_name = 2;
+	string node_id = 5;
+	string parameters = 6;
+	string project = 10;
+	string version = 16;
+	string test_set_file_path = 12;
+	bytes payload = 14;
+	map<string, string> tags = 20;	
+}
+
+message NodeAdded {	
+	string node_id = 1;
+	string pool = 4;
+	string type = 5;
+	string variables = 6;
+}
+
+message NodeRemoved {	
+	string node_id = 1;
+}
+
+message NodeUpdated {	
+	string node_id = 1;
+	google.protobuf.StringValue current_use_case = 3;
+	google.protobuf.Int32Value run_state = 4;
+	google.protobuf.StringValue current_run_id = 5;
+	google.protobuf.Int32Value node_state = 6;
+	google.protobuf.StringValue pool = 7;
+	google.protobuf.StringValue variables = 8;
+}
+
+service ConnectorService{
+	rpc Ping(PingMessage) returns (PongMessage) { }
+	rpc StartRun(StartRunRequest) returns (StartRunResponse) { }
+	rpc OnUseCaseStart(UseCaseStartRequest) returns (google.protobuf.Empty) { }
+	rpc OnLogStep(LogStepRequest) returns (google.protobuf.Empty) { }
+	rpc LogTrace(LogTraceRequest) returns (google.protobuf.Empty) { }
+	rpc OnUseCaseEnd(UseCaseEndRequest) returns (google.protobuf.Empty) { }
+	rpc StopRun(StopRunRequest) returns (google.protobuf.Empty) { }
+	rpc SubscribeToTestRequests(google.protobuf.Empty) returns (stream TestRequest) { }
+	rpc RespondToTestRequest(TestRequestAck) returns (google.protobuf.Empty) { }
+	rpc AddNode(NodeAdded) returns (google.protobuf.Empty) { }
+	rpc RemoveNode(NodeRemoved) returns (google.protobuf.Empty) { }
+	rpc UpdateNode(NodeUpdated) returns (google.protobuf.Empty) { }
+}

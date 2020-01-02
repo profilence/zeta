@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project ZetaConnector">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="."/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/bin/zeta-connector-api-1.0.0.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="com.profilence.zeta.Connector"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${dir.workspace}/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/guava-23.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-protobuf-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-stub-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-api-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-context-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/protobuf-java-3.8.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-okhttp-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-core-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/opencensus-api-0.24.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/opencensus-contrib-grpc-metrics-0.24.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies//perfmark-api-0.20.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-netty-shaded-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/grpc-java/1.26/grpc-protobuf-lite-1.26.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/okio-2.4.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/dependencies/kotlin-stdlib-1.3.61.jar"/>
+        </jar>
+    </target>
+</project>
