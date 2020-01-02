@@ -1,4 +1,4 @@
-zeta
+Profilence ZETA
 ====
 
 Connector for test services
@@ -17,9 +17,14 @@ executed as such for testing the connection to the Zeta service, i.e:
 
 java –jar zeta-connector-api-1.0.0.jar localhost:50051
 
-*./java/src/com/profilence/*zeta -directory: Connector.java is the main
+*./java/src/com/profilence/zeta* -directory: Connector.java is the main
 class/file; otherwise the directory contains mostly protoc-generated code. The
 project files are currently for eclipse/ant
 
 For proto-code generation, run *./proto_compile/[win-x86_64\|linux\|mac]/
 java_compile.[bat\|sh]*
+
+
+Python client
+-----------
+TBD
