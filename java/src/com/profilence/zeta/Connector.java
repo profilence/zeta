@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.protobuf.Empty;
 import com.google.protobuf.Int32Value;
@@ -36,18 +38,47 @@ public class Connector {
 	
 	
 	public static void main(String[] args) throws Exception {
-		Connector.addLogger(new ILogger() {
-			@Override
-			public void onLogMessage(LogLevel level, String message) {
-				System.out.println(message);
+		if (args.length > 0) {
+			
+			Pattern p = Pattern.compile("([^:]+):([0-9]+)");
+			Matcher m;
+			String address;
+			int port;
+			
+			if (args.length >= 1 &&  (m = p.matcher(args[0])).find()) {
+				address = m.group(1);
+				port = Integer.parseInt(m.group(2));
+			} else if (args.length >= 2 && args[1].matches("[0-9]+")) {
+				address = args[0];
+				port = Integer.parseInt(args[1]);
+			} else {
+				System.out.println("Invalid parameters; give address and port for ping test: [address]:[port]");
+				return;
 			}
-		});
-		Connector client = new Connector("localhost", 50052);
-	    try {
-	      client.ping();
-	    } finally {
-	      client.shutdown();
-	    }
+			
+			Connector.addLogger(new ILogger() {
+				@Override
+				public void onLogMessage(LogLevel level, String message) {
+					System.out.println(message);
+				}
+			});
+			System.out.println("Connecting to " + address + ":" + port + " ...");
+			Connector client = new Connector(address, port);
+		    try {
+		    	System.out.println("Pinging ...");
+			    if (client.ping() != -1) {
+			    	System.out.println("Successfully pinged the service");
+			    } else {
+			        System.out.println("Failed to ping the service");
+			    }
+		    } finally {
+		    	System.out.println("Shutting down ...");
+		    	client.shutdown();
+		    }
+		} else {
+			System.out.println("Invalid parameters; give address and port for ping test: [address]:[port]");
+			return;
+		}
 	}
 	
 	/**
