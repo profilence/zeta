@@ -20,6 +20,9 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -66,7 +69,7 @@ public class Connector {
 			Connector client = new Connector(address, port);
 		    try {
 		    	System.out.println("Pinging ...");
-			    if (client.ping() != -1) {
+			    if (client.ping() == PingResponseType.Ok) {
 			    	System.out.println("Successfully pinged the service");
 			    } else {
 			        System.out.println("Failed to ping the service");
@@ -133,15 +136,37 @@ public class Connector {
 	/**
 	 * Ping Connector service
 	 */
-	public int ping() {
+	public PingResponseType ping() {
 		PingMessage request = PingMessage.newBuilder().build();
 	    try {
 	    	PongMessage response = blockingStub.ping(request);
-	    	return response.getResult();
+	    	return PingResponseType.fromValue(response.getResult());
 	    } catch (StatusRuntimeException e) {
 	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
-	    	return -1;
+	    	return PingResponseType.Failed;
 	    }
+	}
+	
+	/**
+	 * Request server to start new test run with recommended profiling settings
+	 * @param runName
+	 * @param setName
+	 * @param project
+	 * @param version
+	 * @param primaryDeviceSerial
+	 * @param secondaryDeviceSerial
+	 * @param tags
+	 * @return Test run id if successfully started; null otherwise
+	 */
+	public String startRunWithRecommendedSettings(
+			String runName, 
+			String setName, 
+			String project, 
+			String version, 
+			String primaryDeviceSerial, 
+			String secondaryDeviceSerial,
+			Map<String, String> tags) {
+		return startRun(runName, setName, project, version, primaryDeviceSerial, secondaryDeviceSerial, (String)null, tags);
 	}
 	
 	/**
@@ -152,7 +177,49 @@ public class Connector {
 	 * @param version
 	 * @param primaryDeviceSerial
 	 * @param secondaryDeviceSerial
-	 * @param profilingSettings
+	 * @param profilingSettingsFile JSON file containing profiling settings
+	 * @param tags
+	 * @return Test run id if successfully started; null otherwise
+	 */
+	public String startRun(
+			String runName, 
+			String setName, 
+			String project, 
+			String version, 
+			String primaryDeviceSerial, 
+			String secondaryDeviceSerial,
+			File profilingSettingsFile,
+			Map<String, String> tags) {
+		
+		String settingsJson = null;
+		if (profilingSettingsFile != null && profilingSettingsFile.exists()) {
+		    StringBuilder contentBuilder = new StringBuilder();
+		    try (BufferedReader br = new BufferedReader(new FileReader(profilingSettingsFile))) 
+		    {
+		        String sCurrentLine;
+		        while ((sCurrentLine = br.readLine()) != null) 
+		        {
+		            contentBuilder.append(sCurrentLine).append("\n");
+		        }
+		    } catch (Exception e) { 
+		    } 
+		    settingsJson = contentBuilder.toString();
+		    if (settingsJson != null && settingsJson.trim().isEmpty()) {
+		    	settingsJson = null;
+		    }
+		}
+		return startRun(runName, setName, project, version, primaryDeviceSerial, secondaryDeviceSerial, settingsJson, tags);
+	}
+	
+	/**
+	 * Request server to start new test run
+	 * @param runName
+	 * @param setName
+	 * @param project
+	 * @param version
+	 * @param primaryDeviceSerial
+	 * @param secondaryDeviceSerial
+	 * @param profilingSettings JSON string providing analyzer settings
 	 * @param tags
 	 * @return Test run id if successfully started; null otherwise
 	 */

@@ -1,0 +1,100 @@
+{
+  "SelectedMode": "Recommended",
+  "ProcrankSettings": {
+    "Mode": "Disabled",
+    "Interval": "00:01:00"
+  },
+  "DumpsysMeminfoASettings": {
+    "Target": "Global",
+    "TargetedProcesses": [
+      {
+        "ProcessName": null,
+        "IncludeSubprocesses": false
+      }
+    ],
+    "Mode": "Disabled",
+    "Interval": "00:01:00"
+  },
+  "HPROFSettings": {
+    "TargetedProcesses": [
+      {
+        "ProcessName": null,
+        "IncludeSubprocesses": false
+      }
+    ],
+    "Mode": "Disabled",
+    "Interval": "00:20:00"
+  },
+  "DumpsysMeminfoSettings": {
+    "Mode": "Synchronized",
+    "Interval": "00:00:30"
+  },
+  "CPUAnalyzerSettings": {
+    "Target": "Global",
+    "TargetedProcesses": [
+      {
+        "ProcessName": null,
+        "IncludeSubprocesses": false
+      }
+    ],
+    "Mode": "Timed",
+    "Interval": "00:00:10"
+  },
+  "BatteryAnalyzerSettings": {
+    "Mode": "TimedHideInterval",
+    "Interval": "00:00:20"
+  },
+  "CPUStatesAnalyzerSettings": {
+    "Mode": "TimedHideInterval",
+    "Interval": "00:00:20"
+  },
+  "GPUStatesAnalyzerSettings": {
+    "Mode": "Disabled",
+    "Interval": "00:00:01"
+  },
+  "GPULoadAnalyzerSettings": {
+    "Mode": "Disabled",
+    "Interval": "00:00:01"
+  },
+  "GPURenderingAnalyzerSettings": {
+    "Mode": "Disabled",
+    "Interval": "00:00:05"
+  },
+  "ThermalAnalyzerSettings": {
+    "Mode": "Timed",
+    "Interval": "00:00:10"
+  },
+  "DumpsysSettings": {
+    "TargetedServices": [
+      {
+        "Name": "",
+        "Args": ""
+      }
+    ],
+    "Mode": "Disabled",
+    "Interval": "00:05:00"
+  },
+  "BatteryConsumptionSettings": {
+    "UsbValue": 0.0,
+    "ReduceValueWhenBatteryFull": true,
+    "Mode": "Disabled",
+    "Interval": "00:00:05"
+  },
+  "DiskUsageAnalyzerSettings": {
+    "Mode": "TimedHideInterval",
+    "Interval": "00:00:01"
+  },
+  "NetstatAnalyzerSettings": {
+    "Mode": "TimedHideInterval",
+    "Interval": "00:00:01"
+  },
+  "CPULoadPerCoreAnalyzerSettings": {
+    "Mode": "Timed",
+    "Interval": "00:00:02"
+  },
+  "IsAutomationEnabled": true,
+  "FramestatsSettings": {
+    "Mode": "Disabled",
+    "Interval": "00:00:00.0500000"
+  }
+}
