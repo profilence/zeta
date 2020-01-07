@@ -3,33 +3,33 @@
 
 package com.profilence.zeta;
 
-public interface TestRequestAckOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:profilence.zeta.TestRequestAck)
+public interface TestStartResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:profilence.zeta.TestStartResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string status = 1;</code>
-   * @return The status.
-   */
-  java.lang.String getStatus();
-  /**
-   * <code>string status = 1;</code>
-   * @return The bytes for status.
-   */
-  com.google.protobuf.ByteString
-      getStatusBytes();
-
-  /**
-   * <code>string run_id = 2;</code>
+   * <code>string run_id = 1;</code>
    * @return The runId.
    */
   java.lang.String getRunId();
   /**
-   * <code>string run_id = 2;</code>
+   * <code>string run_id = 1;</code>
    * @return The bytes for runId.
    */
   com.google.protobuf.ByteString
       getRunIdBytes();
+
+  /**
+   * <code>string fail_cause = 2;</code>
+   * @return The failCause.
+   */
+  java.lang.String getFailCause();
+  /**
+   * <code>string fail_cause = 2;</code>
+   * @return The bytes for failCause.
+   */
+  com.google.protobuf.ByteString
+      getFailCauseBytes();
 
   /**
    * <code>repeated string log = 3;</code>
@@ -57,20 +57,20 @@ public interface TestRequestAckOrBuilder extends
       getLogBytes(int index);
 
   /**
-   * <code>bool result = 5;</code>
+   * <code>bool result = 4;</code>
    * @return The result.
    */
   boolean getResult();
 
   /**
-   * <code>string fail_cause = 6;</code>
-   * @return The failCause.
+   * <code>string status = 5;</code>
+   * @return The status.
    */
-  java.lang.String getFailCause();
+  java.lang.String getStatus();
   /**
-   * <code>string fail_cause = 6;</code>
-   * @return The bytes for failCause.
+   * <code>string status = 5;</code>
+   * @return The bytes for status.
    */
   com.google.protobuf.ByteString
-      getFailCauseBytes();
+      getStatusBytes();
 }

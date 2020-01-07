@@ -64,16 +64,25 @@ message StopRunRequest {
 	bool discard_results = 2;
 }
 
-message TestRequestAck {
-	string status = 1;
-	string run_id = 2;
-	repeated string log = 3;
-	bool result = 5;
-	string fail_cause = 6;
+message TestRequestMessageWrapper {
+	int32 request_type = 1;
+	bytes payload = 2;
 }
 
-message TestRequest {	
-	string run_id = 24;
+message TestStopRequest {
+	string primary_device_serial = 1;
+}
+
+message TestStartResponse {
+	string run_id = 1;
+	string fail_cause = 2;	
+	repeated string log = 3;
+	bool result = 4;
+	string status = 5;
+}
+
+message TestStartRequest {	
+	string run_id = 22;
 	string run_name = 2;
 	string node_id = 5;
 	string parameters = 6;
@@ -88,7 +97,7 @@ message NodeAdded {
 	string node_id = 1;
 	string pool = 4;
 	string type = 5;
-	string variables = 6;
+	string variables = 12;
 }
 
 message NodeRemoved {	
@@ -113,8 +122,8 @@ service ConnectorService{
 	rpc LogTrace(LogTraceRequest) returns (google.protobuf.Empty) { }
 	rpc OnUseCaseEnd(UseCaseEndRequest) returns (google.protobuf.Empty) { }
 	rpc StopRun(StopRunRequest) returns (google.protobuf.Empty) { }
-	rpc SubscribeToTestRequests(google.protobuf.Empty) returns (stream TestRequest) { }
-	rpc RespondToTestRequest(TestRequestAck) returns (google.protobuf.Empty) { }
+	rpc SubscribeToTestRequests(google.protobuf.Empty) returns (stream TestRequestMessageWrapper) { }
+	rpc RespondToTestRequest(TestStartResponse) returns (google.protobuf.Empty) { }
 	rpc AddNode(NodeAdded) returns (google.protobuf.Empty) { }
 	rpc RemoveNode(NodeRemoved) returns (google.protobuf.Empty) { }
 	rpc UpdateNode(NodeUpdated) returns (google.protobuf.Empty) { }

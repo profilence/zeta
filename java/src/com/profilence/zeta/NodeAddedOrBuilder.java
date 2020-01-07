@@ -44,12 +44,12 @@ public interface NodeAddedOrBuilder extends
       getTypeBytes();
 
   /**
-   * <code>string variables = 6;</code>
+   * <code>string variables = 12;</code>
    * @return The variables.
    */
   java.lang.String getVariables();
   /**
-   * <code>string variables = 6;</code>
+   * <code>string variables = 12;</code>
    * @return The bytes for variables.
    */
   com.google.protobuf.ByteString

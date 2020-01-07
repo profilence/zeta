@@ -3,17 +3,17 @@
 
 package com.profilence.zeta;
 
-public interface TestRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:profilence.zeta.TestRequest)
+public interface TestStartRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:profilence.zeta.TestStartRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string run_id = 24;</code>
+   * <code>string run_id = 22;</code>
    * @return The runId.
    */
   java.lang.String getRunId();
   /**
-   * <code>string run_id = 24;</code>
+   * <code>string run_id = 22;</code>
    * @return The bytes for runId.
    */
   com.google.protobuf.ByteString

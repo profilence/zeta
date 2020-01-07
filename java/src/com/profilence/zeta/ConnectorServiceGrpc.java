@@ -245,28 +245,28 @@ public final class ConnectorServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
-      com.profilence.zeta.TestRequest> getSubscribeToTestRequestsMethod;
+      com.profilence.zeta.TestRequestMessageWrapper> getSubscribeToTestRequestsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SubscribeToTestRequests",
       requestType = com.google.protobuf.Empty.class,
-      responseType = com.profilence.zeta.TestRequest.class,
+      responseType = com.profilence.zeta.TestRequestMessageWrapper.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
-      com.profilence.zeta.TestRequest> getSubscribeToTestRequestsMethod() {
-    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.profilence.zeta.TestRequest> getSubscribeToTestRequestsMethod;
+      com.profilence.zeta.TestRequestMessageWrapper> getSubscribeToTestRequestsMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.profilence.zeta.TestRequestMessageWrapper> getSubscribeToTestRequestsMethod;
     if ((getSubscribeToTestRequestsMethod = ConnectorServiceGrpc.getSubscribeToTestRequestsMethod) == null) {
       synchronized (ConnectorServiceGrpc.class) {
         if ((getSubscribeToTestRequestsMethod = ConnectorServiceGrpc.getSubscribeToTestRequestsMethod) == null) {
           ConnectorServiceGrpc.getSubscribeToTestRequestsMethod = getSubscribeToTestRequestsMethod =
-              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.profilence.zeta.TestRequest>newBuilder()
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.profilence.zeta.TestRequestMessageWrapper>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SubscribeToTestRequests"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.google.protobuf.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.profilence.zeta.TestRequest.getDefaultInstance()))
+                  com.profilence.zeta.TestRequestMessageWrapper.getDefaultInstance()))
               .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("SubscribeToTestRequests"))
               .build();
         }
@@ -275,27 +275,27 @@ public final class ConnectorServiceGrpc {
     return getSubscribeToTestRequestsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.TestRequestAck,
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.TestStartResponse,
       com.google.protobuf.Empty> getRespondToTestRequestMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "RespondToTestRequest",
-      requestType = com.profilence.zeta.TestRequestAck.class,
+      requestType = com.profilence.zeta.TestStartResponse.class,
       responseType = com.google.protobuf.Empty.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.profilence.zeta.TestRequestAck,
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.TestStartResponse,
       com.google.protobuf.Empty> getRespondToTestRequestMethod() {
-    io.grpc.MethodDescriptor<com.profilence.zeta.TestRequestAck, com.google.protobuf.Empty> getRespondToTestRequestMethod;
+    io.grpc.MethodDescriptor<com.profilence.zeta.TestStartResponse, com.google.protobuf.Empty> getRespondToTestRequestMethod;
     if ((getRespondToTestRequestMethod = ConnectorServiceGrpc.getRespondToTestRequestMethod) == null) {
       synchronized (ConnectorServiceGrpc.class) {
         if ((getRespondToTestRequestMethod = ConnectorServiceGrpc.getRespondToTestRequestMethod) == null) {
           ConnectorServiceGrpc.getRespondToTestRequestMethod = getRespondToTestRequestMethod =
-              io.grpc.MethodDescriptor.<com.profilence.zeta.TestRequestAck, com.google.protobuf.Empty>newBuilder()
+              io.grpc.MethodDescriptor.<com.profilence.zeta.TestStartResponse, com.google.protobuf.Empty>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RespondToTestRequest"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.profilence.zeta.TestRequestAck.getDefaultInstance()))
+                  com.profilence.zeta.TestStartResponse.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.google.protobuf.Empty.getDefaultInstance()))
               .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("RespondToTestRequest"))
@@ -499,13 +499,13 @@ public final class ConnectorServiceGrpc {
     /**
      */
     public void subscribeToTestRequests(com.google.protobuf.Empty request,
-        io.grpc.stub.StreamObserver<com.profilence.zeta.TestRequest> responseObserver) {
+        io.grpc.stub.StreamObserver<com.profilence.zeta.TestRequestMessageWrapper> responseObserver) {
       asyncUnimplementedUnaryCall(getSubscribeToTestRequestsMethod(), responseObserver);
     }
 
     /**
      */
-    public void respondToTestRequest(com.profilence.zeta.TestRequestAck request,
+    public void respondToTestRequest(com.profilence.zeta.TestStartResponse request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(getRespondToTestRequestMethod(), responseObserver);
     }
@@ -587,13 +587,13 @@ public final class ConnectorServiceGrpc {
             asyncServerStreamingCall(
               new MethodHandlers<
                 com.google.protobuf.Empty,
-                com.profilence.zeta.TestRequest>(
+                com.profilence.zeta.TestRequestMessageWrapper>(
                   this, METHODID_SUBSCRIBE_TO_TEST_REQUESTS)))
           .addMethod(
             getRespondToTestRequestMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.profilence.zeta.TestRequestAck,
+                com.profilence.zeta.TestStartResponse,
                 com.google.protobuf.Empty>(
                   this, METHODID_RESPOND_TO_TEST_REQUEST)))
           .addMethod(
@@ -694,14 +694,14 @@ public final class ConnectorServiceGrpc {
     /**
      */
     public void subscribeToTestRequests(com.google.protobuf.Empty request,
-        io.grpc.stub.StreamObserver<com.profilence.zeta.TestRequest> responseObserver) {
+        io.grpc.stub.StreamObserver<com.profilence.zeta.TestRequestMessageWrapper> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getSubscribeToTestRequestsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void respondToTestRequest(com.profilence.zeta.TestRequestAck request,
+    public void respondToTestRequest(com.profilence.zeta.TestStartResponse request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getRespondToTestRequestMethod(), getCallOptions()), request, responseObserver);
@@ -797,7 +797,7 @@ public final class ConnectorServiceGrpc {
 
     /**
      */
-    public java.util.Iterator<com.profilence.zeta.TestRequest> subscribeToTestRequests(
+    public java.util.Iterator<com.profilence.zeta.TestRequestMessageWrapper> subscribeToTestRequests(
         com.google.protobuf.Empty request) {
       return blockingServerStreamingCall(
           getChannel(), getSubscribeToTestRequestsMethod(), getCallOptions(), request);
@@ -805,7 +805,7 @@ public final class ConnectorServiceGrpc {
 
     /**
      */
-    public com.google.protobuf.Empty respondToTestRequest(com.profilence.zeta.TestRequestAck request) {
+    public com.google.protobuf.Empty respondToTestRequest(com.profilence.zeta.TestStartResponse request) {
       return blockingUnaryCall(
           getChannel(), getRespondToTestRequestMethod(), getCallOptions(), request);
     }
@@ -905,7 +905,7 @@ public final class ConnectorServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> respondToTestRequest(
-        com.profilence.zeta.TestRequestAck request) {
+        com.profilence.zeta.TestStartResponse request) {
       return futureUnaryCall(
           getChannel().newCall(getRespondToTestRequestMethod(), getCallOptions()), request);
     }
@@ -995,10 +995,10 @@ public final class ConnectorServiceGrpc {
           break;
         case METHODID_SUBSCRIBE_TO_TEST_REQUESTS:
           serviceImpl.subscribeToTestRequests((com.google.protobuf.Empty) request,
-              (io.grpc.stub.StreamObserver<com.profilence.zeta.TestRequest>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.profilence.zeta.TestRequestMessageWrapper>) responseObserver);
           break;
         case METHODID_RESPOND_TO_TEST_REQUEST:
-          serviceImpl.respondToTestRequest((com.profilence.zeta.TestRequestAck) request,
+          serviceImpl.respondToTestRequest((com.profilence.zeta.TestStartResponse) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
         case METHODID_ADD_NODE:
