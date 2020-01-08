@@ -439,16 +439,52 @@ public class Connector {
 	 * Subscribe to test requests
 	 * @return Test requests stream/iterator
 	 */
-	public Iterator<TestRequest> subscribeToTestRequests() {
+	public Iterator<TestRequestMessageWrapper> subscribeToTestRequests() {
 		
-		Iterator<TestRequest> iterator = null;
+		Iterator<TestRequestMessageWrapper> iterator = null;
 		
 		try {
-			blockingStub.subscribeToTestRequests(Empty.newBuilder().build());
+			iterator = blockingStub.subscribeToTestRequests(Empty.newBuilder().build());
 		}  catch (StatusRuntimeException e) {
 	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
 	    }
 		return iterator;
+	}
+	
+	/**
+	 * 
+	 * @param wrapper
+	 * @return
+	 */
+	private static boolean isStartRequest(TestRequestMessageWrapper wrapper) {
+		return wrapper != null && wrapper.getRequestType() == 1;
+	}
+	
+	/**
+	 * 
+	 * @param wrapper
+	 * @return
+	 */
+	private static boolean isStopRequest(TestRequestMessageWrapper wrapper) {
+		return wrapper != null && wrapper.getRequestType() == 2;
+	}
+	
+	/***
+	 * 
+	 * @param wrapper
+	 * @return
+	 */
+	public static Object getRequest(TestRequestMessageWrapper wrapper) {
+		try {
+			if (isStartRequest(wrapper)) {
+				return TestStartRequest.parseFrom(wrapper.getPayload());
+			}
+			if (isStopRequest(wrapper)) {
+				return TestStopRequest.parseFrom(wrapper.getPayload());
+			}
+		} catch(Exception e) { }
+		
+		return null;
 	}
 	
 	/**
@@ -466,7 +502,7 @@ public class Connector {
 			return false;
 		}
 		
-		TestRequestAck ack = TestRequestAck.newBuilder()
+		TestStartResponse resp = TestStartResponse.newBuilder()
 				.setStatus(status != null ? status : "")
 				.setRunId(runID)
 				.setResult(result)
@@ -475,7 +511,7 @@ public class Connector {
 				.build();
 		
 	    try {
-	    	blockingStub.respondToTestRequest(ack);
+	    	blockingStub.respondToTestRequest(resp);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
 	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
