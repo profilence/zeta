@@ -43,7 +43,8 @@ message LogStepRequest {
 	string run_id = 1;
 	string step_name = 2;
 	bool result = 3;
-	bool take_screenshot = 4;	
+	bool take_screenshot = 4;
+	bytes screenshot_bytes = 5;
 }
 
 message LogTraceRequest {

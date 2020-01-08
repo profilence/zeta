@@ -19,10 +19,14 @@ package com.profilence.zeta;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
+import io.grpc.stub.StreamObserver;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Empty;
 import com.google.protobuf.Int32Value;
 import com.google.protobuf.StringValue;
@@ -109,12 +114,12 @@ public class Connector {
 	private static Object loggerLock = new Object();
 	private final ManagedChannel channel;
    	private final ConnectorServiceGrpc.ConnectorServiceBlockingStub blockingStub;
-	
+   	private final ConnectorServiceGrpc.ConnectorServiceStub stub;
+   	
     /** Construct client connecting to Connector server at {@code host:port}. */
 	public Connector(String host, int port) {
 	    this(ManagedChannelBuilder.forAddress(host, port)
-            // Channels are secure by default (via SSL/TLS). For the example we disable TLS to avoid
-            // needing certificates.
+            // Channels are secure by default (via SSL/TLS).
             .usePlaintext()
             .build());
 	}
@@ -123,6 +128,7 @@ public class Connector {
 	Connector(ManagedChannel channel) {
 		this.channel = channel;
 		blockingStub = ConnectorServiceGrpc.newBlockingStub(channel);
+		stub = ConnectorServiceGrpc.newStub(channel);
   	}
 	
 	/**
@@ -279,8 +285,7 @@ public class Connector {
 		if (useCaseNameInvalid && useCaseIDInvalid) {
 			return false;
 		}
-		
-		
+				
 		UseCaseStartRequest request = UseCaseStartRequest.newBuilder()
 				.setRunId(runID)
 				.setUseCaseName(useCaseName != null ? useCaseName : "")
@@ -340,14 +345,70 @@ public class Connector {
 	 * @param runID
 	 * @param stepName
 	 * @param result
-	 * @param takeScreenshot
+	 * @param takeScreenShot
 	 * @return True if successfully notified; false otherwise
 	 */
 	public boolean onLogStep(
 			String runID, 
 			String stepName, 
 			boolean result, 
-			boolean takeScreenshot) {
+			boolean takeScreenShot) {
+		return onLogStep(runID, stepName, result, takeScreenShot, null);
+	}
+	
+	/**
+	 * Notify server about log step
+	 * @param runID
+	 * @param stepName
+	 * @param result
+	 * @param screenShot
+	 * @return True if successfully notified; false otherwise
+	 */
+	public boolean onLogStep (
+			String runID, 
+			String stepName, 
+			boolean result, 
+			File screenShot) throws IOException {
+		
+		byte[] bytes = null;
+		if (screenShot != null && screenShot.exists() && screenShot.length() > 0) {
+			bytes = read(screenShot);
+		}
+				
+		return onLogStep(runID, stepName, result, bytes);
+	}
+	
+	/**
+	 * Notify server about log step
+	 * @param runID
+	 * @param stepName
+	 * @param result
+	 * @param screenShotBytes
+	 * @return True if successfully notified; false otherwise
+	 */
+	public boolean onLogStep(
+			String runID, 
+			String stepName, 
+			boolean result, 
+			byte[] screenShotBytes) {
+		return onLogStep(runID, stepName, result, false, screenShotBytes);
+	}
+	
+	/**
+	 * Notify server about log step
+	 * @param runID
+	 * @param stepName
+	 * @param result
+	 * @param takeScreenShot
+	 * @param screenShotBytes
+	 * @return True if successfully notified; false otherwise
+	 */
+	private boolean onLogStep(
+			String runID, 
+			String stepName, 
+			boolean result, 
+			boolean takeScreenShot,
+			byte[] screenShotBytes) {
 		
 		if (runID == null || runID.trim().isEmpty()) {
 			return false;
@@ -361,7 +422,8 @@ public class Connector {
 				.setRunId(runID)
 				.setStepName(stepName)
 				.setResult(result)
-				.setTakeScreenshot(takeScreenshot)
+				.setTakeScreenshot(takeScreenShot)
+				.setScreenshotBytes(screenShotBytes != null ? ByteString.copyFrom(screenShotBytes) : null)
 				.build();
 		
 	    try {
@@ -437,56 +499,48 @@ public class Connector {
 	
 	/**
 	 * Subscribe to test requests
-	 * @return Test requests stream/iterator
+	 * @param listener handler for asynchronous requests
 	 */
-	public Iterator<TestRequestMessageWrapper> subscribeToTestRequests() {
+	public void subscribeToTestRequests(final ITestRequestListener listener) {
+		if (listener != null) {
+			StreamObserver<TestRequestMessageWrapper> observer = new StreamObserver<TestRequestMessageWrapper>() {
+			      @Override
+			      public void onNext(TestRequestMessageWrapper value) {
+			    	  if (value != null) {
+			    		  try {
+				    		  switch (value.getRequestType()) {
+				    		  	case 1:
+				    		  		listener.onTestStartRequested(TestStartRequest.parseFrom(value.getPayload()));
+				    		  		break;
+				    		  	case 2: 
+				    		  		listener.onTestStopRequested(TestStopRequest.parseFrom(value.getPayload()));
+				    		  		break;
+				    		  	default: 
+				    		  		break;
+				    		  }
+			    		  } catch (Exception e) {
+			    			  listener.onError(e);
+			    		  }
+			    	  }
+			      }
+			      @Override
+			      public void onError(Throwable t) {
+			    	  listener.onError(t);
+			      }
+			      @Override
+			      public void onCompleted() {
+			    	  listener.onCompleted();
+			      }
+			    };
+			try {
+				stub.subscribeToTestRequests(Empty.newBuilder().build(), observer);
+			}  catch (StatusRuntimeException e) {
+		    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+		    	listener.onError(e);
+		    }
+		}
+	}
 		
-		Iterator<TestRequestMessageWrapper> iterator = null;
-		
-		try {
-			iterator = blockingStub.subscribeToTestRequests(Empty.newBuilder().build());
-		}  catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
-	    }
-		return iterator;
-	}
-	
-	/**
-	 * 
-	 * @param wrapper
-	 * @return
-	 */
-	private static boolean isStartRequest(TestRequestMessageWrapper wrapper) {
-		return wrapper != null && wrapper.getRequestType() == 1;
-	}
-	
-	/**
-	 * 
-	 * @param wrapper
-	 * @return
-	 */
-	private static boolean isStopRequest(TestRequestMessageWrapper wrapper) {
-		return wrapper != null && wrapper.getRequestType() == 2;
-	}
-	
-	/***
-	 * 
-	 * @param wrapper
-	 * @return
-	 */
-	public static Object getRequest(TestRequestMessageWrapper wrapper) {
-		try {
-			if (isStartRequest(wrapper)) {
-				return TestStartRequest.parseFrom(wrapper.getPayload());
-			}
-			if (isStopRequest(wrapper)) {
-				return TestStopRequest.parseFrom(wrapper.getPayload());
-			}
-		} catch(Exception e) { }
-		
-		return null;
-	}
-	
 	/**
 	 * Respond to a test requests
 	 * @param runID
@@ -640,4 +694,22 @@ public class Connector {
 		    }
 	}
 	
+	private static byte[] read(File file) throws IOException {
+
+		byte[] buffer = new byte[(int) file.length()];
+	    InputStream ios = null;
+	    try {
+	        ios = new FileInputStream(file);
+	        if (ios.read(buffer) == -1) {
+	            throw new IOException("EOF reached while trying to read the whole file");
+	        }
+	    } finally {
+	        try {
+	            if (ios != null)
+	                ios.close();
+	        } catch (IOException e) {
+	        }
+	    }
+	    return buffer;
+	}
 }

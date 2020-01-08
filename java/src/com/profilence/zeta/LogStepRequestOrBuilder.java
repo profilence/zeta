@@ -42,4 +42,10 @@ public interface LogStepRequestOrBuilder extends
    * @return The takeScreenshot.
    */
   boolean getTakeScreenshot();
+
+  /**
+   * <code>bytes screenshot_bytes = 5;</code>
+   * @return The screenshotBytes.
+   */
+  com.google.protobuf.ByteString getScreenshotBytes();
 }

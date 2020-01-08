@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   private LogStepRequest() {
     runId_ = "";
     stepName_ = "";
+    screenshotBytes_ = com.google.protobuf.ByteString.EMPTY;
   }
 
   @java.lang.Override
@@ -70,6 +71,11 @@ private static final long serialVersionUID = 0L;
           case 32: {
 
             takeScreenshot_ = input.readBool();
+            break;
+          }
+          case 42: {
+
+            screenshotBytes_ = input.readBytes();
             break;
           }
           default: {
@@ -196,6 +202,16 @@ private static final long serialVersionUID = 0L;
     return takeScreenshot_;
   }
 
+  public static final int SCREENSHOT_BYTES_FIELD_NUMBER = 5;
+  private com.google.protobuf.ByteString screenshotBytes_;
+  /**
+   * <code>bytes screenshot_bytes = 5;</code>
+   * @return The screenshotBytes.
+   */
+  public com.google.protobuf.ByteString getScreenshotBytes() {
+    return screenshotBytes_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -222,6 +238,9 @@ private static final long serialVersionUID = 0L;
     if (takeScreenshot_ != false) {
       output.writeBool(4, takeScreenshot_);
     }
+    if (!screenshotBytes_.isEmpty()) {
+      output.writeBytes(5, screenshotBytes_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -244,6 +263,10 @@ private static final long serialVersionUID = 0L;
     if (takeScreenshot_ != false) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(4, takeScreenshot_);
+    }
+    if (!screenshotBytes_.isEmpty()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBytesSize(5, screenshotBytes_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -268,6 +291,8 @@ private static final long serialVersionUID = 0L;
         != other.getResult()) return false;
     if (getTakeScreenshot()
         != other.getTakeScreenshot()) return false;
+    if (!getScreenshotBytes()
+        .equals(other.getScreenshotBytes())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -289,6 +314,8 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + TAKE_SCREENSHOT_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getTakeScreenshot());
+    hash = (37 * hash) + SCREENSHOT_BYTES_FIELD_NUMBER;
+    hash = (53 * hash) + getScreenshotBytes().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -430,6 +457,8 @@ private static final long serialVersionUID = 0L;
 
       takeScreenshot_ = false;
 
+      screenshotBytes_ = com.google.protobuf.ByteString.EMPTY;
+
       return this;
     }
 
@@ -460,6 +489,7 @@ private static final long serialVersionUID = 0L;
       result.stepName_ = stepName_;
       result.result_ = result_;
       result.takeScreenshot_ = takeScreenshot_;
+      result.screenshotBytes_ = screenshotBytes_;
       onBuilt();
       return result;
     }
@@ -521,6 +551,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getTakeScreenshot() != false) {
         setTakeScreenshot(other.getTakeScreenshot());
+      }
+      if (other.getScreenshotBytes() != com.google.protobuf.ByteString.EMPTY) {
+        setScreenshotBytes(other.getScreenshotBytes());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -759,6 +792,39 @@ private static final long serialVersionUID = 0L;
     public Builder clearTakeScreenshot() {
       
       takeScreenshot_ = false;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.ByteString screenshotBytes_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes screenshot_bytes = 5;</code>
+     * @return The screenshotBytes.
+     */
+    public com.google.protobuf.ByteString getScreenshotBytes() {
+      return screenshotBytes_;
+    }
+    /**
+     * <code>bytes screenshot_bytes = 5;</code>
+     * @param value The screenshotBytes to set.
+     * @return This builder for chaining.
+     */
+    public Builder setScreenshotBytes(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      screenshotBytes_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bytes screenshot_bytes = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearScreenshotBytes() {
+      
+      screenshotBytes_ = getDefaultInstance().getScreenshotBytes();
       onChanged();
       return this;
     }
