@@ -369,8 +369,9 @@ public class Connector {
 			String stepName, 
 			boolean result, 
 			File screenShot) throws IOException {
-		
+			
 		byte[] bytes = null;
+		
 		if (screenShot != null && screenShot.exists() && screenShot.length() > 0) {
 			bytes = read(screenShot);
 		}
@@ -423,7 +424,7 @@ public class Connector {
 				.setStepName(stepName)
 				.setResult(result)
 				.setTakeScreenshot(takeScreenShot)
-				.setScreenshotBytes(screenShotBytes != null ? ByteString.copyFrom(screenShotBytes) : null)
+				.setScreenshotBytes(ByteString.copyFrom(screenShotBytes != null ? screenShotBytes : new byte[0]))
 				.build();
 		
 	    try {
@@ -705,8 +706,9 @@ public class Connector {
 	        }
 	    } finally {
 	        try {
-	            if (ios != null)
+	            if (ios != null) {
 	                ios.close();
+	            }
 	        } catch (IOException e) {
 	        }
 	    }
