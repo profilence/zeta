@@ -9,6 +9,21 @@ import os.path
 from os import path
 
 
+class TestRequestListenerBase(object):
+
+    def on_error(self, e):
+        pass
+
+    def on_completed(self):
+        pass
+
+    def on_test_start_requested(self, request):
+        pass
+
+    def on_test_stop_requested(self, request):
+        pass
+
+
 class Connector(object):
     log = None
 
@@ -97,12 +112,13 @@ class Connector(object):
 
         take_screenshot = isinstance(screenshot, bool) and screenshot is True
         screenshot_bytes = None
-        if isinstance(screenshot, bytes) and len(screenshot):
-            screenshot_bytes = screenshot
-        elif isinstance(screenshot, str):
-            pass
+        if not take_screenshot:
+            if isinstance(screenshot, bytes) and len(screenshot):
+                screenshot_bytes = screenshot
+            elif isinstance(screenshot, str):
+                screenshot_bytes = get_bytes_from_file(screenshot)
 
-        pass
+        self._on_log_step(run_id, step_name, result, take_screenshot, screenshot_bytes)
 
     def _on_log_step(self, run_id, step_name, result, take_screenshot, screenshot_bytes):
 
@@ -117,13 +133,19 @@ class Connector(object):
         request.step_name = step_name or ''
         request.result = result
         request.take_screenshot = take_screenshot
-        request.screenshot_bytes = screenshot_bytes
+        if screenshot_bytes:
+            request.screenshot_bytes = screenshot_bytes
         try:
             self._blockingStub.OnLogStep(request)
             return True
         except grpc.RpcError as e:
             self._log(2, 'RPC failed: %s' % str(e))
         return False
+
+    def subscribe_to_test_requests(self, listener):
+
+        if isinstance(listener, TestRequestListenerBase):
+            pass
 
 
 def get_bytes_from_file(filename):
@@ -132,6 +154,7 @@ def get_bytes_from_file(filename):
             return open(filename, "rb").read()
         except Exception as e:
             pass
+
 
 def cw(level, message):
     print(message)
