@@ -15,7 +15,7 @@ Standalone JAR for the client API can be found at
 libraries as well. The library can imported to a java project, but can also be
 executed as such for testing the connection to the Zeta service, i.e:
 
-java –jar zeta-connector-api-1.0.0.jar localhost:50051
+$ java –jar zeta-connector-api-1.0.0.jar localhost:50051
 
 *./java/src/com/profilence/zeta* -directory: Connector.java is the main
 class/file; otherwise the directory contains mostly protoc-generated code. The
@@ -29,7 +29,7 @@ Python client
 
 Python driver for the client API can be found at ./python/src/connector.py. The driver can imported to a python project, but can also be executed as such for testing the connection to the Zeta service, i.e:
 
-python connector.py localhost:50051
+$ python connector.py localhost:50051
 
 ./python/src -directory: connector.py is the main class/file; otherwise the directory contains mostly protoc-generated code.
 
