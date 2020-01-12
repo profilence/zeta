@@ -35,6 +35,8 @@ python connector.py localhost:50051
 
 For proto-code generation, run ./proto_compile/[win-x86_64|linux|mac]/python_compile.[bat|sh]
 
+Python driver and code generator have dependency to grpcio-tools package ($ pip install grpcio-tools)
+
 
 Example - Java
 -----------
