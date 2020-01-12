@@ -1,2 +1,4 @@
 /proto_compile/java_out/
 /proto_compile/python_out/
+/python/src/.idea/
+/python/src/__pycache__/

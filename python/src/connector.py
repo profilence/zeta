@@ -135,7 +135,7 @@ class Connector(object):
             version (str):                          Version of the project
             primary_device_serial (str):            Identifier of the primary DUT
             secondary_device_serial (str):          Identifier of the secondary DUT
-            profiling_settings (str|TextIOBase):    Profiling settings as JSON string, or a file handle to JSON file
+            profiling_settings (str/TextIOBase):    Profiling settings as JSON string, or a file handle to JSON file
             tags (dict):                            Tags for the test run
 
         Returns:
@@ -241,7 +241,7 @@ class Connector(object):
             run_id (str):                   ID of the test run
             step_name (str):                Step name/description
             result (bool):                  True if the step passed as expected; otherwise False
-            screenshot (bool|bytes|str):    True for requesting the service to take a screenshot;
+            screenshot (bool/bytes/str):    True for requesting the service to take a screenshot;
                                             image bytes or path to image file for sending a local screenshot for
                                             the service. If requesting the service to take a screenshot, make sure
                                             it's supported for the DUT platform by the service.
@@ -384,7 +384,7 @@ class Connector(object):
             log (list[str]):      Tool log
 
         Returns:
-            True if response was sent to service; otherwise False
+            True if response was successfully sent to service; otherwise False
 
         """
 
