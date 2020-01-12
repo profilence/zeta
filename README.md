@@ -53,32 +53,32 @@ import com.profilence.zeta.PingResponseType;
 public class ClientExample {
 
     public static void main(String[] args) throws InterruptedException {
-		
+        
         Random rand = new Random(); 
-		
+        
         Connector.addLogger(new ILogger() {
             @Override
             public void onLogMessage(LogLevel level, String message) {
                 print(message);
             }
         });
-		
+        
         Connector client = new Connector("localhost", 31321);
-	    
+        
         try {
-	    
+        
             PingResponseType response = client.ping();
             print(response);
             
             if (response == PingResponseType.Ok) {
-	    	  
+              
                 String testRunName = "demo";
                 String testSetName = "dummy";
                 String projectName = "AProject";
                 String projectVersion = "1.1.1";
                 String targetDeviceIdentifier = "emulator-5554";
                 File profilingSettings = new File("/home/tests/profiling_settings.json");
-	    	  
+              
                 String testRunID = client.startRun(testRunName, testSetName, projectName, projectVersion, targetDeviceIdentifier, null, profilingSettings, null);
                 print("testRunID: " + testRunID);
                 if (testRunID != null) {
@@ -107,14 +107,14 @@ public class ClientExample {
                     print("Successfully stopped test run: " + client.stopRun(testRunID, false));
                 }
             }
-	    } finally {
-	      client.shutdown();
-	    }
-	}
-	
-	public static void print(Object obj) {
-		System.out.println(obj);
-	}
+        } finally {
+          client.shutdown();
+        }
+    }
+    
+    public static void print(Object obj) {
+        System.out.println(obj);
+    }
 }
 ```
 
