@@ -463,9 +463,9 @@ class Connector(object):
         Parameters:
             node_id (str):              Unique ID of the node
             current_use_case (str):     Name of current use case
-            run_state (str):            State of the run
+            run_state (int):            State of the run
             current_run_id (str):       ID of the current run
-            node_state (str):           State of the node
+            node_state (int):           State of the node
             pool (str):                 Name of the pool/group this node belongs to
             variables (str):            Variables
 
