@@ -35,9 +35,10 @@ public class ClientExample {
                 String projectName = "AProject";
                 String projectVersion = "1.1.1";
                 String targetDeviceIdentifier = "emulator-5554";
+                String targetDeviceType = "android";
                 File profilingSettings = new File("/home/tests/profiling_settings.json");
               
-                String testRunID = client.startRun(testRunName, testSetName, projectName, projectVersion, targetDeviceIdentifier, null, profilingSettings, null);
+                String testRunID = client.startRun(testRunName, testSetName, projectName, projectVersion, targetDeviceIdentifier, targetDeviceType, null, null, profilingSettings, null);
                 print("testRunID: " + testRunID);
                 if (testRunID != null) {
                     for(int i = 1; i <= 10; i++) {

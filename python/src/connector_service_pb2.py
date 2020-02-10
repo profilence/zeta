@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='profilence.zeta',
   syntax='proto3',
   serialized_options=_b('\n\023com.profilence.zetaB\013DriverProtoP\001'),
-  serialized_pb=_b('\n\x17\x63onnector_service.proto\x12\x0fprofilence.zeta\x1a\x0ewrappers.proto\x1a\x0b\x65mpty.proto\"\x9a\x02\n\x0fStartRunRequest\x12\x10\n\x08run_name\x18\x01 \x01(\t\x12\x10\n\x08set_name\x18\x02 \x01(\t\x12\x0f\n\x07project\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\x12\x1d\n\x15primary_device_serial\x18\x05 \x01(\t\x12\x1f\n\x17secondary_device_serial\x18\x06 \x01(\t\x12\x1a\n\x12profiling_settings\x18\x07 \x01(\t\x12\x38\n\x04tags\x18\x08 \x03(\x0b\x32*.profilence.zeta.StartRunRequest.TagsEntry\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\r\n\x0bPingMessage\"\x1d\n\x0bPongMessage\x12\x0e\n\x06result\x18\x01 \x01(\x05\"\"\n\x10StartRunResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\"\x81\x01\n\x13UseCaseStartRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x15\n\ruse_case_name\x18\x02 \x01(\t\x12\x13\n\x0buse_case_id\x18\x03 \x01(\t\x12\x16\n\x0etarget_process\x18\x04 \x01(\t\x12\x16\n\x0erequirement_id\x18\x05 \x01(\t\"v\n\x0eLogStepRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tstep_name\x18\x02 \x01(\t\x12\x0e\n\x06result\x18\x03 \x01(\x08\x12\x17\n\x0ftake_screenshot\x18\x04 \x01(\x08\x12\x18\n\x10screenshot_bytes\x18\x05 \x01(\x0c\"/\n\x0fLogTraceRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\"v\n\x11UseCaseEndRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0e\n\x06result\x18\x02 \x01(\x08\x12\x15\n\ractiveRunTime\x18\x03 \x01(\x03\x12\x12\n\nfail_cause\x18\x04 \x01(\t\x12\x16\n\x0ereset_intended\x18\x05 \x01(\x08\"9\n\x0eStopRunRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x17\n\x0f\x64iscard_results\x18\x02 \x01(\x08\"B\n\x19TestRequestMessageWrapper\x12\x14\n\x0crequest_type\x18\x01 \x01(\x05\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\"0\n\x0fTestStopRequest\x12\x1d\n\x15primary_device_serial\x18\x01 \x01(\t\"d\n\x11TestStartResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x12\n\nfail_cause\x18\x02 \x01(\t\x12\x0b\n\x03log\x18\x03 \x03(\t\x12\x0e\n\x06result\x18\x04 \x01(\x08\x12\x0e\n\x06status\x18\x05 \x01(\t\"\x90\x02\n\x10TestStartRequest\x12\x0e\n\x06run_id\x18\x16 \x01(\t\x12\x10\n\x08run_name\x18\x02 \x01(\t\x12\x0f\n\x07node_id\x18\x05 \x01(\t\x12\x12\n\nparameters\x18\x06 \x01(\t\x12\x0f\n\x07project\x18\n \x01(\t\x12\x0f\n\x07version\x18\x10 \x01(\t\x12\x1a\n\x12test_set_file_path\x18\x0c \x01(\t\x12\x0f\n\x07payload\x18\x0e \x01(\x0c\x12\x39\n\x04tags\x18\x14 \x03(\x0b\x32+.profilence.zeta.TestStartRequest.TagsEntry\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\tNodeAdded\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x0c\n\x04pool\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\x12\x11\n\tvariables\x18\x0c \x01(\t\"\x1e\n\x0bNodeRemoved\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\xca\x02\n\x0bNodeUpdated\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x36\n\x10\x63urrent_use_case\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\trun_state\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x34\n\x0e\x63urrent_run_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\nnode_state\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x04pool\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tvariables\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue2\xa7\x07\n\x10\x43onnectorService\x12\x44\n\x04Ping\x12\x1c.profilence.zeta.PingMessage\x1a\x1c.profilence.zeta.PongMessage\"\x00\x12Q\n\x08StartRun\x12 .profilence.zeta.StartRunRequest\x1a!.profilence.zeta.StartRunResponse\"\x00\x12P\n\x0eOnUseCaseStart\x12$.profilence.zeta.UseCaseStartRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\tOnLogStep\x12\x1f.profilence.zeta.LogStepRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\x08LogTrace\x12 .profilence.zeta.LogTraceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12L\n\x0cOnUseCaseEnd\x12\".profilence.zeta.UseCaseEndRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\x07StopRun\x12\x1f.profilence.zeta.StopRunRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x61\n\x17SubscribeToTestRequests\x12\x16.google.protobuf.Empty\x1a*.profilence.zeta.TestRequestMessageWrapper\"\x00\x30\x01\x12T\n\x14RespondToTestRequest\x12\".profilence.zeta.TestStartResponse\x1a\x16.google.protobuf.Empty\"\x00\x12?\n\x07\x41\x64\x64Node\x12\x1a.profilence.zeta.NodeAdded\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nRemoveNode\x12\x1c.profilence.zeta.NodeRemoved\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nUpdateNode\x12\x1c.profilence.zeta.NodeUpdated\x1a\x16.google.protobuf.Empty\"\x00\x42$\n\x13\x63om.profilence.zetaB\x0b\x44riverProtoP\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x17\x63onnector_service.proto\x12\x0fprofilence.zeta\x1a\x0ewrappers.proto\x1a\x0b\x65mpty.proto\"\xd6\x02\n\x0fStartRunRequest\x12\x10\n\x08run_name\x18\x01 \x01(\t\x12\x10\n\x08set_name\x18\x02 \x01(\t\x12\x0f\n\x07project\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\x12\x1b\n\x13primary_device_type\x18\t \x01(\t\x12\x1d\n\x15secondary_device_type\x18\n \x01(\t\x12\x1d\n\x15primary_device_serial\x18\x05 \x01(\t\x12\x1f\n\x17secondary_device_serial\x18\x06 \x01(\t\x12\x1a\n\x12profiling_settings\x18\x07 \x01(\t\x12\x38\n\x04tags\x18\x08 \x03(\x0b\x32*.profilence.zeta.StartRunRequest.TagsEntry\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\r\n\x0bPingMessage\"\x1d\n\x0bPongMessage\x12\x0e\n\x06result\x18\x01 \x01(\x05\"\"\n\x10StartRunResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\"\x81\x01\n\x13UseCaseStartRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x15\n\ruse_case_name\x18\x02 \x01(\t\x12\x13\n\x0buse_case_id\x18\x03 \x01(\t\x12\x16\n\x0etarget_process\x18\x04 \x01(\t\x12\x16\n\x0erequirement_id\x18\x05 \x01(\t\"v\n\x0eLogStepRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tstep_name\x18\x02 \x01(\t\x12\x0e\n\x06result\x18\x03 \x01(\x08\x12\x17\n\x0ftake_screenshot\x18\x04 \x01(\x08\x12\x18\n\x10screenshot_bytes\x18\x05 \x01(\x0c\"/\n\x0fLogTraceRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\"v\n\x11UseCaseEndRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0e\n\x06result\x18\x02 \x01(\x08\x12\x15\n\ractiveRunTime\x18\x03 \x01(\x03\x12\x12\n\nfail_cause\x18\x04 \x01(\t\x12\x16\n\x0ereset_intended\x18\x05 \x01(\x08\"9\n\x0eStopRunRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x17\n\x0f\x64iscard_results\x18\x02 \x01(\x08\"B\n\x19TestRequestMessageWrapper\x12\x14\n\x0crequest_type\x18\x01 \x01(\x05\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\"0\n\x0fTestStopRequest\x12\x1d\n\x15primary_device_serial\x18\x01 \x01(\t\"d\n\x11TestStartResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x12\n\nfail_cause\x18\x02 \x01(\t\x12\x0b\n\x03log\x18\x03 \x03(\t\x12\x0e\n\x06result\x18\x04 \x01(\x08\x12\x0e\n\x06status\x18\x05 \x01(\t\"\x90\x02\n\x10TestStartRequest\x12\x0e\n\x06run_id\x18\x16 \x01(\t\x12\x10\n\x08run_name\x18\x02 \x01(\t\x12\x0f\n\x07node_id\x18\x05 \x01(\t\x12\x12\n\nparameters\x18\x06 \x01(\t\x12\x0f\n\x07project\x18\n \x01(\t\x12\x0f\n\x07version\x18\x10 \x01(\t\x12\x1a\n\x12test_set_file_path\x18\x0c \x01(\t\x12\x0f\n\x07payload\x18\x0e \x01(\x0c\x12\x39\n\x04tags\x18\x14 \x03(\x0b\x32+.profilence.zeta.TestStartRequest.TagsEntry\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\tNodeAdded\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x0c\n\x04pool\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\x12\x11\n\tvariables\x18\x0c \x01(\t\"\x1e\n\x0bNodeRemoved\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\xca\x02\n\x0bNodeUpdated\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x36\n\x10\x63urrent_use_case\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\trun_state\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x34\n\x0e\x63urrent_run_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\nnode_state\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x04pool\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tvariables\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue2\xa7\x07\n\x10\x43onnectorService\x12\x44\n\x04Ping\x12\x1c.profilence.zeta.PingMessage\x1a\x1c.profilence.zeta.PongMessage\"\x00\x12Q\n\x08StartRun\x12 .profilence.zeta.StartRunRequest\x1a!.profilence.zeta.StartRunResponse\"\x00\x12P\n\x0eOnUseCaseStart\x12$.profilence.zeta.UseCaseStartRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\tOnLogStep\x12\x1f.profilence.zeta.LogStepRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\x08LogTrace\x12 .profilence.zeta.LogTraceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12L\n\x0cOnUseCaseEnd\x12\".profilence.zeta.UseCaseEndRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\x07StopRun\x12\x1f.profilence.zeta.StopRunRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x61\n\x17SubscribeToTestRequests\x12\x16.google.protobuf.Empty\x1a*.profilence.zeta.TestRequestMessageWrapper\"\x00\x30\x01\x12T\n\x14RespondToTestRequest\x12\".profilence.zeta.TestStartResponse\x1a\x16.google.protobuf.Empty\"\x00\x12?\n\x07\x41\x64\x64Node\x12\x1a.profilence.zeta.NodeAdded\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nRemoveNode\x12\x1c.profilence.zeta.NodeRemoved\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nUpdateNode\x12\x1c.profilence.zeta.NodeUpdated\x1a\x16.google.protobuf.Empty\"\x00\x42$\n\x13\x63om.profilence.zetaB\x0b\x44riverProtoP\x01\x62\x06proto3')
   ,
   dependencies=[wrappers__pb2.DESCRIPTOR,empty__pb2.DESCRIPTOR,])
 
@@ -62,8 +62,8 @@ _STARTRUNREQUEST_TAGSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=313,
-  serialized_end=356,
+  serialized_start=373,
+  serialized_end=416,
 )
 
 _STARTRUNREQUEST = _descriptor.Descriptor(
@@ -102,28 +102,42 @@ _STARTRUNREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='primary_device_serial', full_name='profilence.zeta.StartRunRequest.primary_device_serial', index=4,
+      name='primary_device_type', full_name='profilence.zeta.StartRunRequest.primary_device_type', index=4,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='secondary_device_type', full_name='profilence.zeta.StartRunRequest.secondary_device_type', index=5,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='primary_device_serial', full_name='profilence.zeta.StartRunRequest.primary_device_serial', index=6,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='secondary_device_serial', full_name='profilence.zeta.StartRunRequest.secondary_device_serial', index=5,
+      name='secondary_device_serial', full_name='profilence.zeta.StartRunRequest.secondary_device_serial', index=7,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='profiling_settings', full_name='profilence.zeta.StartRunRequest.profiling_settings', index=6,
+      name='profiling_settings', full_name='profilence.zeta.StartRunRequest.profiling_settings', index=8,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tags', full_name='profilence.zeta.StartRunRequest.tags', index=7,
+      name='tags', full_name='profilence.zeta.StartRunRequest.tags', index=9,
       number=8, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -142,7 +156,7 @@ _STARTRUNREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=74,
-  serialized_end=356,
+  serialized_end=416,
 )
 
 
@@ -165,8 +179,8 @@ _PINGMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=358,
-  serialized_end=371,
+  serialized_start=418,
+  serialized_end=431,
 )
 
 
@@ -196,8 +210,8 @@ _PONGMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=373,
-  serialized_end=402,
+  serialized_start=433,
+  serialized_end=462,
 )
 
 
@@ -227,8 +241,8 @@ _STARTRUNRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=404,
-  serialized_end=438,
+  serialized_start=464,
+  serialized_end=498,
 )
 
 
@@ -286,8 +300,8 @@ _USECASESTARTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=441,
-  serialized_end=570,
+  serialized_start=501,
+  serialized_end=630,
 )
 
 
@@ -345,8 +359,8 @@ _LOGSTEPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=572,
-  serialized_end=690,
+  serialized_start=632,
+  serialized_end=750,
 )
 
 
@@ -383,8 +397,8 @@ _LOGTRACEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=692,
-  serialized_end=739,
+  serialized_start=752,
+  serialized_end=799,
 )
 
 
@@ -442,8 +456,8 @@ _USECASEENDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=741,
-  serialized_end=859,
+  serialized_start=801,
+  serialized_end=919,
 )
 
 
@@ -480,8 +494,8 @@ _STOPRUNREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=861,
-  serialized_end=918,
+  serialized_start=921,
+  serialized_end=978,
 )
 
 
@@ -518,8 +532,8 @@ _TESTREQUESTMESSAGEWRAPPER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=920,
-  serialized_end=986,
+  serialized_start=980,
+  serialized_end=1046,
 )
 
 
@@ -549,8 +563,8 @@ _TESTSTOPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=988,
-  serialized_end=1036,
+  serialized_start=1048,
+  serialized_end=1096,
 )
 
 
@@ -608,8 +622,8 @@ _TESTSTARTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1038,
-  serialized_end=1138,
+  serialized_start=1098,
+  serialized_end=1198,
 )
 
 
@@ -646,8 +660,8 @@ _TESTSTARTREQUEST_TAGSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=313,
-  serialized_end=356,
+  serialized_start=373,
+  serialized_end=416,
 )
 
 _TESTSTARTREQUEST = _descriptor.Descriptor(
@@ -732,8 +746,8 @@ _TESTSTARTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1141,
-  serialized_end=1413,
+  serialized_start=1201,
+  serialized_end=1473,
 )
 
 
@@ -784,8 +798,8 @@ _NODEADDED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1415,
-  serialized_end=1490,
+  serialized_start=1475,
+  serialized_end=1550,
 )
 
 
@@ -815,8 +829,8 @@ _NODEREMOVED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1492,
-  serialized_end=1522,
+  serialized_start=1552,
+  serialized_end=1582,
 )
 
 
@@ -888,8 +902,8 @@ _NODEUPDATED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1525,
-  serialized_end=1855,
+  serialized_start=1585,
+  serialized_end=1915,
 )
 
 _STARTRUNREQUEST_TAGSENTRY.containing_type = _STARTRUNREQUEST
@@ -1059,8 +1073,8 @@ _CONNECTORSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1858,
-  serialized_end=2793,
+  serialized_start=1918,
+  serialized_end=2853,
   methods=[
   _descriptor.MethodDescriptor(
     name='Ping',

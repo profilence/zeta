@@ -98,7 +98,7 @@ class Connector(object):
         return value
 
     def start_run_with_recommended_settings(self, run_name, set_name, project, version, primary_device_serial,
-                                            secondary_device_serial, tags):
+                primary_device_type, secondary_device_serial, secondary_device_type, tags):
         """ Requests the service for a new test run with recommended profiling settings
 
         Parameters:
@@ -107,7 +107,9 @@ class Connector(object):
             project (str):                  Name of the project under test
             version (str):                  Version of the project
             primary_device_serial (str):    Identifier of the primary DUT
+            primary_device_type (str):      Type of the primary DUT
             secondary_device_serial (str):  Identifier of the secondary DUT
+            secondary_device_type (str):    Type of the secondary DUT
             tags (dict):                    Tags for the test run
 
         Returns:
@@ -120,12 +122,14 @@ class Connector(object):
                               project,
                               version,
                               primary_device_serial,
+                              primary_device_type,
                               secondary_device_serial,
+                              secondary_device_type
                               None,
                               tags)
 
-    def start_run(self, run_name, set_name, project, version, primary_device_serial, secondary_device_serial,
-                  profiling_settings, tags):
+    def start_run(self, run_name, set_name, project, version, primary_device_serial, primary_device_type,
+                  secondary_device_serial, secondary_device_type, profiling_settings, tags):
         """ Requests the service for a new test run
 
         Parameters:
@@ -134,7 +138,9 @@ class Connector(object):
             project (str):                          Name of the project under test
             version (str):                          Version of the project
             primary_device_serial (str):            Identifier of the primary DUT
+            primary_device_type (str):              Type of the primary DUT
             secondary_device_serial (str):          Identifier of the secondary DUT
+            secondary_device_type (str):            Type of the secondary DUT
             profiling_settings (str/TextIOBase):    Profiling settings as JSON string, or a file handle to JSON file
             tags (dict):                            Tags for the test run
 
@@ -157,6 +163,8 @@ class Connector(object):
         request.version = version or ''
         request.primary_device_serial = primary_device_serial or ''
         request.secondary_device_serial = secondary_device_serial or ''
+        request.primary_device_type = primary_device_type or ''
+        request.secondary_device_type = secondary_device_type or ''
         request.profiling_settings = profiling_settings or ''
         request.tags.update(tags or {})
         try:

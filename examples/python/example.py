@@ -18,10 +18,11 @@ try:
         project_name = 'AProject'
         project_version = '1.1.1'
         target_device_identifier = 'emulator-5554'
+        target_device_type = 'android'
         profiling_settings = open('/home/tests/profiling_settings.json')
 
         test_run_id = client.start_run(test_run_name, test_set_name, project_name, project_version,
-                                       target_device_identifier, None, profiling_settings, None)
+                                       target_device_identifier, target_device_type, None, None, profiling_settings, None)
 
         print('testRunID: %s' % test_run_id)
 

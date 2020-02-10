@@ -148,7 +148,7 @@ public class Connector {
 	    	PongMessage response = blockingStub.ping(request);
 	    	return PingResponseType.fromValue(response.getResult());
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return PingResponseType.Failed;
 	    }
 	}
@@ -160,7 +160,9 @@ public class Connector {
 	 * @param project
 	 * @param version
 	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
 	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
 	 * @param tags
 	 * @return Test run id if successfully started; null otherwise
 	 */
@@ -170,9 +172,11 @@ public class Connector {
 			String project, 
 			String version, 
 			String primaryDeviceSerial, 
+			String primaryDeviceType, 
 			String secondaryDeviceSerial,
+			String secondaryDeviceType,
 			Map<String, String> tags) {
-		return startRun(runName, setName, project, version, primaryDeviceSerial, secondaryDeviceSerial, (String)null, tags);
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, (String)null, tags);
 	}
 	
 	/**
@@ -182,7 +186,9 @@ public class Connector {
 	 * @param project
 	 * @param version
 	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
 	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
 	 * @param profilingSettingsFile JSON file containing profiling settings
 	 * @param tags
 	 * @return Test run id if successfully started; null otherwise
@@ -193,7 +199,9 @@ public class Connector {
 			String project, 
 			String version, 
 			String primaryDeviceSerial, 
+			String primaryDeviceType, 
 			String secondaryDeviceSerial,
+			String secondaryDeviceType,
 			File profilingSettingsFile,
 			Map<String, String> tags) {
 		
@@ -214,7 +222,7 @@ public class Connector {
 		    	settingsJson = null;
 		    }
 		}
-		return startRun(runName, setName, project, version, primaryDeviceSerial, secondaryDeviceSerial, settingsJson, tags);
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, settingsJson, tags);
 	}
 	
 	/**
@@ -224,7 +232,9 @@ public class Connector {
 	 * @param project
 	 * @param version
 	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
 	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
 	 * @param profilingSettings JSON string providing analyzer settings
 	 * @param tags
 	 * @return Test run id if successfully started; null otherwise
@@ -235,7 +245,9 @@ public class Connector {
 			String project, 
 			String version, 
 			String primaryDeviceSerial, 
+			String primaryDeviceType, 
 			String secondaryDeviceSerial,
+			String secondaryDeviceType,
 			String profilingSettings,
 			Map<String, String> tags) {
 		
@@ -244,6 +256,8 @@ public class Connector {
 				.setSetName(setName != null ? setName : "")
 				.setProject(project != null ? project : "")
 				.setVersion(version != null ? version : "")
+				.setPrimaryDeviceType(primaryDeviceType != null ? primaryDeviceType : "")
+				.setSecondaryDeviceType(secondaryDeviceType != null ? secondaryDeviceType : "")
 				.setPrimaryDeviceSerial(primaryDeviceSerial != null ? primaryDeviceSerial : "")
 				.setSecondaryDeviceSerial(secondaryDeviceSerial != null ? secondaryDeviceSerial : "")
 				.setProfilingSettings(profilingSettings != null ? profilingSettings : "")
@@ -254,7 +268,7 @@ public class Connector {
 	    	StartRunResponse response = blockingStub.startRun(request);
 	    	return response.getRunId();
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return null;
 	    }
 	}
@@ -298,7 +312,7 @@ public class Connector {
 	    	blockingStub.onUseCaseStart(request);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -335,7 +349,7 @@ public class Connector {
 	    	blockingStub.onUseCaseEnd(request);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -431,7 +445,7 @@ public class Connector {
 	    	blockingStub.onLogStep(request);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -461,7 +475,7 @@ public class Connector {
 	    	blockingStub.logTrace(request);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -487,7 +501,7 @@ public class Connector {
 	    	blockingStub.stopRun(request);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -536,7 +550,7 @@ public class Connector {
 			try {
 				stub.subscribeToTestRequests(Empty.newBuilder().build(), observer);
 			}  catch (StatusRuntimeException e) {
-		    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+		    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 		    	listener.onError(e);
 		    }
 		}
@@ -569,7 +583,7 @@ public class Connector {
 	    	blockingStub.respondToTestRequest(resp);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -603,7 +617,7 @@ public class Connector {
 	    	blockingStub.addNode(request);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -627,7 +641,7 @@ public class Connector {
 	    	blockingStub.removeNode(request);
 	    	return true;
 	    } catch (StatusRuntimeException e) {
-	    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 	    	return false;
 	    }
 	}
@@ -690,7 +704,7 @@ public class Connector {
 		    	blockingStub.updateNode(request);
 		    	return true;
 		    } catch (StatusRuntimeException e) {
-		    	log(LogLevel.Warning, "RPC failed: " + e.getStatus());
+		    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
 		    	return false;
 		    }
 	}
