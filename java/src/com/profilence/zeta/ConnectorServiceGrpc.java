@@ -182,6 +182,99 @@ public final class ConnectorServiceGrpc {
     return getLogTraceMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.DeviceLogEntry,
+      com.google.protobuf.Empty> getLogDeviceMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "LogDevice",
+      requestType = com.profilence.zeta.DeviceLogEntry.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.DeviceLogEntry,
+      com.google.protobuf.Empty> getLogDeviceMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.DeviceLogEntry, com.google.protobuf.Empty> getLogDeviceMethod;
+    if ((getLogDeviceMethod = ConnectorServiceGrpc.getLogDeviceMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getLogDeviceMethod = ConnectorServiceGrpc.getLogDeviceMethod) == null) {
+          ConnectorServiceGrpc.getLogDeviceMethod = getLogDeviceMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.DeviceLogEntry, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "LogDevice"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.DeviceLogEntry.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("LogDevice"))
+              .build();
+        }
+      }
+    }
+    return getLogDeviceMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.ResetEntry,
+      com.google.protobuf.Empty> getNotifyResetMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "NotifyReset",
+      requestType = com.profilence.zeta.ResetEntry.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.ResetEntry,
+      com.google.protobuf.Empty> getNotifyResetMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.ResetEntry, com.google.protobuf.Empty> getNotifyResetMethod;
+    if ((getNotifyResetMethod = ConnectorServiceGrpc.getNotifyResetMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getNotifyResetMethod = ConnectorServiceGrpc.getNotifyResetMethod) == null) {
+          ConnectorServiceGrpc.getNotifyResetMethod = getNotifyResetMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.ResetEntry, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "NotifyReset"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.ResetEntry.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("NotifyReset"))
+              .build();
+        }
+      }
+    }
+    return getNotifyResetMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.EventEntry,
+      com.google.protobuf.Empty> getNotifyEventMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "NotifyEvent",
+      requestType = com.profilence.zeta.EventEntry.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.EventEntry,
+      com.google.protobuf.Empty> getNotifyEventMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.EventEntry, com.google.protobuf.Empty> getNotifyEventMethod;
+    if ((getNotifyEventMethod = ConnectorServiceGrpc.getNotifyEventMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getNotifyEventMethod = ConnectorServiceGrpc.getNotifyEventMethod) == null) {
+          ConnectorServiceGrpc.getNotifyEventMethod = getNotifyEventMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.EventEntry, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "NotifyEvent"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.EventEntry.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("NotifyEvent"))
+              .build();
+        }
+      }
+    }
+    return getNotifyEventMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.UseCaseEndRequest,
       com.google.protobuf.Empty> getOnUseCaseEndMethod;
 
@@ -242,6 +335,161 @@ public final class ConnectorServiceGrpc {
       }
     }
     return getStopRunMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.DynamicSeriesInformation,
+      com.google.protobuf.Empty> getCreateTimeSeriesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CreateTimeSeries",
+      requestType = com.profilence.zeta.DynamicSeriesInformation.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.DynamicSeriesInformation,
+      com.google.protobuf.Empty> getCreateTimeSeriesMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.DynamicSeriesInformation, com.google.protobuf.Empty> getCreateTimeSeriesMethod;
+    if ((getCreateTimeSeriesMethod = ConnectorServiceGrpc.getCreateTimeSeriesMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getCreateTimeSeriesMethod = ConnectorServiceGrpc.getCreateTimeSeriesMethod) == null) {
+          ConnectorServiceGrpc.getCreateTimeSeriesMethod = getCreateTimeSeriesMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.DynamicSeriesInformation, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateTimeSeries"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.DynamicSeriesInformation.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("CreateTimeSeries"))
+              .build();
+        }
+      }
+    }
+    return getCreateTimeSeriesMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.DynamicSingleSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateSingleSystemSeriesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateSingleSystemSeries",
+      requestType = com.profilence.zeta.DynamicSingleSeriesUpdate.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.DynamicSingleSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateSingleSystemSeriesMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.DynamicSingleSeriesUpdate, com.google.protobuf.Empty> getUpdateSingleSystemSeriesMethod;
+    if ((getUpdateSingleSystemSeriesMethod = ConnectorServiceGrpc.getUpdateSingleSystemSeriesMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getUpdateSingleSystemSeriesMethod = ConnectorServiceGrpc.getUpdateSingleSystemSeriesMethod) == null) {
+          ConnectorServiceGrpc.getUpdateSingleSystemSeriesMethod = getUpdateSingleSystemSeriesMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.DynamicSingleSeriesUpdate, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateSingleSystemSeries"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.DynamicSingleSeriesUpdate.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("UpdateSingleSystemSeries"))
+              .build();
+        }
+      }
+    }
+    return getUpdateSingleSystemSeriesMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.DynamicProcessSingleSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateSingleProcessSeriesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateSingleProcessSeries",
+      requestType = com.profilence.zeta.DynamicProcessSingleSeriesUpdate.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.DynamicProcessSingleSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateSingleProcessSeriesMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.DynamicProcessSingleSeriesUpdate, com.google.protobuf.Empty> getUpdateSingleProcessSeriesMethod;
+    if ((getUpdateSingleProcessSeriesMethod = ConnectorServiceGrpc.getUpdateSingleProcessSeriesMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getUpdateSingleProcessSeriesMethod = ConnectorServiceGrpc.getUpdateSingleProcessSeriesMethod) == null) {
+          ConnectorServiceGrpc.getUpdateSingleProcessSeriesMethod = getUpdateSingleProcessSeriesMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.DynamicProcessSingleSeriesUpdate, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateSingleProcessSeries"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.DynamicProcessSingleSeriesUpdate.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("UpdateSingleProcessSeries"))
+              .build();
+        }
+      }
+    }
+    return getUpdateSingleProcessSeriesMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.DynamicCompositeSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateCompositeSystemSeriesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateCompositeSystemSeries",
+      requestType = com.profilence.zeta.DynamicCompositeSeriesUpdate.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.DynamicCompositeSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateCompositeSystemSeriesMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.DynamicCompositeSeriesUpdate, com.google.protobuf.Empty> getUpdateCompositeSystemSeriesMethod;
+    if ((getUpdateCompositeSystemSeriesMethod = ConnectorServiceGrpc.getUpdateCompositeSystemSeriesMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getUpdateCompositeSystemSeriesMethod = ConnectorServiceGrpc.getUpdateCompositeSystemSeriesMethod) == null) {
+          ConnectorServiceGrpc.getUpdateCompositeSystemSeriesMethod = getUpdateCompositeSystemSeriesMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.DynamicCompositeSeriesUpdate, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateCompositeSystemSeries"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.DynamicCompositeSeriesUpdate.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("UpdateCompositeSystemSeries"))
+              .build();
+        }
+      }
+    }
+    return getUpdateCompositeSystemSeriesMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.DynamicProcessCompositeSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateCompositeProcessSeriesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateCompositeProcessSeries",
+      requestType = com.profilence.zeta.DynamicProcessCompositeSeriesUpdate.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.DynamicProcessCompositeSeriesUpdate,
+      com.google.protobuf.Empty> getUpdateCompositeProcessSeriesMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.DynamicProcessCompositeSeriesUpdate, com.google.protobuf.Empty> getUpdateCompositeProcessSeriesMethod;
+    if ((getUpdateCompositeProcessSeriesMethod = ConnectorServiceGrpc.getUpdateCompositeProcessSeriesMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getUpdateCompositeProcessSeriesMethod = ConnectorServiceGrpc.getUpdateCompositeProcessSeriesMethod) == null) {
+          ConnectorServiceGrpc.getUpdateCompositeProcessSeriesMethod = getUpdateCompositeProcessSeriesMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.DynamicProcessCompositeSeriesUpdate, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateCompositeProcessSeries"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.DynamicProcessCompositeSeriesUpdate.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("UpdateCompositeProcessSeries"))
+              .build();
+        }
+      }
+    }
+    return getUpdateCompositeProcessSeriesMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
@@ -484,6 +732,27 @@ public final class ConnectorServiceGrpc {
 
     /**
      */
+    public io.grpc.stub.StreamObserver<com.profilence.zeta.DeviceLogEntry> logDevice(
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      return asyncUnimplementedStreamingCall(getLogDeviceMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void notifyReset(com.profilence.zeta.ResetEntry request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getNotifyResetMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void notifyEvent(com.profilence.zeta.EventEntry request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getNotifyEventMethod(), responseObserver);
+    }
+
+    /**
+     */
     public void onUseCaseEnd(com.profilence.zeta.UseCaseEndRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(getOnUseCaseEndMethod(), responseObserver);
@@ -494,6 +763,41 @@ public final class ConnectorServiceGrpc {
     public void stopRun(com.profilence.zeta.StopRunRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(getStopRunMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void createTimeSeries(com.profilence.zeta.DynamicSeriesInformation request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getCreateTimeSeriesMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void updateSingleSystemSeries(com.profilence.zeta.DynamicSingleSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateSingleSystemSeriesMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void updateSingleProcessSeries(com.profilence.zeta.DynamicProcessSingleSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateSingleProcessSeriesMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void updateCompositeSystemSeries(com.profilence.zeta.DynamicCompositeSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateCompositeSystemSeriesMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void updateCompositeProcessSeries(com.profilence.zeta.DynamicProcessCompositeSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateCompositeProcessSeriesMethod(), responseObserver);
     }
 
     /**
@@ -569,6 +873,27 @@ public final class ConnectorServiceGrpc {
                 com.google.protobuf.Empty>(
                   this, METHODID_LOG_TRACE)))
           .addMethod(
+            getLogDeviceMethod(),
+            asyncClientStreamingCall(
+              new MethodHandlers<
+                com.profilence.zeta.DeviceLogEntry,
+                com.google.protobuf.Empty>(
+                  this, METHODID_LOG_DEVICE)))
+          .addMethod(
+            getNotifyResetMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.ResetEntry,
+                com.google.protobuf.Empty>(
+                  this, METHODID_NOTIFY_RESET)))
+          .addMethod(
+            getNotifyEventMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.EventEntry,
+                com.google.protobuf.Empty>(
+                  this, METHODID_NOTIFY_EVENT)))
+          .addMethod(
             getOnUseCaseEndMethod(),
             asyncUnaryCall(
               new MethodHandlers<
@@ -582,6 +907,41 @@ public final class ConnectorServiceGrpc {
                 com.profilence.zeta.StopRunRequest,
                 com.google.protobuf.Empty>(
                   this, METHODID_STOP_RUN)))
+          .addMethod(
+            getCreateTimeSeriesMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.DynamicSeriesInformation,
+                com.google.protobuf.Empty>(
+                  this, METHODID_CREATE_TIME_SERIES)))
+          .addMethod(
+            getUpdateSingleSystemSeriesMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.DynamicSingleSeriesUpdate,
+                com.google.protobuf.Empty>(
+                  this, METHODID_UPDATE_SINGLE_SYSTEM_SERIES)))
+          .addMethod(
+            getUpdateSingleProcessSeriesMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.DynamicProcessSingleSeriesUpdate,
+                com.google.protobuf.Empty>(
+                  this, METHODID_UPDATE_SINGLE_PROCESS_SERIES)))
+          .addMethod(
+            getUpdateCompositeSystemSeriesMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.DynamicCompositeSeriesUpdate,
+                com.google.protobuf.Empty>(
+                  this, METHODID_UPDATE_COMPOSITE_SYSTEM_SERIES)))
+          .addMethod(
+            getUpdateCompositeProcessSeriesMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.DynamicProcessCompositeSeriesUpdate,
+                com.google.protobuf.Empty>(
+                  this, METHODID_UPDATE_COMPOSITE_PROCESS_SERIES)))
           .addMethod(
             getSubscribeToTestRequestsMethod(),
             asyncServerStreamingCall(
@@ -677,6 +1037,30 @@ public final class ConnectorServiceGrpc {
 
     /**
      */
+    public io.grpc.stub.StreamObserver<com.profilence.zeta.DeviceLogEntry> logDevice(
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      return asyncClientStreamingCall(
+          getChannel().newCall(getLogDeviceMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     */
+    public void notifyReset(com.profilence.zeta.ResetEntry request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getNotifyResetMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void notifyEvent(com.profilence.zeta.EventEntry request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getNotifyEventMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void onUseCaseEnd(com.profilence.zeta.UseCaseEndRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnaryCall(
@@ -689,6 +1073,46 @@ public final class ConnectorServiceGrpc {
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getStopRunMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void createTimeSeries(com.profilence.zeta.DynamicSeriesInformation request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCreateTimeSeriesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateSingleSystemSeries(com.profilence.zeta.DynamicSingleSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateSingleSystemSeriesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateSingleProcessSeries(com.profilence.zeta.DynamicProcessSingleSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateSingleProcessSeriesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateCompositeSystemSeries(com.profilence.zeta.DynamicCompositeSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateCompositeSystemSeriesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateCompositeProcessSeries(com.profilence.zeta.DynamicProcessCompositeSeriesUpdate request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateCompositeProcessSeriesMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -783,6 +1207,20 @@ public final class ConnectorServiceGrpc {
 
     /**
      */
+    public com.google.protobuf.Empty notifyReset(com.profilence.zeta.ResetEntry request) {
+      return blockingUnaryCall(
+          getChannel(), getNotifyResetMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty notifyEvent(com.profilence.zeta.EventEntry request) {
+      return blockingUnaryCall(
+          getChannel(), getNotifyEventMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
     public com.google.protobuf.Empty onUseCaseEnd(com.profilence.zeta.UseCaseEndRequest request) {
       return blockingUnaryCall(
           getChannel(), getOnUseCaseEndMethod(), getCallOptions(), request);
@@ -793,6 +1231,41 @@ public final class ConnectorServiceGrpc {
     public com.google.protobuf.Empty stopRun(com.profilence.zeta.StopRunRequest request) {
       return blockingUnaryCall(
           getChannel(), getStopRunMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty createTimeSeries(com.profilence.zeta.DynamicSeriesInformation request) {
+      return blockingUnaryCall(
+          getChannel(), getCreateTimeSeriesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty updateSingleSystemSeries(com.profilence.zeta.DynamicSingleSeriesUpdate request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateSingleSystemSeriesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty updateSingleProcessSeries(com.profilence.zeta.DynamicProcessSingleSeriesUpdate request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateSingleProcessSeriesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty updateCompositeSystemSeries(com.profilence.zeta.DynamicCompositeSeriesUpdate request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateCompositeSystemSeriesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty updateCompositeProcessSeries(com.profilence.zeta.DynamicProcessCompositeSeriesUpdate request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateCompositeProcessSeriesMethod(), getCallOptions(), request);
     }
 
     /**
@@ -888,6 +1361,22 @@ public final class ConnectorServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> notifyReset(
+        com.profilence.zeta.ResetEntry request) {
+      return futureUnaryCall(
+          getChannel().newCall(getNotifyResetMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> notifyEvent(
+        com.profilence.zeta.EventEntry request) {
+      return futureUnaryCall(
+          getChannel().newCall(getNotifyEventMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> onUseCaseEnd(
         com.profilence.zeta.UseCaseEndRequest request) {
       return futureUnaryCall(
@@ -900,6 +1389,46 @@ public final class ConnectorServiceGrpc {
         com.profilence.zeta.StopRunRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getStopRunMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> createTimeSeries(
+        com.profilence.zeta.DynamicSeriesInformation request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCreateTimeSeriesMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> updateSingleSystemSeries(
+        com.profilence.zeta.DynamicSingleSeriesUpdate request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateSingleSystemSeriesMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> updateSingleProcessSeries(
+        com.profilence.zeta.DynamicProcessSingleSeriesUpdate request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateSingleProcessSeriesMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> updateCompositeSystemSeries(
+        com.profilence.zeta.DynamicCompositeSeriesUpdate request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateCompositeSystemSeriesMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> updateCompositeProcessSeries(
+        com.profilence.zeta.DynamicProcessCompositeSeriesUpdate request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateCompositeProcessSeriesMethod(), getCallOptions()), request);
     }
 
     /**
@@ -940,13 +1469,21 @@ public final class ConnectorServiceGrpc {
   private static final int METHODID_ON_USE_CASE_START = 2;
   private static final int METHODID_ON_LOG_STEP = 3;
   private static final int METHODID_LOG_TRACE = 4;
-  private static final int METHODID_ON_USE_CASE_END = 5;
-  private static final int METHODID_STOP_RUN = 6;
-  private static final int METHODID_SUBSCRIBE_TO_TEST_REQUESTS = 7;
-  private static final int METHODID_RESPOND_TO_TEST_REQUEST = 8;
-  private static final int METHODID_ADD_NODE = 9;
-  private static final int METHODID_REMOVE_NODE = 10;
-  private static final int METHODID_UPDATE_NODE = 11;
+  private static final int METHODID_NOTIFY_RESET = 5;
+  private static final int METHODID_NOTIFY_EVENT = 6;
+  private static final int METHODID_ON_USE_CASE_END = 7;
+  private static final int METHODID_STOP_RUN = 8;
+  private static final int METHODID_CREATE_TIME_SERIES = 9;
+  private static final int METHODID_UPDATE_SINGLE_SYSTEM_SERIES = 10;
+  private static final int METHODID_UPDATE_SINGLE_PROCESS_SERIES = 11;
+  private static final int METHODID_UPDATE_COMPOSITE_SYSTEM_SERIES = 12;
+  private static final int METHODID_UPDATE_COMPOSITE_PROCESS_SERIES = 13;
+  private static final int METHODID_SUBSCRIBE_TO_TEST_REQUESTS = 14;
+  private static final int METHODID_RESPOND_TO_TEST_REQUEST = 15;
+  private static final int METHODID_ADD_NODE = 16;
+  private static final int METHODID_REMOVE_NODE = 17;
+  private static final int METHODID_UPDATE_NODE = 18;
+  private static final int METHODID_LOG_DEVICE = 19;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -985,12 +1522,40 @@ public final class ConnectorServiceGrpc {
           serviceImpl.logTrace((com.profilence.zeta.LogTraceRequest) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
+        case METHODID_NOTIFY_RESET:
+          serviceImpl.notifyReset((com.profilence.zeta.ResetEntry) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_NOTIFY_EVENT:
+          serviceImpl.notifyEvent((com.profilence.zeta.EventEntry) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
         case METHODID_ON_USE_CASE_END:
           serviceImpl.onUseCaseEnd((com.profilence.zeta.UseCaseEndRequest) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
         case METHODID_STOP_RUN:
           serviceImpl.stopRun((com.profilence.zeta.StopRunRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_CREATE_TIME_SERIES:
+          serviceImpl.createTimeSeries((com.profilence.zeta.DynamicSeriesInformation) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_UPDATE_SINGLE_SYSTEM_SERIES:
+          serviceImpl.updateSingleSystemSeries((com.profilence.zeta.DynamicSingleSeriesUpdate) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_UPDATE_SINGLE_PROCESS_SERIES:
+          serviceImpl.updateSingleProcessSeries((com.profilence.zeta.DynamicProcessSingleSeriesUpdate) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_UPDATE_COMPOSITE_SYSTEM_SERIES:
+          serviceImpl.updateCompositeSystemSeries((com.profilence.zeta.DynamicCompositeSeriesUpdate) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_UPDATE_COMPOSITE_PROCESS_SERIES:
+          serviceImpl.updateCompositeProcessSeries((com.profilence.zeta.DynamicProcessCompositeSeriesUpdate) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
         case METHODID_SUBSCRIBE_TO_TEST_REQUESTS:
@@ -1023,6 +1588,9 @@ public final class ConnectorServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_LOG_DEVICE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.logDevice(
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -1079,8 +1647,16 @@ public final class ConnectorServiceGrpc {
               .addMethod(getOnUseCaseStartMethod())
               .addMethod(getOnLogStepMethod())
               .addMethod(getLogTraceMethod())
+              .addMethod(getLogDeviceMethod())
+              .addMethod(getNotifyResetMethod())
+              .addMethod(getNotifyEventMethod())
               .addMethod(getOnUseCaseEndMethod())
               .addMethod(getStopRunMethod())
+              .addMethod(getCreateTimeSeriesMethod())
+              .addMethod(getUpdateSingleSystemSeriesMethod())
+              .addMethod(getUpdateSingleProcessSeriesMethod())
+              .addMethod(getUpdateCompositeSystemSeriesMethod())
+              .addMethod(getUpdateCompositeProcessSeriesMethod())
               .addMethod(getSubscribeToTestRequestsMethod())
               .addMethod(getRespondToTestRequestMethod())
               .addMethod(getAddNodeMethod())

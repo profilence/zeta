@@ -1,100 +1,51 @@
 {
-  "SelectedMode": "Recommended",
-  "ProcrankSettings": {
-    "Mode": "Disabled",
-    "Interval": "00:01:00"
-  },
-  "DumpsysMeminfoASettings": {
-    "Target": "Global",
-    "TargetedProcesses": [
+   "cpuLoad":true,
+   "cpuStates":true,
+   "powerMeasure":true,
+   "batteryStats":true,
+   "frameStats":false,
+   "cpuLoadPerCore":false,
+   "netstats":false,
+   "diskUsage":false,
+   "thermal":true,
+   "gpuLoad":false,
+   "gpuStates":false,
+   "lightMemoryProfiling":true,
+   "processMemoryProfiling":false,
+   "systemMemoryProfiling":false,
+   "slabs":false,
+   "deviceLog":true,
+   "device2Log":false,
+   "events":true,
+   "resets":true,
+   "dumpServices":[
       {
-        "ProcessName": null,
-        "IncludeSubprocesses": false
-      }
-    ],
-    "Mode": "Disabled",
-    "Interval": "00:01:00"
-  },
-  "HPROFSettings": {
-    "TargetedProcesses": [
+         "service":"activity",
+         "arguments":"top"
+      },
       {
-        "ProcessName": null,
-        "IncludeSubprocesses": false
+         "service":"media.camera",
+         "arguments":null
       }
-    ],
-    "Mode": "Disabled",
-    "Interval": "00:20:00"
-  },
-  "DumpsysMeminfoSettings": {
-    "Mode": "Synchronized",
-    "Interval": "00:00:30"
-  },
-  "CPUAnalyzerSettings": {
-    "Target": "Global",
-    "TargetedProcesses": [
+   ],
+   "dumpHeaps":[
       {
-        "ProcessName": null,
-        "IncludeSubprocesses": false
-      }
-    ],
-    "Mode": "Timed",
-    "Interval": "00:00:10"
-  },
-  "BatteryAnalyzerSettings": {
-    "Mode": "TimedHideInterval",
-    "Interval": "00:00:20"
-  },
-  "CPUStatesAnalyzerSettings": {
-    "Mode": "TimedHideInterval",
-    "Interval": "00:00:20"
-  },
-  "GPUStatesAnalyzerSettings": {
-    "Mode": "Disabled",
-    "Interval": "00:00:01"
-  },
-  "GPULoadAnalyzerSettings": {
-    "Mode": "Disabled",
-    "Interval": "00:00:01"
-  },
-  "GPURenderingAnalyzerSettings": {
-    "Mode": "Disabled",
-    "Interval": "00:00:05"
-  },
-  "ThermalAnalyzerSettings": {
-    "Mode": "Timed",
-    "Interval": "00:00:10"
-  },
-  "DumpsysSettings": {
-    "TargetedServices": [
+         "processName":"com.google.chrome",
+         "includeSubprocesses":true
+      },
       {
-        "Name": "",
-        "Args": ""
+         "processName":"com.google.calculator",
+         "includeSubprocesses":false
       }
-    ],
-    "Mode": "Disabled",
-    "Interval": "00:05:00"
-  },
-  "BatteryConsumptionSettings": {
-    "UsbValue": 0.0,
-    "ReduceValueWhenBatteryFull": true,
-    "Mode": "Disabled",
-    "Interval": "00:00:05"
-  },
-  "DiskUsageAnalyzerSettings": {
-    "Mode": "TimedHideInterval",
-    "Interval": "00:00:01"
-  },
-  "NetstatAnalyzerSettings": {
-    "Mode": "TimedHideInterval",
-    "Interval": "00:00:01"
-  },
-  "CPULoadPerCoreAnalyzerSettings": {
-    "Mode": "Timed",
-    "Interval": "00:00:02"
-  },
-  "IsAutomationEnabled": true,
-  "FramestatsSettings": {
-    "Mode": "Disabled",
-    "Interval": "00:00:00.0500000"
-  }
+   ],
+   "deviceSettings":{
+      "deviceSerialXXX":{
+         "propertyX":"valueX",
+         "propertyXX":10
+      },
+      "deviceSerialYYY":{
+         "propertyY":true,
+         "propertyYY":12.2
+      }
+   }
 }

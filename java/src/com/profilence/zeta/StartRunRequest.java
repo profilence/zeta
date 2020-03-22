@@ -20,11 +20,12 @@ private static final long serialVersionUID = 0L;
     setName_ = "";
     project_ = "";
     version_ = "";
-    primaryDeviceType_ = "";
-    secondaryDeviceType_ = "";
     primaryDeviceSerial_ = "";
     secondaryDeviceSerial_ = "";
     profilingSettings_ = "";
+    primaryDeviceType_ = "";
+    secondaryDeviceType_ = "";
+    runId_ = "";
   }
 
   @java.lang.Override
@@ -123,6 +124,12 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             secondaryDeviceType_ = s;
+            break;
+          }
+          case 90: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            runId_ = s;
             break;
           }
           default: {
@@ -313,78 +320,6 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PRIMARY_DEVICE_TYPE_FIELD_NUMBER = 9;
-  private volatile java.lang.Object primaryDeviceType_;
-  /**
-   * <code>string primary_device_type = 9;</code>
-   * @return The primaryDeviceType.
-   */
-  public java.lang.String getPrimaryDeviceType() {
-    java.lang.Object ref = primaryDeviceType_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      primaryDeviceType_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string primary_device_type = 9;</code>
-   * @return The bytes for primaryDeviceType.
-   */
-  public com.google.protobuf.ByteString
-      getPrimaryDeviceTypeBytes() {
-    java.lang.Object ref = primaryDeviceType_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      primaryDeviceType_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int SECONDARY_DEVICE_TYPE_FIELD_NUMBER = 10;
-  private volatile java.lang.Object secondaryDeviceType_;
-  /**
-   * <code>string secondary_device_type = 10;</code>
-   * @return The secondaryDeviceType.
-   */
-  public java.lang.String getSecondaryDeviceType() {
-    java.lang.Object ref = secondaryDeviceType_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      secondaryDeviceType_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string secondary_device_type = 10;</code>
-   * @return The bytes for secondaryDeviceType.
-   */
-  public com.google.protobuf.ByteString
-      getSecondaryDeviceTypeBytes() {
-    java.lang.Object ref = secondaryDeviceType_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      secondaryDeviceType_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
   public static final int PRIMARY_DEVICE_SERIAL_FIELD_NUMBER = 5;
   private volatile java.lang.Object primaryDeviceSerial_;
   /**
@@ -569,6 +504,114 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
+  public static final int PRIMARY_DEVICE_TYPE_FIELD_NUMBER = 9;
+  private volatile java.lang.Object primaryDeviceType_;
+  /**
+   * <code>string primary_device_type = 9;</code>
+   * @return The primaryDeviceType.
+   */
+  public java.lang.String getPrimaryDeviceType() {
+    java.lang.Object ref = primaryDeviceType_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      primaryDeviceType_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string primary_device_type = 9;</code>
+   * @return The bytes for primaryDeviceType.
+   */
+  public com.google.protobuf.ByteString
+      getPrimaryDeviceTypeBytes() {
+    java.lang.Object ref = primaryDeviceType_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      primaryDeviceType_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int SECONDARY_DEVICE_TYPE_FIELD_NUMBER = 10;
+  private volatile java.lang.Object secondaryDeviceType_;
+  /**
+   * <code>string secondary_device_type = 10;</code>
+   * @return The secondaryDeviceType.
+   */
+  public java.lang.String getSecondaryDeviceType() {
+    java.lang.Object ref = secondaryDeviceType_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      secondaryDeviceType_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string secondary_device_type = 10;</code>
+   * @return The bytes for secondaryDeviceType.
+   */
+  public com.google.protobuf.ByteString
+      getSecondaryDeviceTypeBytes() {
+    java.lang.Object ref = secondaryDeviceType_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      secondaryDeviceType_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int RUN_ID_FIELD_NUMBER = 11;
+  private volatile java.lang.Object runId_;
+  /**
+   * <code>string run_id = 11;</code>
+   * @return The runId.
+   */
+  public java.lang.String getRunId() {
+    java.lang.Object ref = runId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      runId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string run_id = 11;</code>
+   * @return The bytes for runId.
+   */
+  public com.google.protobuf.ByteString
+      getRunIdBytes() {
+    java.lang.Object ref = runId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      runId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -616,6 +659,9 @@ private static final long serialVersionUID = 0L;
     if (!getSecondaryDeviceTypeBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 10, secondaryDeviceType_);
     }
+    if (!getRunIdBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 11, runId_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -662,6 +708,9 @@ private static final long serialVersionUID = 0L;
     if (!getSecondaryDeviceTypeBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, secondaryDeviceType_);
     }
+    if (!getRunIdBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, runId_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -685,10 +734,6 @@ private static final long serialVersionUID = 0L;
         .equals(other.getProject())) return false;
     if (!getVersion()
         .equals(other.getVersion())) return false;
-    if (!getPrimaryDeviceType()
-        .equals(other.getPrimaryDeviceType())) return false;
-    if (!getSecondaryDeviceType()
-        .equals(other.getSecondaryDeviceType())) return false;
     if (!getPrimaryDeviceSerial()
         .equals(other.getPrimaryDeviceSerial())) return false;
     if (!getSecondaryDeviceSerial()
@@ -697,6 +742,12 @@ private static final long serialVersionUID = 0L;
         .equals(other.getProfilingSettings())) return false;
     if (!internalGetTags().equals(
         other.internalGetTags())) return false;
+    if (!getPrimaryDeviceType()
+        .equals(other.getPrimaryDeviceType())) return false;
+    if (!getSecondaryDeviceType()
+        .equals(other.getSecondaryDeviceType())) return false;
+    if (!getRunId()
+        .equals(other.getRunId())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -716,10 +767,6 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getProject().hashCode();
     hash = (37 * hash) + VERSION_FIELD_NUMBER;
     hash = (53 * hash) + getVersion().hashCode();
-    hash = (37 * hash) + PRIMARY_DEVICE_TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getPrimaryDeviceType().hashCode();
-    hash = (37 * hash) + SECONDARY_DEVICE_TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getSecondaryDeviceType().hashCode();
     hash = (37 * hash) + PRIMARY_DEVICE_SERIAL_FIELD_NUMBER;
     hash = (53 * hash) + getPrimaryDeviceSerial().hashCode();
     hash = (37 * hash) + SECONDARY_DEVICE_SERIAL_FIELD_NUMBER;
@@ -730,6 +777,12 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + TAGS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetTags().hashCode();
     }
+    hash = (37 * hash) + PRIMARY_DEVICE_TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getPrimaryDeviceType().hashCode();
+    hash = (37 * hash) + SECONDARY_DEVICE_TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getSecondaryDeviceType().hashCode();
+    hash = (37 * hash) + RUN_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getRunId().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -893,10 +946,6 @@ private static final long serialVersionUID = 0L;
 
       version_ = "";
 
-      primaryDeviceType_ = "";
-
-      secondaryDeviceType_ = "";
-
       primaryDeviceSerial_ = "";
 
       secondaryDeviceSerial_ = "";
@@ -904,6 +953,12 @@ private static final long serialVersionUID = 0L;
       profilingSettings_ = "";
 
       internalGetMutableTags().clear();
+      primaryDeviceType_ = "";
+
+      secondaryDeviceType_ = "";
+
+      runId_ = "";
+
       return this;
     }
 
@@ -935,13 +990,14 @@ private static final long serialVersionUID = 0L;
       result.setName_ = setName_;
       result.project_ = project_;
       result.version_ = version_;
-      result.primaryDeviceType_ = primaryDeviceType_;
-      result.secondaryDeviceType_ = secondaryDeviceType_;
       result.primaryDeviceSerial_ = primaryDeviceSerial_;
       result.secondaryDeviceSerial_ = secondaryDeviceSerial_;
       result.profilingSettings_ = profilingSettings_;
       result.tags_ = internalGetTags();
       result.tags_.makeImmutable();
+      result.primaryDeviceType_ = primaryDeviceType_;
+      result.secondaryDeviceType_ = secondaryDeviceType_;
+      result.runId_ = runId_;
       onBuilt();
       return result;
     }
@@ -1006,14 +1062,6 @@ private static final long serialVersionUID = 0L;
         version_ = other.version_;
         onChanged();
       }
-      if (!other.getPrimaryDeviceType().isEmpty()) {
-        primaryDeviceType_ = other.primaryDeviceType_;
-        onChanged();
-      }
-      if (!other.getSecondaryDeviceType().isEmpty()) {
-        secondaryDeviceType_ = other.secondaryDeviceType_;
-        onChanged();
-      }
       if (!other.getPrimaryDeviceSerial().isEmpty()) {
         primaryDeviceSerial_ = other.primaryDeviceSerial_;
         onChanged();
@@ -1028,6 +1076,18 @@ private static final long serialVersionUID = 0L;
       }
       internalGetMutableTags().mergeFrom(
           other.internalGetTags());
+      if (!other.getPrimaryDeviceType().isEmpty()) {
+        primaryDeviceType_ = other.primaryDeviceType_;
+        onChanged();
+      }
+      if (!other.getSecondaryDeviceType().isEmpty()) {
+        secondaryDeviceType_ = other.secondaryDeviceType_;
+        onChanged();
+      }
+      if (!other.getRunId().isEmpty()) {
+        runId_ = other.runId_;
+        onChanged();
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -1358,158 +1418,6 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       version_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object primaryDeviceType_ = "";
-    /**
-     * <code>string primary_device_type = 9;</code>
-     * @return The primaryDeviceType.
-     */
-    public java.lang.String getPrimaryDeviceType() {
-      java.lang.Object ref = primaryDeviceType_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        primaryDeviceType_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string primary_device_type = 9;</code>
-     * @return The bytes for primaryDeviceType.
-     */
-    public com.google.protobuf.ByteString
-        getPrimaryDeviceTypeBytes() {
-      java.lang.Object ref = primaryDeviceType_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        primaryDeviceType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string primary_device_type = 9;</code>
-     * @param value The primaryDeviceType to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPrimaryDeviceType(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      primaryDeviceType_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string primary_device_type = 9;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPrimaryDeviceType() {
-      
-      primaryDeviceType_ = getDefaultInstance().getPrimaryDeviceType();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string primary_device_type = 9;</code>
-     * @param value The bytes for primaryDeviceType to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPrimaryDeviceTypeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      primaryDeviceType_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object secondaryDeviceType_ = "";
-    /**
-     * <code>string secondary_device_type = 10;</code>
-     * @return The secondaryDeviceType.
-     */
-    public java.lang.String getSecondaryDeviceType() {
-      java.lang.Object ref = secondaryDeviceType_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        secondaryDeviceType_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string secondary_device_type = 10;</code>
-     * @return The bytes for secondaryDeviceType.
-     */
-    public com.google.protobuf.ByteString
-        getSecondaryDeviceTypeBytes() {
-      java.lang.Object ref = secondaryDeviceType_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        secondaryDeviceType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string secondary_device_type = 10;</code>
-     * @param value The secondaryDeviceType to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSecondaryDeviceType(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      secondaryDeviceType_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string secondary_device_type = 10;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSecondaryDeviceType() {
-      
-      secondaryDeviceType_ = getDefaultInstance().getSecondaryDeviceType();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string secondary_device_type = 10;</code>
-     * @param value The bytes for secondaryDeviceType to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSecondaryDeviceTypeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      secondaryDeviceType_ = value;
       onChanged();
       return this;
     }
@@ -1862,6 +1770,234 @@ private static final long serialVersionUID = 0L;
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableTags().getMutableMap()
           .putAll(values);
+      return this;
+    }
+
+    private java.lang.Object primaryDeviceType_ = "";
+    /**
+     * <code>string primary_device_type = 9;</code>
+     * @return The primaryDeviceType.
+     */
+    public java.lang.String getPrimaryDeviceType() {
+      java.lang.Object ref = primaryDeviceType_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        primaryDeviceType_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string primary_device_type = 9;</code>
+     * @return The bytes for primaryDeviceType.
+     */
+    public com.google.protobuf.ByteString
+        getPrimaryDeviceTypeBytes() {
+      java.lang.Object ref = primaryDeviceType_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        primaryDeviceType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string primary_device_type = 9;</code>
+     * @param value The primaryDeviceType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPrimaryDeviceType(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      primaryDeviceType_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string primary_device_type = 9;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPrimaryDeviceType() {
+      
+      primaryDeviceType_ = getDefaultInstance().getPrimaryDeviceType();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string primary_device_type = 9;</code>
+     * @param value The bytes for primaryDeviceType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPrimaryDeviceTypeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      primaryDeviceType_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object secondaryDeviceType_ = "";
+    /**
+     * <code>string secondary_device_type = 10;</code>
+     * @return The secondaryDeviceType.
+     */
+    public java.lang.String getSecondaryDeviceType() {
+      java.lang.Object ref = secondaryDeviceType_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        secondaryDeviceType_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string secondary_device_type = 10;</code>
+     * @return The bytes for secondaryDeviceType.
+     */
+    public com.google.protobuf.ByteString
+        getSecondaryDeviceTypeBytes() {
+      java.lang.Object ref = secondaryDeviceType_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        secondaryDeviceType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string secondary_device_type = 10;</code>
+     * @param value The secondaryDeviceType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSecondaryDeviceType(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      secondaryDeviceType_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string secondary_device_type = 10;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearSecondaryDeviceType() {
+      
+      secondaryDeviceType_ = getDefaultInstance().getSecondaryDeviceType();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string secondary_device_type = 10;</code>
+     * @param value The bytes for secondaryDeviceType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setSecondaryDeviceTypeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      secondaryDeviceType_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object runId_ = "";
+    /**
+     * <code>string run_id = 11;</code>
+     * @return The runId.
+     */
+    public java.lang.String getRunId() {
+      java.lang.Object ref = runId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        runId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string run_id = 11;</code>
+     * @return The bytes for runId.
+     */
+    public com.google.protobuf.ByteString
+        getRunIdBytes() {
+      java.lang.Object ref = runId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        runId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string run_id = 11;</code>
+     * @param value The runId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRunId(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      runId_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string run_id = 11;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRunId() {
+      
+      runId_ = getDefaultInstance().getRunId();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string run_id = 11;</code>
+     * @param value The bytes for runId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRunIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      runId_ = value;
+      onChanged();
       return this;
     }
     @java.lang.Override

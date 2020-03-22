@@ -56,30 +56,6 @@ public interface StartRunRequestOrBuilder extends
       getVersionBytes();
 
   /**
-   * <code>string primary_device_type = 9;</code>
-   * @return The primaryDeviceType.
-   */
-  java.lang.String getPrimaryDeviceType();
-  /**
-   * <code>string primary_device_type = 9;</code>
-   * @return The bytes for primaryDeviceType.
-   */
-  com.google.protobuf.ByteString
-      getPrimaryDeviceTypeBytes();
-
-  /**
-   * <code>string secondary_device_type = 10;</code>
-   * @return The secondaryDeviceType.
-   */
-  java.lang.String getSecondaryDeviceType();
-  /**
-   * <code>string secondary_device_type = 10;</code>
-   * @return The bytes for secondaryDeviceType.
-   */
-  com.google.protobuf.ByteString
-      getSecondaryDeviceTypeBytes();
-
-  /**
    * <code>string primary_device_serial = 5;</code>
    * @return The primaryDeviceSerial.
    */
@@ -148,4 +124,40 @@ public interface StartRunRequestOrBuilder extends
 
   java.lang.String getTagsOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>string primary_device_type = 9;</code>
+   * @return The primaryDeviceType.
+   */
+  java.lang.String getPrimaryDeviceType();
+  /**
+   * <code>string primary_device_type = 9;</code>
+   * @return The bytes for primaryDeviceType.
+   */
+  com.google.protobuf.ByteString
+      getPrimaryDeviceTypeBytes();
+
+  /**
+   * <code>string secondary_device_type = 10;</code>
+   * @return The secondaryDeviceType.
+   */
+  java.lang.String getSecondaryDeviceType();
+  /**
+   * <code>string secondary_device_type = 10;</code>
+   * @return The bytes for secondaryDeviceType.
+   */
+  com.google.protobuf.ByteString
+      getSecondaryDeviceTypeBytes();
+
+  /**
+   * <code>string run_id = 11;</code>
+   * @return The runId.
+   */
+  java.lang.String getRunId();
+  /**
+   * <code>string run_id = 11;</code>
+   * @return The bytes for runId.
+   */
+  com.google.protobuf.ByteString
+      getRunIdBytes();
 }

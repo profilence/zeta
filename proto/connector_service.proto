@@ -14,12 +14,13 @@ message StartRunRequest {
 	string set_name = 2;
 	string project = 3;
 	string version = 4;
-	string primary_device_type = 9;
-	string secondary_device_type = 10;
 	string primary_device_serial = 5;
-	string secondary_device_serial = 6;
+	string secondary_device_serial = 6; 
 	string profiling_settings = 7;
 	map<string, string> tags = 8;
+	string primary_device_type = 9;
+	string secondary_device_type = 10;
+	string run_id = 11;
 }
 
 message PingMessage {	
@@ -117,14 +118,96 @@ message NodeUpdated {
 	google.protobuf.StringValue variables = 8;
 }
 
-service ConnectorService{
+message DynamicSeriesInformation {
+	string run_id = 1;
+	string series_id = 2;
+	string series_name = 3;
+	string group = 4;
+	string y_axis_name = 5;
+	string unit = 6;
+	int32 type = 7;
+	string namespace = 8;
+	string process = 9;
+	string description = 10;
+}
+
+message DynamicSingleSeriesUpdate {
+	string run_id = 1;
+	string series_id = 2;
+	double timestamp = 3;
+	float value = 4;
+}
+
+message DynamicProcessSingleSeriesUpdate {
+	string run_id = 1;
+	string series_id = 2;
+	string package = 3;
+	string process = 4;
+	double timestamp = 5;
+	float value = 6;
+}
+
+message DynamicCompositeSeriesUpdate {
+	string run_id = 1;
+	string series_id = 2;
+	double timestamp = 3;
+	map<string, float> values = 4;
+}
+
+message DynamicProcessCompositeSeriesUpdate {
+	string run_id = 1;
+	string series_id = 2;
+	string package = 3;
+	string process = 4;
+	double timestamp = 5;
+	map<string, float> values = 6;
+}
+
+message DeviceLogEntry {
+	string run_id = 1;
+	int32 device_index = 2;
+	double timestamp = 3;
+	string tag = 4;
+	string data = 5;
+	int32 priority = 6;
+	int32 source_buffer = 7;
+}
+
+message ResetEntry {
+	string run_id = 1;
+	double timestamp = 2;
+	int32 type = 3;
+	map<string, string> reasons = 4;
+	map<string, string> properties = 5;
+}
+
+message EventEntry {
+	string run_id = 1;
+	double timestamp = 2;
+	int32 type = 3;
+	bool is_system_process = 4;
+	string name = 5;
+	string process = 6;
+	string exception_type = 7;
+	repeated string data = 8;
+}
+
+service ConnectorService {
 	rpc Ping(PingMessage) returns (PongMessage) { }
 	rpc StartRun(StartRunRequest) returns (StartRunResponse) { }
 	rpc OnUseCaseStart(UseCaseStartRequest) returns (google.protobuf.Empty) { }
 	rpc OnLogStep(LogStepRequest) returns (google.protobuf.Empty) { }
 	rpc LogTrace(LogTraceRequest) returns (google.protobuf.Empty) { }
+	rpc LogDevice(stream DeviceLogEntry) returns (google.protobuf.Empty) { }
+	rpc NotifyReset(ResetEntry) returns (google.protobuf.Empty) { }
+	rpc NotifyEvent(EventEntry) returns (google.protobuf.Empty) { }
 	rpc OnUseCaseEnd(UseCaseEndRequest) returns (google.protobuf.Empty) { }
 	rpc StopRun(StopRunRequest) returns (google.protobuf.Empty) { }
+	rpc CreateTimeSeries(DynamicSeriesInformation) returns (google.protobuf.Empty) { }
+	rpc UpdateSingleSystemSeries(DynamicSingleSeriesUpdate) returns (google.protobuf.Empty) { }
+	rpc UpdateSingleProcessSeries(DynamicProcessSingleSeriesUpdate) returns (google.protobuf.Empty) { }
+	rpc UpdateCompositeSystemSeries(DynamicCompositeSeriesUpdate) returns (google.protobuf.Empty) { }
+	rpc UpdateCompositeProcessSeries(DynamicProcessCompositeSeriesUpdate) returns (google.protobuf.Empty) { }
 	rpc SubscribeToTestRequests(google.protobuf.Empty) returns (stream TestRequestMessageWrapper) { }
 	rpc RespondToTestRequest(TestStartResponse) returns (google.protobuf.Empty) { }
 	rpc AddNode(NodeAdded) returns (google.protobuf.Empty) { }

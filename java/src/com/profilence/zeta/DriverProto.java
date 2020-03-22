@@ -104,6 +104,66 @@ public final class DriverProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_profilence_zeta_NodeUpdated_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DynamicSeriesInformation_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DynamicSeriesInformation_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DynamicSingleSeriesUpdate_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DynamicSingleSeriesUpdate_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DynamicProcessSingleSeriesUpdate_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DynamicProcessSingleSeriesUpdate_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_ValuesEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_ValuesEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_ValuesEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_ValuesEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_DeviceLogEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_DeviceLogEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_ResetEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_ResetEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_ResetEntry_ReasonsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_ResetEntry_ReasonsEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_ResetEntry_PropertiesEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_ResetEntry_PropertiesEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_profilence_zeta_EventEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_profilence_zeta_EventEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -114,66 +174,122 @@ public final class DriverProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\027connector_service.proto\022\017profilence.ze" +
-      "ta\032\016wrappers.proto\032\013empty.proto\"\326\002\n\017Star" +
+      "ta\032\016wrappers.proto\032\013empty.proto\"\346\002\n\017Star" +
       "tRunRequest\022\020\n\010run_name\030\001 \001(\t\022\020\n\010set_nam" +
       "e\030\002 \001(\t\022\017\n\007project\030\003 \001(\t\022\017\n\007version\030\004 \001(" +
-      "\t\022\033\n\023primary_device_type\030\t \001(\t\022\035\n\025second" +
-      "ary_device_type\030\n \001(\t\022\035\n\025primary_device_" +
-      "serial\030\005 \001(\t\022\037\n\027secondary_device_serial\030" +
-      "\006 \001(\t\022\032\n\022profiling_settings\030\007 \001(\t\0228\n\004tag" +
-      "s\030\010 \003(\0132*.profilence.zeta.StartRunReques" +
-      "t.TagsEntry\032+\n\tTagsEntry\022\013\n\003key\030\001 \001(\t\022\r\n" +
-      "\005value\030\002 \001(\t:\0028\001\"\r\n\013PingMessage\"\035\n\013PongM" +
-      "essage\022\016\n\006result\030\001 \001(\005\"\"\n\020StartRunRespon" +
-      "se\022\016\n\006run_id\030\001 \001(\t\"\201\001\n\023UseCaseStartReque" +
-      "st\022\016\n\006run_id\030\001 \001(\t\022\025\n\ruse_case_name\030\002 \001(" +
-      "\t\022\023\n\013use_case_id\030\003 \001(\t\022\026\n\016target_process" +
-      "\030\004 \001(\t\022\026\n\016requirement_id\030\005 \001(\t\"v\n\016LogSte" +
-      "pRequest\022\016\n\006run_id\030\001 \001(\t\022\021\n\tstep_name\030\002 " +
-      "\001(\t\022\016\n\006result\030\003 \001(\010\022\027\n\017take_screenshot\030\004" +
-      " \001(\010\022\030\n\020screenshot_bytes\030\005 \001(\014\"/\n\017LogTra" +
-      "ceRequest\022\016\n\006run_id\030\001 \001(\t\022\014\n\004data\030\002 \001(\t\"" +
-      "v\n\021UseCaseEndRequest\022\016\n\006run_id\030\001 \001(\t\022\016\n\006" +
-      "result\030\002 \001(\010\022\025\n\ractiveRunTime\030\003 \001(\003\022\022\n\nf" +
-      "ail_cause\030\004 \001(\t\022\026\n\016reset_intended\030\005 \001(\010\"" +
-      "9\n\016StopRunRequest\022\016\n\006run_id\030\001 \001(\t\022\027\n\017dis" +
-      "card_results\030\002 \001(\010\"B\n\031TestRequestMessage" +
-      "Wrapper\022\024\n\014request_type\030\001 \001(\005\022\017\n\007payload" +
-      "\030\002 \001(\014\"0\n\017TestStopRequest\022\035\n\025primary_dev" +
-      "ice_serial\030\001 \001(\t\"d\n\021TestStartResponse\022\016\n" +
-      "\006run_id\030\001 \001(\t\022\022\n\nfail_cause\030\002 \001(\t\022\013\n\003log" +
-      "\030\003 \003(\t\022\016\n\006result\030\004 \001(\010\022\016\n\006status\030\005 \001(\t\"\220" +
-      "\002\n\020TestStartRequest\022\016\n\006run_id\030\026 \001(\t\022\020\n\010r" +
-      "un_name\030\002 \001(\t\022\017\n\007node_id\030\005 \001(\t\022\022\n\nparame" +
-      "ters\030\006 \001(\t\022\017\n\007project\030\n \001(\t\022\017\n\007version\030\020" +
-      " \001(\t\022\032\n\022test_set_file_path\030\014 \001(\t\022\017\n\007payl" +
-      "oad\030\016 \001(\014\0229\n\004tags\030\024 \003(\0132+.profilence.zet" +
-      "a.TestStartRequest.TagsEntry\032+\n\tTagsEntr" +
-      "y\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"K\n\tNod" +
-      "eAdded\022\017\n\007node_id\030\001 \001(\t\022\014\n\004pool\030\004 \001(\t\022\014\n" +
-      "\004type\030\005 \001(\t\022\021\n\tvariables\030\014 \001(\t\"\036\n\013NodeRe" +
-      "moved\022\017\n\007node_id\030\001 \001(\t\"\312\002\n\013NodeUpdated\022\017" +
-      "\n\007node_id\030\001 \001(\t\0226\n\020current_use_case\030\003 \001(" +
-      "\0132\034.google.protobuf.StringValue\022.\n\trun_s" +
-      "tate\030\004 \001(\0132\033.google.protobuf.Int32Value\022" +
-      "4\n\016current_run_id\030\005 \001(\0132\034.google.protobu" +
-      "f.StringValue\022/\n\nnode_state\030\006 \001(\0132\033.goog" +
-      "le.protobuf.Int32Value\022*\n\004pool\030\007 \001(\0132\034.g" +
-      "oogle.protobuf.StringValue\022/\n\tvariables\030" +
-      "\010 \001(\0132\034.google.protobuf.StringValue2\247\007\n\020" +
-      "ConnectorService\022D\n\004Ping\022\034.profilence.ze" +
-      "ta.PingMessage\032\034.profilence.zeta.PongMes" +
-      "sage\"\000\022Q\n\010StartRun\022 .profilence.zeta.Sta" +
-      "rtRunRequest\032!.profilence.zeta.StartRunR" +
-      "esponse\"\000\022P\n\016OnUseCaseStart\022$.profilence" +
-      ".zeta.UseCaseStartRequest\032\026.google.proto" +
-      "buf.Empty\"\000\022F\n\tOnLogStep\022\037.profilence.ze" +
-      "ta.LogStepRequest\032\026.google.protobuf.Empt" +
-      "y\"\000\022F\n\010LogTrace\022 .profilence.zeta.LogTra" +
-      "ceRequest\032\026.google.protobuf.Empty\"\000\022L\n\014O" +
-      "nUseCaseEnd\022\".profilence.zeta.UseCaseEnd" +
-      "Request\032\026.google.protobuf.Empty\"\000\022D\n\007Sto" +
-      "pRun\022\037.profilence.zeta.StopRunRequest\032\026." +
+      "\t\022\035\n\025primary_device_serial\030\005 \001(\t\022\037\n\027seco" +
+      "ndary_device_serial\030\006 \001(\t\022\032\n\022profiling_s" +
+      "ettings\030\007 \001(\t\0228\n\004tags\030\010 \003(\0132*.profilence" +
+      ".zeta.StartRunRequest.TagsEntry\022\033\n\023prima" +
+      "ry_device_type\030\t \001(\t\022\035\n\025secondary_device" +
+      "_type\030\n \001(\t\022\016\n\006run_id\030\013 \001(\t\032+\n\tTagsEntry" +
+      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\r\n\013Ping" +
+      "Message\"\035\n\013PongMessage\022\016\n\006result\030\001 \001(\005\"\"" +
+      "\n\020StartRunResponse\022\016\n\006run_id\030\001 \001(\t\"\201\001\n\023U" +
+      "seCaseStartRequest\022\016\n\006run_id\030\001 \001(\t\022\025\n\rus" +
+      "e_case_name\030\002 \001(\t\022\023\n\013use_case_id\030\003 \001(\t\022\026" +
+      "\n\016target_process\030\004 \001(\t\022\026\n\016requirement_id" +
+      "\030\005 \001(\t\"v\n\016LogStepRequest\022\016\n\006run_id\030\001 \001(\t" +
+      "\022\021\n\tstep_name\030\002 \001(\t\022\016\n\006result\030\003 \001(\010\022\027\n\017t" +
+      "ake_screenshot\030\004 \001(\010\022\030\n\020screenshot_bytes" +
+      "\030\005 \001(\014\"/\n\017LogTraceRequest\022\016\n\006run_id\030\001 \001(" +
+      "\t\022\014\n\004data\030\002 \001(\t\"v\n\021UseCaseEndRequest\022\016\n\006" +
+      "run_id\030\001 \001(\t\022\016\n\006result\030\002 \001(\010\022\025\n\ractiveRu" +
+      "nTime\030\003 \001(\003\022\022\n\nfail_cause\030\004 \001(\t\022\026\n\016reset" +
+      "_intended\030\005 \001(\010\"9\n\016StopRunRequest\022\016\n\006run" +
+      "_id\030\001 \001(\t\022\027\n\017discard_results\030\002 \001(\010\"B\n\031Te" +
+      "stRequestMessageWrapper\022\024\n\014request_type\030" +
+      "\001 \001(\005\022\017\n\007payload\030\002 \001(\014\"0\n\017TestStopReques" +
+      "t\022\035\n\025primary_device_serial\030\001 \001(\t\"d\n\021Test" +
+      "StartResponse\022\016\n\006run_id\030\001 \001(\t\022\022\n\nfail_ca" +
+      "use\030\002 \001(\t\022\013\n\003log\030\003 \003(\t\022\016\n\006result\030\004 \001(\010\022\016" +
+      "\n\006status\030\005 \001(\t\"\220\002\n\020TestStartRequest\022\016\n\006r" +
+      "un_id\030\026 \001(\t\022\020\n\010run_name\030\002 \001(\t\022\017\n\007node_id" +
+      "\030\005 \001(\t\022\022\n\nparameters\030\006 \001(\t\022\017\n\007project\030\n " +
+      "\001(\t\022\017\n\007version\030\020 \001(\t\022\032\n\022test_set_file_pa" +
+      "th\030\014 \001(\t\022\017\n\007payload\030\016 \001(\014\0229\n\004tags\030\024 \003(\0132" +
+      "+.profilence.zeta.TestStartRequest.TagsE" +
+      "ntry\032+\n\tTagsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030" +
+      "\002 \001(\t:\0028\001\"K\n\tNodeAdded\022\017\n\007node_id\030\001 \001(\t\022" +
+      "\014\n\004pool\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\021\n\tvariables" +
+      "\030\014 \001(\t\"\036\n\013NodeRemoved\022\017\n\007node_id\030\001 \001(\t\"\312" +
+      "\002\n\013NodeUpdated\022\017\n\007node_id\030\001 \001(\t\0226\n\020curre" +
+      "nt_use_case\030\003 \001(\0132\034.google.protobuf.Stri" +
+      "ngValue\022.\n\trun_state\030\004 \001(\0132\033.google.prot" +
+      "obuf.Int32Value\0224\n\016current_run_id\030\005 \001(\0132" +
+      "\034.google.protobuf.StringValue\022/\n\nnode_st" +
+      "ate\030\006 \001(\0132\033.google.protobuf.Int32Value\022*" +
+      "\n\004pool\030\007 \001(\0132\034.google.protobuf.StringVal" +
+      "ue\022/\n\tvariables\030\010 \001(\0132\034.google.protobuf." +
+      "StringValue\"\313\001\n\030DynamicSeriesInformation" +
+      "\022\016\n\006run_id\030\001 \001(\t\022\021\n\tseries_id\030\002 \001(\t\022\023\n\013s" +
+      "eries_name\030\003 \001(\t\022\r\n\005group\030\004 \001(\t\022\023\n\013y_axi" +
+      "s_name\030\005 \001(\t\022\014\n\004unit\030\006 \001(\t\022\014\n\004type\030\007 \001(\005" +
+      "\022\021\n\tnamespace\030\010 \001(\t\022\017\n\007process\030\t \001(\t\022\023\n\013" +
+      "description\030\n \001(\t\"`\n\031DynamicSingleSeries" +
+      "Update\022\016\n\006run_id\030\001 \001(\t\022\021\n\tseries_id\030\002 \001(" +
+      "\t\022\021\n\ttimestamp\030\003 \001(\001\022\r\n\005value\030\004 \001(\002\"\211\001\n " +
+      "DynamicProcessSingleSeriesUpdate\022\016\n\006run_" +
+      "id\030\001 \001(\t\022\021\n\tseries_id\030\002 \001(\t\022\017\n\007package\030\003" +
+      " \001(\t\022\017\n\007process\030\004 \001(\t\022\021\n\ttimestamp\030\005 \001(\001" +
+      "\022\r\n\005value\030\006 \001(\002\"\316\001\n\034DynamicCompositeSeri" +
+      "esUpdate\022\016\n\006run_id\030\001 \001(\t\022\021\n\tseries_id\030\002 " +
+      "\001(\t\022\021\n\ttimestamp\030\003 \001(\001\022I\n\006values\030\004 \003(\01329" +
+      ".profilence.zeta.DynamicCompositeSeriesU" +
+      "pdate.ValuesEntry\032-\n\013ValuesEntry\022\013\n\003key\030" +
+      "\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\"\376\001\n#DynamicProc" +
+      "essCompositeSeriesUpdate\022\016\n\006run_id\030\001 \001(\t" +
+      "\022\021\n\tseries_id\030\002 \001(\t\022\017\n\007package\030\003 \001(\t\022\017\n\007" +
+      "process\030\004 \001(\t\022\021\n\ttimestamp\030\005 \001(\001\022P\n\006valu" +
+      "es\030\006 \003(\0132@.profilence.zeta.DynamicProces" +
+      "sCompositeSeriesUpdate.ValuesEntry\032-\n\013Va" +
+      "luesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028" +
+      "\001\"\215\001\n\016DeviceLogEntry\022\016\n\006run_id\030\001 \001(\t\022\024\n\014" +
+      "device_index\030\002 \001(\005\022\021\n\ttimestamp\030\003 \001(\001\022\013\n" +
+      "\003tag\030\004 \001(\t\022\014\n\004data\030\005 \001(\t\022\020\n\010priority\030\006 \001" +
+      "(\005\022\025\n\rsource_buffer\030\007 \001(\005\"\234\002\n\nResetEntry" +
+      "\022\016\n\006run_id\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\001\022\014\n\004t" +
+      "ype\030\003 \001(\005\0229\n\007reasons\030\004 \003(\0132(.profilence." +
+      "zeta.ResetEntry.ReasonsEntry\022?\n\nproperti" +
+      "es\030\005 \003(\0132+.profilence.zeta.ResetEntry.Pr" +
+      "opertiesEntry\032.\n\014ReasonsEntry\022\013\n\003key\030\001 \001" +
+      "(\t\022\r\n\005value\030\002 \001(\t:\0028\001\0321\n\017PropertiesEntry" +
+      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\235\001\n\nEve" +
+      "ntEntry\022\016\n\006run_id\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001" +
+      "(\001\022\014\n\004type\030\003 \001(\005\022\031\n\021is_system_process\030\004 " +
+      "\001(\010\022\014\n\004name\030\005 \001(\t\022\017\n\007process\030\006 \001(\t\022\026\n\016ex" +
+      "ception_type\030\007 \001(\t\022\014\n\004data\030\010 \003(\t2\372\014\n\020Con" +
+      "nectorService\022D\n\004Ping\022\034.profilence.zeta." +
+      "PingMessage\032\034.profilence.zeta.PongMessag" +
+      "e\"\000\022Q\n\010StartRun\022 .profilence.zeta.StartR" +
+      "unRequest\032!.profilence.zeta.StartRunResp" +
+      "onse\"\000\022P\n\016OnUseCaseStart\022$.profilence.ze" +
+      "ta.UseCaseStartRequest\032\026.google.protobuf" +
+      ".Empty\"\000\022F\n\tOnLogStep\022\037.profilence.zeta." +
+      "LogStepRequest\032\026.google.protobuf.Empty\"\000" +
+      "\022F\n\010LogTrace\022 .profilence.zeta.LogTraceR" +
+      "equest\032\026.google.protobuf.Empty\"\000\022H\n\tLogD" +
+      "evice\022\037.profilence.zeta.DeviceLogEntry\032\026" +
+      ".google.protobuf.Empty\"\000(\001\022D\n\013NotifyRese" +
+      "t\022\033.profilence.zeta.ResetEntry\032\026.google." +
+      "protobuf.Empty\"\000\022D\n\013NotifyEvent\022\033.profil" +
+      "ence.zeta.EventEntry\032\026.google.protobuf.E" +
+      "mpty\"\000\022L\n\014OnUseCaseEnd\022\".profilence.zeta" +
+      ".UseCaseEndRequest\032\026.google.protobuf.Emp" +
+      "ty\"\000\022D\n\007StopRun\022\037.profilence.zeta.StopRu" +
+      "nRequest\032\026.google.protobuf.Empty\"\000\022W\n\020Cr" +
+      "eateTimeSeries\022).profilence.zeta.Dynamic" +
+      "SeriesInformation\032\026.google.protobuf.Empt" +
+      "y\"\000\022`\n\030UpdateSingleSystemSeries\022*.profil" +
+      "ence.zeta.DynamicSingleSeriesUpdate\032\026.go" +
+      "ogle.protobuf.Empty\"\000\022h\n\031UpdateSinglePro" +
+      "cessSeries\0221.profilence.zeta.DynamicProc" +
+      "essSingleSeriesUpdate\032\026.google.protobuf." +
+      "Empty\"\000\022f\n\033UpdateCompositeSystemSeries\022-" +
+      ".profilence.zeta.DynamicCompositeSeriesU" +
+      "pdate\032\026.google.protobuf.Empty\"\000\022n\n\034Updat" +
+      "eCompositeProcessSeries\0224.profilence.zet" +
+      "a.DynamicProcessCompositeSeriesUpdate\032\026." +
       "google.protobuf.Empty\"\000\022a\n\027SubscribeToTe" +
       "stRequests\022\026.google.protobuf.Empty\032*.pro" +
       "filence.zeta.TestRequestMessageWrapper\"\000" +
@@ -198,7 +314,7 @@ public final class DriverProto {
     internal_static_profilence_zeta_StartRunRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_profilence_zeta_StartRunRequest_descriptor,
-        new java.lang.String[] { "RunName", "SetName", "Project", "Version", "PrimaryDeviceType", "SecondaryDeviceType", "PrimaryDeviceSerial", "SecondaryDeviceSerial", "ProfilingSettings", "Tags", });
+        new java.lang.String[] { "RunName", "SetName", "Project", "Version", "PrimaryDeviceSerial", "SecondaryDeviceSerial", "ProfilingSettings", "Tags", "PrimaryDeviceType", "SecondaryDeviceType", "RunId", });
     internal_static_profilence_zeta_StartRunRequest_TagsEntry_descriptor =
       internal_static_profilence_zeta_StartRunRequest_descriptor.getNestedTypes().get(0);
     internal_static_profilence_zeta_StartRunRequest_TagsEntry_fieldAccessorTable = new
@@ -301,6 +417,78 @@ public final class DriverProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_profilence_zeta_NodeUpdated_descriptor,
         new java.lang.String[] { "NodeId", "CurrentUseCase", "RunState", "CurrentRunId", "NodeState", "Pool", "Variables", });
+    internal_static_profilence_zeta_DynamicSeriesInformation_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_profilence_zeta_DynamicSeriesInformation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DynamicSeriesInformation_descriptor,
+        new java.lang.String[] { "RunId", "SeriesId", "SeriesName", "Group", "YAxisName", "Unit", "Type", "Namespace", "Process", "Description", });
+    internal_static_profilence_zeta_DynamicSingleSeriesUpdate_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_profilence_zeta_DynamicSingleSeriesUpdate_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DynamicSingleSeriesUpdate_descriptor,
+        new java.lang.String[] { "RunId", "SeriesId", "Timestamp", "Value", });
+    internal_static_profilence_zeta_DynamicProcessSingleSeriesUpdate_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_profilence_zeta_DynamicProcessSingleSeriesUpdate_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DynamicProcessSingleSeriesUpdate_descriptor,
+        new java.lang.String[] { "RunId", "SeriesId", "Package", "Process", "Timestamp", "Value", });
+    internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_descriptor,
+        new java.lang.String[] { "RunId", "SeriesId", "Timestamp", "Values", });
+    internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_ValuesEntry_descriptor =
+      internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_descriptor.getNestedTypes().get(0);
+    internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_ValuesEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DynamicCompositeSeriesUpdate_ValuesEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_descriptor,
+        new java.lang.String[] { "RunId", "SeriesId", "Package", "Process", "Timestamp", "Values", });
+    internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_ValuesEntry_descriptor =
+      internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_descriptor.getNestedTypes().get(0);
+    internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_ValuesEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DynamicProcessCompositeSeriesUpdate_ValuesEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_profilence_zeta_DeviceLogEntry_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static_profilence_zeta_DeviceLogEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_DeviceLogEntry_descriptor,
+        new java.lang.String[] { "RunId", "DeviceIndex", "Timestamp", "Tag", "Data", "Priority", "SourceBuffer", });
+    internal_static_profilence_zeta_ResetEntry_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_profilence_zeta_ResetEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_ResetEntry_descriptor,
+        new java.lang.String[] { "RunId", "Timestamp", "Type", "Reasons", "Properties", });
+    internal_static_profilence_zeta_ResetEntry_ReasonsEntry_descriptor =
+      internal_static_profilence_zeta_ResetEntry_descriptor.getNestedTypes().get(0);
+    internal_static_profilence_zeta_ResetEntry_ReasonsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_ResetEntry_ReasonsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_profilence_zeta_ResetEntry_PropertiesEntry_descriptor =
+      internal_static_profilence_zeta_ResetEntry_descriptor.getNestedTypes().get(1);
+    internal_static_profilence_zeta_ResetEntry_PropertiesEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_ResetEntry_PropertiesEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_profilence_zeta_EventEntry_descriptor =
+      getDescriptor().getMessageTypes().get(23);
+    internal_static_profilence_zeta_EventEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_profilence_zeta_EventEntry_descriptor,
+        new java.lang.String[] { "RunId", "Timestamp", "Type", "IsSystemProcess", "Name", "Process", "ExceptionType", "Data", });
     com.google.protobuf.WrappersProto.getDescriptor();
     com.google.protobuf.EmptyProto.getDescriptor();
   }

@@ -28,10 +28,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,6 +48,7 @@ public class Connector {
 	
 	
 	public static void main(String[] args) throws Exception {
+						
 		if (args.length > 0) {
 			
 			Pattern p = Pattern.compile("([^:]+):([0-9]+)");
@@ -115,7 +118,8 @@ public class Connector {
 	private final ManagedChannel channel;
    	private final ConnectorServiceGrpc.ConnectorServiceBlockingStub blockingStub;
    	private final ConnectorServiceGrpc.ConnectorServiceStub stub;
-   	
+	private final StreamObserver<DeviceLogEntry> deviceLogSubject;
+	   	
     /** Construct client connecting to Connector server at {@code host:port}. */
 	public Connector(String host, int port) {
 	    this(ManagedChannelBuilder.forAddress(host, port)
@@ -129,6 +133,19 @@ public class Connector {
 		this.channel = channel;
 		blockingStub = ConnectorServiceGrpc.newBlockingStub(channel);
 		stub = ConnectorServiceGrpc.newStub(channel);
+		deviceLogSubject = stub.logDevice(new StreamObserver<Empty>() {
+	        @Override
+	        public void onNext(Empty __) {
+	        }
+
+			@Override
+			public void onCompleted() {
+			}
+
+			@Override
+			public void onError(Throwable __) {						
+			}
+	    });
   	}
 	
 	/**
@@ -178,6 +195,36 @@ public class Connector {
 			Map<String, String> tags) {
 		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, (String)null, tags);
 	}
+	
+	/**
+	 * Request server to start new test run
+	 * @param runName
+	 * @param setName
+	 * @param project
+	 * @param version
+	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
+	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
+	 * @param profilingSettings
+	 * @param tags
+	 * @return
+	 */
+	public String startRun(
+			String runName, 
+			String setName, 
+			String project, 
+			String version, 
+			String primaryDeviceSerial, 
+			String primaryDeviceType, 
+			String secondaryDeviceSerial,
+			String secondaryDeviceType,
+			ProfilingConfiguration profilingSettings,
+			Map<String, String> tags) {
+		String configJson = profilingSettings != null ? profilingSettings.toJson() : null;
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, configJson, tags);
+	}
+	
 	
 	/**
 	 * Request server to start new test run
@@ -496,7 +543,7 @@ public class Connector {
 				.setRunId(runID)
 				.setDiscardResults(discardResults)
 				.build();
-		
+			
 	    try {
 	    	blockingStub.stopRun(request);
 	    	return true;
@@ -506,6 +553,342 @@ public class Connector {
 	    }
 	}
 	
+	/**
+	 * Notify server about a reset occurred in DUT
+	 * @param runID
+	 * @param timeOccured Time 
+	 * @param type
+	 * @param resetReasons
+	 * @param systemPropertiesAfter
+	 * @return
+	 */
+	public boolean notifyReset(String runID, long timeOccured, ResetType type, Map<String, String> resetReasons, Map<String, String> systemPropertiesAfter) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+					
+		ResetEntry entry = ResetEntry.newBuilder()
+			.setRunId(runID)
+			.setTimestamp(timeOccured)
+			.setType(type.toValue())
+			.putAllProperties(resetReasons != null ? resetReasons : new HashMap<String, String>())
+			.putAllReasons(systemPropertiesAfter != null ? systemPropertiesAfter : new HashMap<String, String>())
+			.build();
+		
+	    try {
+	    	blockingStub.notifyReset(entry);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param timeOccured
+	 * @param type
+	 * @param isSystemProcess
+	 * @param name
+	 * @param process
+	 * @param exceptionType
+	 * @param dataLines
+	 * @return
+	 */
+	public boolean notifyEvent(String runID, long timeOccured, EventType type, boolean isSystemProcess, String name, String process, String exceptionType, String[] dataLines) {
+		return notifyEvent(runID, timeOccured, type, isSystemProcess, name, process, exceptionType, dataLines != null ? Arrays.asList(dataLines) : null);
+	}
+	
+	/**
+	 * Notify server about an event occurred with the DUT: crash, freeze, warning, etc.
+	 * @param runID
+	 * @param timeOccured
+	 * @param type
+	 * @param isSystemProcess
+	 * @param name
+	 * @param process
+	 * @param exceptionType
+	 * @param dataLines
+	 * @return
+	 */
+	public boolean notifyEvent(String runID, long timeOccured, EventType type, boolean isSystemProcess, String name, String process, String exceptionType, Iterable<String> dataLines) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+		
+		EventEntry entry = EventEntry.newBuilder()
+			.setRunId(runID)
+			.setTimestamp(timeOccured)
+			.setType(type.toValue())
+			.setIsSystemProcess(isSystemProcess)
+			.setName(name != null ? name : "")
+			.setProcess(process != null ? process : "")
+			.setExceptionType(exceptionType != null ? exceptionType : "")
+			.addAllData(dataLines != null ? dataLines : new ArrayList<>())
+			.build();
+		
+	    try {
+	    	blockingStub.notifyEvent(entry);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param seriedID
+	 * @param seriesName
+	 * @param group
+	 * @param yAxisName
+	 * @param unit
+	 * @param type
+	 * @param namespace
+	 * @param process
+	 * @param description
+	 * @return
+	 */
+	public boolean createTimeSeries(String runID, String seriesID, String seriesName, String group, String yAxisName, String unit, SeriesType type, String namespace, String process, String description) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+		
+		if (seriesID == null || seriesID.trim().isEmpty()) {
+			return false;
+		}
+		
+		DynamicSeriesInformation info = DynamicSeriesInformation.newBuilder()
+				.setRunId(runID)
+				.setSeriesId(seriesID)
+				.setSeriesName(seriesName != null ? seriesName : "")
+				.setGroup(group != null ? group : "")
+				.setYAxisName(yAxisName != null ? yAxisName : "")
+				.setUnit(unit != null ? unit : "")
+				.setType(type.toValue())
+				.setNamespace(namespace != null ? namespace : "")
+				.setProcess(process != null ? process : "")
+				.setDescription(description != null ? description : "")
+				.build();
+				
+	    try {
+	    	blockingStub.createTimeSeries(info);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param seriesID
+	 * @param timestamp
+	 * @param pkg
+	 * @param process
+	 * @param values
+	 * @return
+	 */
+	public boolean updateCompositeProcessSeries(String runID, String seriesID, long timestamp, String pkg, String process, Map<String, Float> values) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+		
+		if (seriesID == null || seriesID.trim().isEmpty()) {
+			return false;
+		}
+		
+		if ((pkg == null || pkg.trim().isEmpty()) && (process == null || process.trim().isEmpty())) {
+			return false;
+		}
+		
+		DynamicProcessCompositeSeriesUpdate update = DynamicProcessCompositeSeriesUpdate.newBuilder()
+				.setRunId(runID)
+				.setSeriesId(seriesID)
+				.setTimestamp(timestamp)
+				.setPackage(pkg != null ? pkg : "")
+				.setProcess(process != null ? process : "")
+				.putAllValues(values != null ? values : new HashMap<>())
+				.build();
+
+	    try {
+	    	blockingStub.updateCompositeProcessSeries(update);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param seriesID
+	 * @param timestamp
+	 * @param values
+	 * @return
+	 */
+	public boolean updateCompositeSystemSeries(String runID, String seriesID, long timestamp, Map<String, Float> values) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+		
+		if (seriesID == null || seriesID.trim().isEmpty()) {
+			return false;
+		}
+		
+		DynamicCompositeSeriesUpdate update = DynamicCompositeSeriesUpdate.newBuilder()
+				.setRunId(runID)
+				.setSeriesId(seriesID)
+				.setTimestamp(timestamp)
+				.putAllValues(values != null ? values : new HashMap<>())
+				.build();
+
+	    try {
+	    	blockingStub.updateCompositeSystemSeries(update);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
+			
+	/**
+	 * 
+	 * @param runID
+	 * @param timestamp
+	 * @param priority
+	 * @param sourceBufferType
+	 * @param tag
+	 * @param data
+	 * @return
+	 */
+	public boolean onDeviceLog(String runID, long timestamp, LogPriority priority, SourceBuffer sourceBufferType, String tag, String data) {
+		return onDeviceLogImpl(runID, 1, timestamp, priority, sourceBufferType, tag, data);
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param timestamp
+	 * @param priority
+	 * @param sourceBufferType
+	 * @param tag
+	 * @param data
+	 * @return
+	 */
+	public boolean onDevice2Log(String runID, long timestamp, LogPriority priority, SourceBuffer sourceBufferType, String tag, String data) {
+		return onDeviceLogImpl(runID, 2, timestamp, priority, sourceBufferType, tag, data);
+	}
+
+	private boolean onDeviceLogImpl(String runID, int deviceIndex, long timestamp, LogPriority priority, SourceBuffer sourceBufferType, String tag, String data) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+					
+		DeviceLogEntry entry = DeviceLogEntry.newBuilder()
+				.setRunId(runID)
+				.setDeviceIndex(deviceIndex)
+				.setTimestamp(timestamp)
+				.setTag(tag != null ? tag : "")
+				.setData(data != null ? data : "")
+				.setPriority(priority.toValue())
+				.setSourceBuffer(sourceBufferType.toValue())
+				.build();
+				
+	    try {
+	    	deviceLogSubject.onNext(entry);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
+		
+	/**
+	 * 
+	 * @param runID
+	 * @param seriesID
+	 * @param pkg
+	 * @param process
+	 * @param timestamp
+	 * @param value
+	 * @return
+	 */
+	public boolean updateSingleProcessSeries(String runID, String seriesID, String pkg, String process, long timestamp, float value) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+		
+		if (seriesID == null || seriesID.trim().isEmpty()) {
+			return false;
+		}
+		
+		if ((pkg == null || pkg.trim().isEmpty()) && (process == null || process.trim().isEmpty())) {
+			return false;
+		}
+		
+		DynamicProcessSingleSeriesUpdate update = DynamicProcessSingleSeriesUpdate.newBuilder()
+				.setRunId(runID)
+				.setSeriesId(seriesID)
+				.setTimestamp(timestamp)
+				.setPackage(pkg != null ? pkg : "")
+				.setProcess(process != null ? process : "")
+				.setValue(value)
+				.build();
+		
+	    try {
+	    	blockingStub.updateSingleProcessSeries(update);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param seriesID
+	 * @param timestamp
+	 * @param value
+	 * @return
+	 */
+	public boolean updateSingleSystemSeries(String runID, String seriesID, long timestamp, float value) {
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+		
+		if (seriesID == null || seriesID.trim().isEmpty()) {
+			return false;
+		}
+		
+		DynamicSingleSeriesUpdate update = DynamicSingleSeriesUpdate.newBuilder()
+				.setRunId(runID)
+				.setSeriesId(seriesID)
+				.setTimestamp(timestamp)
+				.setValue(value)
+				.build();
+		
+	    try {
+	    	blockingStub.updateSingleSystemSeries(update);
+	    	return true;
+	    } catch (StatusRuntimeException e) {
+	    	log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+	    	return false;
+	    }
+	}
 	
 	/***
 	 * 
