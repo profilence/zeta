@@ -9,10 +9,13 @@ import connector_service_pb2
 import connector_service_pb2_grpc
 import wrappers_pb2
 import empty_pb2
+from profiling_configuration import ProfilingConfiguration
 
 from os import path
 import sys
 import re
+import queue
+import time
 
 __copyright__ = "Copyright 2020 Profilence"
 __license__ = "Apache License, Version 2.0"
@@ -76,10 +79,33 @@ class Connector(object):
 
         self._channel = grpc.insecure_channel('%s:%d' % (host, port))
         self._blockingStub = connector_service_pb2_grpc.ConnectorServiceStub(self._channel)
+        self._device_log_entry_queue = queue.Queue(maxsize=0)
+        self._shutdown = False
+        self._device_log_sender = threading.Thread(target=self._start_device_log_listener, daemon=False)
+        self._device_log_sender.start()
+
+    def _start_device_log_listener(self):
+        try:
+            self._blockingStub.LogDevice(self._read_device_log_entries())
+        except grpc.RpcError:
+            pass
+
+    def _read_device_log_entries(self):
+
+        while not self._shutdown:
+            entry = self._device_log_entry_queue.get(block=True, timeout=5)
+            if entry:
+                yield entry
+
+    def _wait_device_log_queue(self):
+        while not self._shutdown and not self._device_log_entry_queue.empty():
+            time.sleep(0.05)
 
     def shutdown(self):
         """ Shuts down the connection """
-
+        self._shutdown = True
+        self._device_log_entry_queue.put(None)
+        self._device_log_sender.join(5)
         self._channel.close()
 
     def ping(self):
@@ -98,7 +124,7 @@ class Connector(object):
         return value
 
     def start_run_with_recommended_settings(self, run_name, set_name, project, version, primary_device_serial,
-                primary_device_type, secondary_device_serial, secondary_device_type, tags):
+                                            primary_device_type, secondary_device_serial, secondary_device_type, tags):
         """ Requests the service for a new test run with recommended profiling settings
 
         Parameters:
@@ -124,7 +150,7 @@ class Connector(object):
                               primary_device_serial,
                               primary_device_type,
                               secondary_device_serial,
-                              secondary_device_type
+                              secondary_device_type,
                               None,
                               tags)
 
@@ -149,7 +175,9 @@ class Connector(object):
 
         """
 
-        if profiling_settings and isinstance(profiling_settings, TextIOBase):
+        if profiling_settings and isinstance(profiling_settings, ProfilingConfiguration):
+            profiling_settings = profiling_settings.to_json()
+        elif profiling_settings and isinstance(profiling_settings, TextIOBase):
             try:
                 profiling_settings = profiling_settings.read()
             except IOError as ioe:
@@ -320,6 +348,316 @@ class Connector(object):
             self._log(2, 'RPC failed: %s' % str(e))
         return False
 
+    def notify_reset(self, run_id, timestamp, reset_type, reset_reasons, system_properties_after):
+        """ Notify the service about a reset detected in the DUT
+
+        Parameters:
+            run_id (str):                   ID of the test run
+            timestamp (float):              Time (seconds after epoc) when the reset took place
+            reset_type (int):               Type of the reset (use ResetType enum)
+            reset_reasons (dict):           Reset reasons if known
+            system_properties_after (dict): DUT's system properties after the recovered from the reset
+
+        Returns:
+            True is notification sent successfully; otherwise False
+
+        """
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        request = connector_service_pb2.ResetEntry()
+        request.run_id = run_id
+        request.timestamp = timestamp * 1000.0
+        request.type = reset_type
+        request.reasons.update(reset_reasons or {})
+        request.properties.update(system_properties_after or {})
+
+        try:
+            self._blockingStub.NotifyReset(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
+    def notify_event(self, run_id, timestamp, event_type, is_system_process, name, process, exception_type, data_lines):
+        """ Notify the service about an event detected in the DUT
+
+        Parameters:
+            run_id (str):               ID of the test run
+            timestamp (float):          Time (seconds after epoc) when the event took place
+            event_type (int):           Type of the event (use EventType enum)
+            is_system_process (bool):   True if caused by system process; False otherwise
+            name (str):                 Name of the event dump
+            process (str):              Name of the process created/caused the event
+            exception_type (str):       Description of the event: e.g. 'OutOfMemoryException'
+            data_lines (list[str]):     Event data
+
+        Returns:
+            True is notification sent successfully; otherwise False
+
+        """
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        request = connector_service_pb2.EventEntry()
+        request.run_id = run_id
+        request.timestamp = timestamp * 1000.0
+        request.type = event_type
+        request.is_system_process = is_system_process
+        request.name = name or ''
+        request.process = process or ''
+        request.exception_type = exception_type or ''
+        if data_lines and len(data_lines):
+            request.data.extend(data_lines)
+        try:
+            self._blockingStub.NotifyEvent(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
+    def create_time_series(self, run_id, series_id, series_name, group, y_axis_name,
+                           unit, series_type, namespace, process, description):
+        """ Initialize a new time series chart
+
+        Parameters:
+            run_id (str):       ID of the test run
+            series_id (str):    Unique ID of the series. This ID will be used when sending the values for the series
+            series_name (str):  Name of the series
+            group (str):        Group name for the series
+            y_axis_name (str):  Name of the Y-axis
+            unit (str):         Unit of the data
+            series_type (int):  Type of the series (use SeriesType enum)
+            namespace (str):    Process/package namespace (only for process specific charts)
+            process (str):      Name of the process (only for process specific charts)
+            description (str):  Description for the series
+
+        Returns:
+            True is data sent successfully; otherwise False
+
+        """
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        if series_id is None or len(series_id.strip()) == 0:
+            return False
+
+        request = connector_service_pb2.DynamicSeriesInformation()
+        request.run_id = run_id
+        request.series_id = series_id
+        request.series_name = series_name or ''
+        request.group = group or ''
+        request.y_axis_name = y_axis_name or ''
+        request.unit = unit or ''
+        request.type = series_type
+        request.namespace = namespace or ''
+        request.process = process or ''
+        request.description = description or ''
+
+        try:
+            self._blockingStub.CreateTimeSeries(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
+    def update_single_system_series(self, run_id, series_id, timestamp, value):
+        """ Update system singe series data
+
+        Parameters:
+            run_id (str):       ID of the test run
+            series_id (str):    Unique ID of the series.
+            timestamp (float):  X-value. Time (seconds after epoc)
+            value (float):      Y-value
+
+        Returns:
+            True is data sent successfully; otherwise False
+
+        """
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        if series_id is None or len(series_id.strip()) == 0:
+            return False
+
+        request = connector_service_pb2.DynamicSingleSeriesUpdate()
+        request.run_id = run_id
+        request.series_id = series_id
+        request.timestamp = timestamp * 1000.0
+        request.value = value
+
+        try:
+            self._blockingStub.UpdateSingleSystemSeries(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
+    def update_composite_system_series(self, run_id, series_id, timestamp, values):
+        """ Update system composite series data
+
+        Parameters:
+            run_id (str):               ID of the test run
+            series_id (str):            Unique ID of the series.
+            timestamp (float):          X-value. Time (seconds after epoc)
+            values (dict[str, float]):  Y-value per column
+
+        Returns:
+            True is data sent successfully; otherwise False
+
+        """
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        if series_id is None or len(series_id.strip()) == 0:
+            return False
+
+        request = connector_service_pb2.DynamicCompositeSeriesUpdate()
+        request.run_id = run_id
+        request.series_id = series_id
+        request.timestamp = timestamp * 1000.0
+        request.values.update(values or {})
+        try:
+            self._blockingStub.UpdateCompositeSystemSeries(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
+    def update_single_process_series(self, run_id, series_id, timestamp, package, process, value):
+        """ Update process specific single series data
+
+        Parameters:
+            run_id (str):       ID of the test run
+            series_id (str):    Unique ID of the series.
+            timestamp (float):  X-value. Time (seconds after epoc)
+            package (str):      Namespace of the package
+            process (str):      Name of the process
+            value (float):      Y-value
+
+        Returns:
+            True is data sent successfully; otherwise False
+
+        """
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        if series_id is None or len(series_id.strip()) == 0:
+            return False
+
+        request = connector_service_pb2.DynamicProcessSingleSeriesUpdate()
+        request.run_id = run_id
+        request.series_id = series_id
+        request.timestamp = timestamp * 1000.0
+        request.package = package or ''
+        request.process = process or ''
+        request.value = value
+        try:
+            self._blockingStub.UpdateSingleProcessSeries(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
+    def update_composite_process_series(self, run_id, series_id, timestamp, package, process, values):
+        """ Update process specific composite series data
+
+        Parameters:
+            run_id (str):               ID of the test run
+            series_id (str):            Unique ID of the series.
+            timestamp (float):          X-value. Time (seconds after epoc)
+            package (str):              Namespace of the package
+            process (str):              Name of the process
+            values (dict[str, float]):  Y-value per column
+
+        Returns:
+            True is data sent successfully; otherwise False
+
+        """
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        if series_id is None or len(series_id.strip()) == 0:
+            return False
+
+        request = connector_service_pb2.DynamicProcessCompositeSeriesUpdate()
+        request.run_id = run_id
+        request.series_id = series_id
+        request.timestamp = timestamp * 1000.0
+        request.package = package or ''
+        request.process = process or ''
+        request.values.update(values or {})
+        try:
+            self._blockingStub.UpdateCompositeProcessSeries(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
+    def on_device_log(self, run_id, timestamp, log_priority, source_buffer_type, tag, data):
+        """ Route a device log line to service
+
+        Parameters:
+            run_id (str):               ID of the test run
+            timestamp (float):          Time (seconds after epoc)
+            log_priority (int):         Priority of the log message (use LogPriority enum)
+            source_buffer_type (int):   Source buffer of the log message (use SourceBuffer enum)
+            tag (str):                  Tag of the message
+            data (str):                 Message data
+
+        Returns:
+            True is data buffered successfully; otherwise False
+
+        """
+
+        self.__on_device_log_impl(run_id, 1, timestamp, log_priority, source_buffer_type, tag, data)
+
+    def on_device2_log(self, run_id, timestamp, log_priority, source_buffer_type, tag, data):
+        """ Route a device2 log line to service
+
+        Parameters:
+            run_id (str):               ID of the test run
+            timestamp (float):          Time (seconds after epoc)
+            log_priority (int):         Priority of the log message (use LogPriority enum)
+            source_buffer_type (int):   Source buffer of the log message (use SourceBuffer enum)
+            tag (str):                  Tag of the message
+            data (str):                 Message data
+
+        Returns:
+            True is data buffered successfully; otherwise False
+
+        """
+
+        self.__on_device_log_impl(run_id, 2, timestamp, log_priority, source_buffer_type, tag, data)
+
+    def __on_device_log_impl(self, run_id, device_index, timestamp, log_priority, source_buffer_type, tag, data):
+
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+
+        entry = connector_service_pb2.DeviceLogEntry()
+        entry.run_id = run_id
+        entry.device_index = device_index
+        entry.timestamp = timestamp * 1000.0
+        entry.priority = log_priority
+        entry.source_buffer = source_buffer_type
+        entry.tag = tag or ''
+        entry.data = data or ''
+
+        try:
+            self._device_log_entry_queue.put(entry)
+            return True
+        except Exception as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
     def stop_run(self, run_id, discard_results=False):
         """ Requests the service to stop an ongoing test run
 
@@ -339,6 +677,7 @@ class Connector(object):
         request.run_id = run_id
         request.discard_results = discard_results
         try:
+            self._wait_device_log_queue()
             self._blockingStub.StopRun(request)
             return True
         except grpc.RpcError as e:
@@ -486,23 +825,19 @@ class Connector(object):
             return False
 
         request = connector_service_pb2.NodeUpdated()
+        request.node_id = node_id
+
         if current_use_case and len(current_use_case.strip()):
-            request.current_use_case = wrappers_pb2.StringValue()
             request.current_use_case.value = current_use_case
         if current_run_id and len(current_run_id.strip()):
-            request.current_run_id = wrappers_pb2.StringValue()
             request.current_run_id.value = current_run_id
         if pool and len(pool.strip()):
-            request.pool = wrappers_pb2.StringValue()
             request.pool.value = pool
         if variables and len(variables.strip()):
-            request.variables = wrappers_pb2.StringValue()
             request.variables.value = variables
         if node_state is not None:
-            request.node_state = wrappers_pb2.Int32Value()
             request.node_state.value = node_state
         if run_state is not None:
-            request.run_state = wrappers_pb2.Int32Value()
             request.run_state.value = run_state
         try:
             self._blockingStub.UpdateNode(request)
@@ -527,11 +862,11 @@ if __name__ == '__main__':
         args = sys.argv[1:]
         p = re.compile('([^:]+):([0-9]+)')
 
-        m = None
         address = None
         port = None
 
-        if len(args) >= 1 and (m := p.match(args[0])):
+        if len(args) >= 1 and (p.match(args[0])):
+            m = p.match(args[0])
             address = m.group(1)
             port = int(m.group(2))
         elif len(args) >= 2 and re.search('[0-9]+', args[1]):

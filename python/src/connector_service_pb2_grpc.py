@@ -40,6 +40,21 @@ class ConnectorServiceStub(object):
         request_serializer=connector__service__pb2.LogTraceRequest.SerializeToString,
         response_deserializer=empty__pb2.Empty.FromString,
         )
+    self.LogDevice = channel.stream_unary(
+        '/profilence.zeta.ConnectorService/LogDevice',
+        request_serializer=connector__service__pb2.DeviceLogEntry.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
+    self.NotifyReset = channel.unary_unary(
+        '/profilence.zeta.ConnectorService/NotifyReset',
+        request_serializer=connector__service__pb2.ResetEntry.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
+    self.NotifyEvent = channel.unary_unary(
+        '/profilence.zeta.ConnectorService/NotifyEvent',
+        request_serializer=connector__service__pb2.EventEntry.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
     self.OnUseCaseEnd = channel.unary_unary(
         '/profilence.zeta.ConnectorService/OnUseCaseEnd',
         request_serializer=connector__service__pb2.UseCaseEndRequest.SerializeToString,
@@ -48,6 +63,31 @@ class ConnectorServiceStub(object):
     self.StopRun = channel.unary_unary(
         '/profilence.zeta.ConnectorService/StopRun',
         request_serializer=connector__service__pb2.StopRunRequest.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
+    self.CreateTimeSeries = channel.unary_unary(
+        '/profilence.zeta.ConnectorService/CreateTimeSeries',
+        request_serializer=connector__service__pb2.DynamicSeriesInformation.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
+    self.UpdateSingleSystemSeries = channel.unary_unary(
+        '/profilence.zeta.ConnectorService/UpdateSingleSystemSeries',
+        request_serializer=connector__service__pb2.DynamicSingleSeriesUpdate.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
+    self.UpdateSingleProcessSeries = channel.unary_unary(
+        '/profilence.zeta.ConnectorService/UpdateSingleProcessSeries',
+        request_serializer=connector__service__pb2.DynamicProcessSingleSeriesUpdate.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
+    self.UpdateCompositeSystemSeries = channel.unary_unary(
+        '/profilence.zeta.ConnectorService/UpdateCompositeSystemSeries',
+        request_serializer=connector__service__pb2.DynamicCompositeSeriesUpdate.SerializeToString,
+        response_deserializer=empty__pb2.Empty.FromString,
+        )
+    self.UpdateCompositeProcessSeries = channel.unary_unary(
+        '/profilence.zeta.ConnectorService/UpdateCompositeProcessSeries',
+        request_serializer=connector__service__pb2.DynamicProcessCompositeSeriesUpdate.SerializeToString,
         response_deserializer=empty__pb2.Empty.FromString,
         )
     self.SubscribeToTestRequests = channel.unary_stream(
@@ -116,6 +156,27 @@ class ConnectorServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def LogDevice(self, request_iterator, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def NotifyReset(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def NotifyEvent(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def OnUseCaseEnd(self, request, context):
     # missing associated documentation comment in .proto file
     pass
@@ -124,6 +185,41 @@ class ConnectorServiceServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def StopRun(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def CreateTimeSeries(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def UpdateSingleSystemSeries(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def UpdateSingleProcessSeries(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def UpdateCompositeSystemSeries(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def UpdateCompositeProcessSeries(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -193,6 +289,21 @@ def add_ConnectorServiceServicer_to_server(servicer, server):
           request_deserializer=connector__service__pb2.LogTraceRequest.FromString,
           response_serializer=empty__pb2.Empty.SerializeToString,
       ),
+      'LogDevice': grpc.stream_unary_rpc_method_handler(
+          servicer.LogDevice,
+          request_deserializer=connector__service__pb2.DeviceLogEntry.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
+      'NotifyReset': grpc.unary_unary_rpc_method_handler(
+          servicer.NotifyReset,
+          request_deserializer=connector__service__pb2.ResetEntry.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
+      'NotifyEvent': grpc.unary_unary_rpc_method_handler(
+          servicer.NotifyEvent,
+          request_deserializer=connector__service__pb2.EventEntry.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
       'OnUseCaseEnd': grpc.unary_unary_rpc_method_handler(
           servicer.OnUseCaseEnd,
           request_deserializer=connector__service__pb2.UseCaseEndRequest.FromString,
@@ -201,6 +312,31 @@ def add_ConnectorServiceServicer_to_server(servicer, server):
       'StopRun': grpc.unary_unary_rpc_method_handler(
           servicer.StopRun,
           request_deserializer=connector__service__pb2.StopRunRequest.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
+      'CreateTimeSeries': grpc.unary_unary_rpc_method_handler(
+          servicer.CreateTimeSeries,
+          request_deserializer=connector__service__pb2.DynamicSeriesInformation.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
+      'UpdateSingleSystemSeries': grpc.unary_unary_rpc_method_handler(
+          servicer.UpdateSingleSystemSeries,
+          request_deserializer=connector__service__pb2.DynamicSingleSeriesUpdate.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
+      'UpdateSingleProcessSeries': grpc.unary_unary_rpc_method_handler(
+          servicer.UpdateSingleProcessSeries,
+          request_deserializer=connector__service__pb2.DynamicProcessSingleSeriesUpdate.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
+      'UpdateCompositeSystemSeries': grpc.unary_unary_rpc_method_handler(
+          servicer.UpdateCompositeSystemSeries,
+          request_deserializer=connector__service__pb2.DynamicCompositeSeriesUpdate.FromString,
+          response_serializer=empty__pb2.Empty.SerializeToString,
+      ),
+      'UpdateCompositeProcessSeries': grpc.unary_unary_rpc_method_handler(
+          servicer.UpdateCompositeProcessSeries,
+          request_deserializer=connector__service__pb2.DynamicProcessCompositeSeriesUpdate.FromString,
           response_serializer=empty__pb2.Empty.SerializeToString,
       ),
       'SubscribeToTestRequests': grpc.unary_stream_rpc_method_handler(
