@@ -89,12 +89,12 @@ message TestStartRequest {
 	string run_id = 22;
 	string run_name = 2;
 	string node_id = 5;
-	string parameters = 6;
 	string project = 10;
 	string version = 16;
 	string test_set_file_path = 12;
 	bytes payload = 14;
 	map<string, string> tags = 20;	
+	repeated string log = 24;
 }
 
 message NodeAdded {	

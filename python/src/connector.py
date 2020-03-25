@@ -7,8 +7,8 @@ import grpc
 
 import connector_service_pb2
 import connector_service_pb2_grpc
-import wrappers_pb2
 import empty_pb2
+from connector_types import PingResponseType, TestRequestListenerBase
 from profiling_configuration import ProfilingConfiguration
 
 from os import path
@@ -19,44 +19,6 @@ import time
 
 __copyright__ = "Copyright 2020 Profilence"
 __license__ = "Apache License, Version 2.0"
-
-
-class TestRequestListenerBase(object):
-    """ Base class for test request handling """
-
-    def on_error(self, e):
-        """ Called if error occurs while listening test requests
-
-        Parameters:
-            e (Exception): The exception object
-
-        """
-
-        pass
-
-    def on_completed(self):
-        """ Called when the asynchronous sequence completes """
-
-        pass
-
-    def on_test_start_requested(self, request):
-        """ Called by service for starting a new test in the test node (this client)
-
-         Parameters:
-             request (TestStartRequest): Start request details
-
-         """
-
-        pass
-
-    def on_test_stop_requested(self, request):
-        """ Called by server for stopping ongoing test in the test node (this client)
-
-         Parameters:
-             request (TestStopRequest): Stop request details
-
-         """
-        pass
 
 
 class Connector(object):
@@ -260,7 +222,7 @@ class Connector(object):
         request = connector_service_pb2.UseCaseEndRequest()
         request.run_id = run_id
         request.result = result
-        request.activeRunTime = active_run_time
+        request.activeRunTime = int(active_run_time)
         request.fail_cause = fail_cause or ''
         request.reset_intended = reset_intended
         try:
@@ -773,7 +735,7 @@ class Connector(object):
         request.node_id = node_id
         request.pool = pool or ''
         request.type = node_type or ''
-        request.variables = variables or ''
+        request.variables = variables or '{}'
         try:
             self._blockingStub.AddNode(request)
             return True
@@ -881,7 +843,7 @@ if __name__ == '__main__':
         try:
             client = Connector(address, port)
             print('Pinging ..')
-            if client.ping() == 1:
+            if client.ping() == PingResponseType.OK:
                 print('Successfully pinged the service')
             else:
                 print('Failed to ping the service')

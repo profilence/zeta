@@ -55,3 +55,41 @@ SeriesType = enum(SINGLE_SERIES=0,
 
 PingResponseType = enum(FAILED=0,
                         OK=1)
+
+
+class TestRequestListenerBase(object):
+    """ Base class for test request handling """
+
+    def on_error(self, e):
+        """ Called if error occurs while listening test requests
+
+        Parameters:
+            e (Exception): The exception object
+
+        """
+
+        pass
+
+    def on_completed(self):
+        """ Called when the asynchronous sequence completes """
+
+        pass
+
+    def on_test_start_requested(self, request):
+        """ Called by service for starting a new test in the test node (this client)
+
+         Parameters:
+             request (TestStartRequest): Start request details
+
+         """
+
+        pass
+
+    def on_test_stop_requested(self, request):
+        """ Called by server for stopping ongoing test in the test node (this client)
+
+         Parameters:
+             request (TestStopRequest): Stop request details
+
+         """
+        pass
