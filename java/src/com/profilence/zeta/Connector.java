@@ -30,10 +30,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -993,7 +991,7 @@ public class Connector {
 				.setNodeId(nodeID)
 				.setPool(pool != null ? pool : "")
 				.setType(type != null ? type : "")
-				.setVariables(variables != null ? variables : "")
+				.setVariables(variables != null && variables.trim().length() > 0 ? variables : "{}")
 				.build();
 	
 	    try {

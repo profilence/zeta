@@ -19,11 +19,11 @@ private static final long serialVersionUID = 0L;
     runId_ = "";
     runName_ = "";
     nodeId_ = "";
-    parameters_ = "";
     project_ = "";
     version_ = "";
     testSetFilePath_ = "";
     payload_ = com.google.protobuf.ByteString.EMPTY;
+    log_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @java.lang.Override
@@ -69,12 +69,6 @@ private static final long serialVersionUID = 0L;
             nodeId_ = s;
             break;
           }
-          case 50: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            parameters_ = s;
-            break;
-          }
           case 82: {
             java.lang.String s = input.readStringRequireUtf8();
 
@@ -117,6 +111,15 @@ private static final long serialVersionUID = 0L;
             runId_ = s;
             break;
           }
+          case 194: {
+            java.lang.String s = input.readStringRequireUtf8();
+            if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              log_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000002;
+            }
+            log_.add(s);
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -132,6 +135,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        log_ = log_.getUnmodifiableView();
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -263,42 +269,6 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
       nodeId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int PARAMETERS_FIELD_NUMBER = 6;
-  private volatile java.lang.Object parameters_;
-  /**
-   * <code>string parameters = 6;</code>
-   * @return The parameters.
-   */
-  public java.lang.String getParameters() {
-    java.lang.Object ref = parameters_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      parameters_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string parameters = 6;</code>
-   * @return The bytes for parameters.
-   */
-  public com.google.protobuf.ByteString
-      getParametersBytes() {
-    java.lang.Object ref = parameters_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      parameters_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -499,6 +469,41 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
+  public static final int LOG_FIELD_NUMBER = 24;
+  private com.google.protobuf.LazyStringList log_;
+  /**
+   * <code>repeated string log = 24;</code>
+   * @return A list containing the log.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getLogList() {
+    return log_;
+  }
+  /**
+   * <code>repeated string log = 24;</code>
+   * @return The count of log.
+   */
+  public int getLogCount() {
+    return log_.size();
+  }
+  /**
+   * <code>repeated string log = 24;</code>
+   * @param index The index of the element to return.
+   * @return The log at the given index.
+   */
+  public java.lang.String getLog(int index) {
+    return log_.get(index);
+  }
+  /**
+   * <code>repeated string log = 24;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the log at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getLogBytes(int index) {
+    return log_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -518,9 +523,6 @@ private static final long serialVersionUID = 0L;
     }
     if (!getNodeIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, nodeId_);
-    }
-    if (!getParametersBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, parameters_);
     }
     if (!getProjectBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 10, project_);
@@ -543,6 +545,9 @@ private static final long serialVersionUID = 0L;
     if (!getRunIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 22, runId_);
     }
+    for (int i = 0; i < log_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 24, log_.getRaw(i));
+    }
     unknownFields.writeTo(output);
   }
 
@@ -557,9 +562,6 @@ private static final long serialVersionUID = 0L;
     }
     if (!getNodeIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, nodeId_);
-    }
-    if (!getParametersBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, parameters_);
     }
     if (!getProjectBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, project_);
@@ -587,6 +589,14 @@ private static final long serialVersionUID = 0L;
     if (!getRunIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(22, runId_);
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < log_.size(); i++) {
+        dataSize += computeStringSizeNoTag(log_.getRaw(i));
+      }
+      size += dataSize;
+      size += 2 * getLogList().size();
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -608,8 +618,6 @@ private static final long serialVersionUID = 0L;
         .equals(other.getRunName())) return false;
     if (!getNodeId()
         .equals(other.getNodeId())) return false;
-    if (!getParameters()
-        .equals(other.getParameters())) return false;
     if (!getProject()
         .equals(other.getProject())) return false;
     if (!getVersion()
@@ -620,6 +628,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getPayload())) return false;
     if (!internalGetTags().equals(
         other.internalGetTags())) return false;
+    if (!getLogList()
+        .equals(other.getLogList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -637,8 +647,6 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getRunName().hashCode();
     hash = (37 * hash) + NODE_ID_FIELD_NUMBER;
     hash = (53 * hash) + getNodeId().hashCode();
-    hash = (37 * hash) + PARAMETERS_FIELD_NUMBER;
-    hash = (53 * hash) + getParameters().hashCode();
     hash = (37 * hash) + PROJECT_FIELD_NUMBER;
     hash = (53 * hash) + getProject().hashCode();
     hash = (37 * hash) + VERSION_FIELD_NUMBER;
@@ -650,6 +658,10 @@ private static final long serialVersionUID = 0L;
     if (!internalGetTags().getMap().isEmpty()) {
       hash = (37 * hash) + TAGS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetTags().hashCode();
+    }
+    if (getLogCount() > 0) {
+      hash = (37 * hash) + LOG_FIELD_NUMBER;
+      hash = (53 * hash) + getLogList().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -812,8 +824,6 @@ private static final long serialVersionUID = 0L;
 
       nodeId_ = "";
 
-      parameters_ = "";
-
       project_ = "";
 
       version_ = "";
@@ -823,6 +833,8 @@ private static final long serialVersionUID = 0L;
       payload_ = com.google.protobuf.ByteString.EMPTY;
 
       internalGetMutableTags().clear();
+      log_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
@@ -853,13 +865,17 @@ private static final long serialVersionUID = 0L;
       result.runId_ = runId_;
       result.runName_ = runName_;
       result.nodeId_ = nodeId_;
-      result.parameters_ = parameters_;
       result.project_ = project_;
       result.version_ = version_;
       result.testSetFilePath_ = testSetFilePath_;
       result.payload_ = payload_;
       result.tags_ = internalGetTags();
       result.tags_.makeImmutable();
+      if (((bitField0_ & 0x00000002) != 0)) {
+        log_ = log_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000002);
+      }
+      result.log_ = log_;
       onBuilt();
       return result;
     }
@@ -920,10 +936,6 @@ private static final long serialVersionUID = 0L;
         nodeId_ = other.nodeId_;
         onChanged();
       }
-      if (!other.getParameters().isEmpty()) {
-        parameters_ = other.parameters_;
-        onChanged();
-      }
       if (!other.getProject().isEmpty()) {
         project_ = other.project_;
         onChanged();
@@ -941,6 +953,16 @@ private static final long serialVersionUID = 0L;
       }
       internalGetMutableTags().mergeFrom(
           other.internalGetTags());
+      if (!other.log_.isEmpty()) {
+        if (log_.isEmpty()) {
+          log_ = other.log_;
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          ensureLogIsMutable();
+          log_.addAll(other.log_);
+        }
+        onChanged();
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -1195,82 +1217,6 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       nodeId_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object parameters_ = "";
-    /**
-     * <code>string parameters = 6;</code>
-     * @return The parameters.
-     */
-    public java.lang.String getParameters() {
-      java.lang.Object ref = parameters_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        parameters_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string parameters = 6;</code>
-     * @return The bytes for parameters.
-     */
-    public com.google.protobuf.ByteString
-        getParametersBytes() {
-      java.lang.Object ref = parameters_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        parameters_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string parameters = 6;</code>
-     * @param value The parameters to set.
-     * @return This builder for chaining.
-     */
-    public Builder setParameters(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      parameters_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string parameters = 6;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearParameters() {
-      
-      parameters_ = getDefaultInstance().getParameters();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string parameters = 6;</code>
-     * @param value The bytes for parameters to set.
-     * @return This builder for chaining.
-     */
-    public Builder setParametersBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      parameters_ = value;
       onChanged();
       return this;
     }
@@ -1656,6 +1602,116 @@ private static final long serialVersionUID = 0L;
         java.util.Map<java.lang.String, java.lang.String> values) {
       internalGetMutableTags().getMutableMap()
           .putAll(values);
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringList log_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureLogIsMutable() {
+      if (!((bitField0_ & 0x00000002) != 0)) {
+        log_ = new com.google.protobuf.LazyStringArrayList(log_);
+        bitField0_ |= 0x00000002;
+       }
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @return A list containing the log.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getLogList() {
+      return log_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @return The count of log.
+     */
+    public int getLogCount() {
+      return log_.size();
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @param index The index of the element to return.
+     * @return The log at the given index.
+     */
+    public java.lang.String getLog(int index) {
+      return log_.get(index);
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the log at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getLogBytes(int index) {
+      return log_.getByteString(index);
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @param index The index to set the value at.
+     * @param value The log to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLog(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLogIsMutable();
+      log_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @param value The log to add.
+     * @return This builder for chaining.
+     */
+    public Builder addLog(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLogIsMutable();
+      log_.add(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @param values The log to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllLog(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureLogIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, log_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearLog() {
+      log_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string log = 24;</code>
+     * @param value The bytes of the log to add.
+     * @return This builder for chaining.
+     */
+    public Builder addLogBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      ensureLogIsMutable();
+      log_.add(value);
+      onChanged();
       return this;
     }
     @java.lang.Override

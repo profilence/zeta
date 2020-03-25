@@ -44,18 +44,6 @@ public interface TestStartRequestOrBuilder extends
       getNodeIdBytes();
 
   /**
-   * <code>string parameters = 6;</code>
-   * @return The parameters.
-   */
-  java.lang.String getParameters();
-  /**
-   * <code>string parameters = 6;</code>
-   * @return The bytes for parameters.
-   */
-  com.google.protobuf.ByteString
-      getParametersBytes();
-
-  /**
    * <code>string project = 10;</code>
    * @return The project.
    */
@@ -130,4 +118,29 @@ public interface TestStartRequestOrBuilder extends
 
   java.lang.String getTagsOrThrow(
       java.lang.String key);
+
+  /**
+   * <code>repeated string log = 24;</code>
+   * @return A list containing the log.
+   */
+  java.util.List<java.lang.String>
+      getLogList();
+  /**
+   * <code>repeated string log = 24;</code>
+   * @return The count of log.
+   */
+  int getLogCount();
+  /**
+   * <code>repeated string log = 24;</code>
+   * @param index The index of the element to return.
+   * @return The log at the given index.
+   */
+  java.lang.String getLog(int index);
+  /**
+   * <code>repeated string log = 24;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the log at the given index.
+   */
+  com.google.protobuf.ByteString
+      getLogBytes(int index);
 }
