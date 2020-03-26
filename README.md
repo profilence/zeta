@@ -185,6 +185,8 @@ finally:
         client.shutdown()
 
 ```
+<a href="https://raw.githubusercontent.com/profilence/zeta/master/images/testrun.PNG" target="_blank">See output</a>
+
 
 Example - Java: publish a test cloud node
 -----------
