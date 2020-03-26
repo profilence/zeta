@@ -310,4 +310,4 @@ class DemoListener(TestRequestListenerBase):
 See full python example from [here](https://github.com/profilence/zeta/blob/master/python/src/examples.py)
 
 Output on web UI 
-![image1](https://github.com/profilence/zeta/blob/master/images/nodes.png)
+![image1](https://raw.githubusercontent.com/profilence/zeta/master/images/nodes.png)
