@@ -186,6 +186,73 @@ finally:
 
 ```
 
+Example - Java: publish a test cloud node
+-----------
+
+```
+public static void startListener(Connector client, final ITestLauncher launcher) throws InterruptedException, IOException {
+
+      if (client.addNode(NODE_ID, POOL, TYPE, NODE_VARIABLES))  {
+          client.subscribeToTestRequests(new ITestRequestListener( ) {
+              @Override
+              public void onTestStartRequested(com.profilence.zeta.TestStartRequest req) {
+                  final String project = req.getProject();
+                  final String version = req.getVersion();
+                  final String runID = req.getRunId();
+                  print("Received request " + runID + " to test version " + version + " for " + project);
+                  (new Thread(new Runnable() {
+                      public void run() {
+                          launcher.start(project, version);
+                      }
+                  })).start();
+                  client.respondToTestRequest(runID, "Started new monkey run", true, null, null);
+              }			  
+              @Override
+              public void onTestStopRequested(com.profilence.zeta.TestStopRequest req) {
+                  launcher.stop();
+              }
+              @Override
+              public void onError(java.lang.Throwable req) {
+              }		
+              @Override
+              public void onCompleted() {
+              }
+          });
+
+          final boolean[] doRun = { true };
+
+          Thread heartBeat = new Thread(new Runnable() {
+              public void run() {
+                  while(doRun[0]) {
+                      try {
+                        Thread.sleep(1000 * 60);
+                    } catch (Exception e) {
+                    }
+                    if (doRun[0]) {  
+                        client.updateNode(NODE_ID, null, null, null, null, POOL, NODE_VARIABLES);
+                    }
+                  }
+                  print("Heartbeat stopped");
+              }
+          });
+
+          heartBeat.start();
+
+          print("Press any key to stop");
+          System.in.read();
+          print("Exiting ...");
+
+          doRun[0] = false;
+          heartBeat.interrupt();
+
+          print("Removing node ...");
+          client.removeNode(NODE_ID);
+      }
+}
+
+```
+See full Java example from [here](https://github.com/profilence/zeta/blob/master/examples/java/ClientExample.java)
+
 Example - Python: publish a test cloud node
 -----------
 
@@ -238,4 +305,7 @@ class DemoListener(TestRequestListenerBase):
             self.__running = False
             self.client.remove_node(self.node_name)
 ```
-see full example from [here](https://github.com/profilence/zeta/blob/master/python/src/examples.py)
+See full python example from [here](https://github.com/profilence/zeta/blob/master/python/src/examples.py)
+
+Output on web UI 
+![image1](https://github.com/profilence/zeta/blob/master/images/nodes.png)
