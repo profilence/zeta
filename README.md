@@ -1,9 +1,9 @@
 Profilence ZETA
 ====
 
-Profilence Zeta-driver is a cross-platform, multi-language library to access Profilence analytics and cloud services. Profilence Zeta serves two main purposes:
+Profilence Zeta-driver is a cross-platform, multi-language library for accessing Profilence analytics and cloud services. Zeta serves two main purposes:
 
-1. Harness your existing test automation/execution system with Profilence analytics, and push all the data to cloud: to be instantly shared with your organization. Zeta has built-in analytic capabilitis for Android and Linux based devices.
+1. Harness your existing test automation/execution system with Profilence analytics, and push all the data to cloud: to be instantly shared with your organization. Zeta has built-in analytic capabilitis for Android and Linux based devices, but can pass through test run data and artifacts for any system under test.
 
 2. Easily build a test cloud by publishing any machine as a test node, ready to serve test requests coming from your build system - with your own test automation system.
 
