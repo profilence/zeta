@@ -1,7 +1,11 @@
 Profilence ZETA
 ====
 
-Connector for test services
+Profilence Zeta-driver is a cross-platform, multi-language library to access Profilence analytics and cloud services. Profilence Zeta serves two main purposes:
+
+1. Harness your existing test automation/execution system with Profilence analytics, and push all the data to cloud: to be instantly shared with your organization. Zeta has built-in analytic capabilitis for Android and Linux based devices.
+
+2. Easily build a test cloud by publishing any machine as a test node, ready to serve test requests coming from your build system - with your own test automation system.
 
 Core of the project is the proto file for the GRPC service:
 
@@ -38,7 +42,7 @@ For proto-code generation, run ./proto_compile/[win-x86_64|linux|mac]/python_com
 Python driver and code generator have dependency to grpcio-tools package ($ pip install grpcio-tools)
 
 
-Example - Java
+Example - Java: integrate analytics to simple sequencer
 -----------
 
 ```
@@ -121,7 +125,7 @@ public class ClientExample {
 }
 ```
 
-Example - Python
+Example - Python: integrate analytics to simple sequencer
 -----------
 
 ```
@@ -181,3 +185,57 @@ finally:
         client.shutdown()
 
 ```
+
+Example - Python: publish a test cloud node
+-----------
+
+```
+import json
+import threading
+import time
+from connector_types import TestRequestListenerBase
+
+
+def get_node_properties():
+    props = {'demo': True, 'region': 'US', 'operator': 'Sprint', 'product': 'Pixel4', 'platform': 'Android'}
+    return json.dumps(props)
+
+
+class DemoListener(TestRequestListenerBase):
+
+    def __init__(self, cli, test_launcher):
+        self.node_name = 'monkey_node'
+        self.pool_name = 'monkey_pool'
+        self.platform_type = 'Android'
+        self.client = cli
+        self.launcher = test_launcher
+        self.__running = False
+
+    def on_test_start_requested(self, request):
+        project = request.project
+        version = request.version
+        run_id = request.run_id
+        print('\nReceived request %s to test version %s for project %s' % (run_id, version, project))
+        if self.launcher:
+            self.client.respond_to_test_request(run_id, 'Started new monkey run', True, None, None)
+            threading.Thread(target=self.launcher, args=[self.client, project, version], daemon=True).start()
+        else:
+            self.client.respond_to_test_request(run_id, 'Cannot start', False, 'No test runner available', None)
+
+    def heart_beat(self):
+        while self.__running:
+            self.client.update_node(self.node_name, None, None, None, None, self.pool_name, get_node_properties())
+            time.sleep(60)
+
+    def start(self):
+        okay = self.client.add_node(self.node_name, self.pool_name, self.platform_type, get_node_properties())
+        print('Node added successfully: %s' % okay)
+        if okay:
+            self.__running = True
+            self.client.subscribe_to_test_requests(self)
+            threading.Thread(target=self.heart_beat, daemon=True).start()
+            input('Press any key to continue....')
+            self.__running = False
+            self.client.remove_node(self.node_name)
+```
+see full example from [here](https://github.com/profilence/zeta/blob/master/python/src/examples.py)
