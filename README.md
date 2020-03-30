@@ -311,3 +311,5 @@ See full python example from [here](https://github.com/profilence/zeta/blob/mast
 
 Output on web UI 
 ![image1](https://raw.githubusercontent.com/profilence/zeta/master/images/nodes.png)
+
+See [example](https://github.com/profilence/zeta/blob/master/request_sender/example.py) how to trigger tests e.g. from a version control system.
