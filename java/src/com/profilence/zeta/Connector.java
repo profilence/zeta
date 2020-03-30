@@ -191,7 +191,35 @@ public class Connector {
 			String secondaryDeviceSerial,
 			String secondaryDeviceType,
 			Map<String, String> tags) {
-		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, (String)null, tags);
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, (String)null, tags, null);
+	}
+	
+	/**
+	 * Request server to start new test run with recommended profiling settings
+	 * @param runName
+	 * @param setName
+	 * @param project
+	 * @param version
+	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
+	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
+	 * @param tags
+	 * @param runId
+	 * @return Test run id if successfully started; null otherwise
+	 */
+	public String startRunWithRecommendedSettings(
+			String runName, 
+			String setName, 
+			String project, 
+			String version, 
+			String primaryDeviceSerial, 
+			String primaryDeviceType, 
+			String secondaryDeviceSerial,
+			String secondaryDeviceType,
+			Map<String, String> tags,
+			String runId) {
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, (String)null, tags, runId);
 	}
 	
 	/**
@@ -219,8 +247,38 @@ public class Connector {
 			String secondaryDeviceType,
 			ProfilingConfiguration profilingSettings,
 			Map<String, String> tags) {
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, profilingSettings, tags, null);
+	}
+	
+	/**
+	 * Request server to start new test run
+	 * @param runName
+	 * @param setName
+	 * @param project
+	 * @param version
+	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
+	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
+	 * @param profilingSettings
+	 * @param tags
+	 * @param runId
+	 * @return
+	 */
+	public String startRun(
+			String runName, 
+			String setName, 
+			String project, 
+			String version, 
+			String primaryDeviceSerial, 
+			String primaryDeviceType, 
+			String secondaryDeviceSerial,
+			String secondaryDeviceType,
+			ProfilingConfiguration profilingSettings,
+			Map<String, String> tags,
+			String runId) {
 		String configJson = profilingSettings != null ? profilingSettings.toJson() : null;
-		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, configJson, tags);
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, configJson, tags, runId);
 	}
 	
 	
@@ -249,6 +307,36 @@ public class Connector {
 			String secondaryDeviceType,
 			File profilingSettingsFile,
 			Map<String, String> tags) {
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, profilingSettingsFile, tags, null);
+	}
+	
+	/**
+	 * Request server to start new test run
+	 * @param runName
+	 * @param setName
+	 * @param project
+	 * @param version
+	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
+	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
+	 * @param profilingSettingsFile JSON file containing profiling settings
+	 * @param tags
+	 * @param runId
+	 * @return Test run id if successfully started; null otherwise
+	 */
+	public String startRun(
+			String runName, 
+			String setName, 
+			String project, 
+			String version, 
+			String primaryDeviceSerial, 
+			String primaryDeviceType, 
+			String secondaryDeviceSerial,
+			String secondaryDeviceType,
+			File profilingSettingsFile,
+			Map<String, String> tags,
+			String runId) {
 		
 		String settingsJson = null;
 		if (profilingSettingsFile != null && profilingSettingsFile.exists()) {
@@ -267,7 +355,7 @@ public class Connector {
 		    	settingsJson = null;
 		    }
 		}
-		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, settingsJson, tags);
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, settingsJson, tags, runId);
 	}
 	
 	/**
@@ -280,7 +368,7 @@ public class Connector {
 	 * @param primaryDeviceType
 	 * @param secondaryDeviceSerial
 	 * @param secondaryDeviceType
-	 * @param profilingSettings JSON string providing analyzer settings
+	 * @param profilingSettingsFile JSON file containing profiling settings
 	 * @param tags
 	 * @return Test run id if successfully started; null otherwise
 	 */
@@ -295,6 +383,36 @@ public class Connector {
 			String secondaryDeviceType,
 			String profilingSettings,
 			Map<String, String> tags) {
+		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, profilingSettings, tags, null);
+	}
+	
+	/**
+	 * Request server to start new test run
+	 * @param runName
+	 * @param setName
+	 * @param project
+	 * @param version
+	 * @param primaryDeviceSerial
+	 * @param primaryDeviceType
+	 * @param secondaryDeviceSerial
+	 * @param secondaryDeviceType
+	 * @param profilingSettings JSON string providing analyzer settings
+	 * @param tags
+	 * @param runId
+	 * @return Test run id if successfully started; null otherwise
+	 */
+	public String startRun(
+			String runName, 
+			String setName, 
+			String project, 
+			String version, 
+			String primaryDeviceSerial, 
+			String primaryDeviceType, 
+			String secondaryDeviceSerial,
+			String secondaryDeviceType,
+			String profilingSettings,
+			Map<String, String> tags,
+			String runId) {
 		
 		StartRunRequest request = StartRunRequest.newBuilder()
 				.setRunName(runName != null ? runName : "")
@@ -307,6 +425,7 @@ public class Connector {
 				.setSecondaryDeviceSerial(secondaryDeviceSerial != null ? secondaryDeviceSerial : "")
 				.setProfilingSettings(profilingSettings != null ? profilingSettings : "")
 				.putAllTags(tags != null ? tags : new HashMap<>())
+				.setRunId(runId != null ? runId : "")
 				.build();
 		 
 	    try {

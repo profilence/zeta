@@ -16,7 +16,7 @@ import com.profilence.zeta.LogLevel;
 import com.profilence.zeta.PingResponseType;
 
 interface ITestLauncher {
-	void start(String project, String version);
+	void start(String project, String version, String runId);
 	void stop();
 }
 
@@ -68,8 +68,8 @@ public class ClientExample {
 				  if (createTestNode) {
 				  	  print("Start test listener");
 					  startListener(client, new ITestLauncher() {
-						  public void start(String x, String y) {
-							  startRunner(client, x, y);
+						  public void start(String x, String y, String z) {
+							  startRunner(client, x, y, z);
 						  }
 						  public void stop() {
 							  stopRunner();
@@ -77,7 +77,7 @@ public class ClientExample {
 					  });
 				  } else {
 					  print("Let the monkey loose");
-					  startRunner(client, "monkey", "2.0");
+					  startRunner(client, "monkey", "2.0", null);
 				  }
 		      } else {
 		    	  print("Service not responding");
@@ -101,7 +101,7 @@ public class ClientExample {
 					  print("Received request " + runID + " to test version " + version + " for " + project);
 					  (new Thread(new Runnable() {
 						  public void run() {
-							  launcher.start(project, version);
+							  launcher.start(project, version, runID);
 						  }
 					  })).start();
 					  client.respondToTestRequest(runID, "Started new monkey run", true, null, null);
@@ -149,11 +149,12 @@ public class ClientExample {
 		  }
 	}
 
-	public static void startRunner(Connector client, String projectName, String projectVersion) {
+	public static void startRunner(Connector client, String projectName, String projectVersion, String testRunID) {
 		
 		_keepRunning = true;
 	  
-		String testRunID = client.startRun(TEST_RUN_NAME, TEST_SET_NAME, projectName, projectVersion, DEVICE_ID, DEVICE_TYPE, null, null, PROFILING_SETTINGS, null);
+		testRunID = client.startRun(TEST_RUN_NAME, TEST_SET_NAME, projectName, projectVersion, DEVICE_ID, DEVICE_TYPE, null, null, PROFILING_SETTINGS, null, testRunID);
+		
 		print("testRunID: " + testRunID);
 		if (testRunID != null) {
 		  for(int i = 1; i <= ITERATIONS + 1; i++) {		  
