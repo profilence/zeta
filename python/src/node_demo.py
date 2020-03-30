@@ -28,10 +28,7 @@ class DemoListener(TestRequestListenerBase):
         run_id = request.run_id
         print('\nReceived request %s to test version %s for project %s' % (run_id, version, project))
         if self.launcher:
-            self.client.respond_to_test_request(run_id, 'Started new monkey run', True, None, None)
-            threading.Thread(target=self.launcher, args=[self.client, project, version], daemon=True).start()
-        else:
-            self.client.respond_to_test_request(run_id, 'Cannot start', False, 'No test runner available', None)
+            self.launcher(self.client, run_id, project, version)
 
     def heart_beat(self):
         while self.__running:

@@ -1,3 +1,4 @@
+import threading
 import time
 import random
 from subprocess import Popen, PIPE
@@ -49,23 +50,32 @@ class DemoRunner:
         run_time = time.time() - start
         return {'success': success, 'runTime': run_time}
 
-    def run_monkey(self, client, project_name, project_version):
-        test_run_id = client.start_run('monkey', 'monkey_goes_bananas', project_name, project_version, self.device_id,
-                                       'android', None, None, None, None)
-        print('Test run id: %s' % test_run_id)
-        if test_run_id:
+    def run_monkey(self, client, run_id, project_name, project_version):
+        run_id = client.start_run('monkey', 'monkey_goes_bananas', project_name, project_version, self.device_id,
+                                  'android', None, None, None, None, run_id)
+        print('Test run id: %s' % run_id)
+        if run_id:
+            client.respond_to_test_request(run_id, 'Started new monkey run', True, None, None)
             for i, pkg in enumerate(
                     ['com.android.calculator2', 'com.android.contacts', 'com.google.android.deskclock']):
                 use_case_name = 'Monkey goes bananas with %s' % pkg
                 use_case_id = 'id_%d' % i
                 print(use_case_name)
-                client.log_trace(test_run_id, 'Starting use case %s from python' % use_case_name)
-                client.on_use_case_start(test_run_id, use_case_name, use_case_id, None, None)
-                client.on_log_step(test_run_id, 'Let the monkey loose!', True, False)
-                result = self.__monkey_spank(pkg, client, test_run_id)
-                client.on_log_step(test_run_id, 'capture', True, True)
+                client.log_trace(run_id, 'Starting use case %s from python' % use_case_name)
+                client.on_use_case_start(run_id, use_case_name, use_case_id, None, None)
+                client.on_log_step(run_id, 'Let the monkey loose!', True, False)
+                result = self.__monkey_spank(pkg, client, run_id)
+                client.on_log_step(run_id, 'capture', True, True)
                 print('Ending use case ...')
-                client.on_use_case_end(test_run_id, result['success'], result['runTime'], None, False)
+                client.on_use_case_end(run_id, result['success'], result['runTime'], None, False)
                 print('End.')
             print('Stopping test run ...')
-            print('Successfully stopped test run: %s' % client.stop_run(test_run_id, False))
+            print('Successfully stopped test run: %s' % client.stop_run(run_id, False))
+        else:
+            client.respond_to_test_request(run_id, 'Cannot start', False, 'No test run ID', None)
+
+    def run_monkey_async(self, client, run_id, project_name, project_version):
+        threading.Thread(target=self.run_monkey,
+                         args=[client, run_id, project_name, project_version],
+                         daemon=True).start()
+

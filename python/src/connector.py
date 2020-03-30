@@ -117,7 +117,7 @@ class Connector(object):
                               tags)
 
     def start_run(self, run_name, set_name, project, version, primary_device_serial, primary_device_type,
-                  secondary_device_serial, secondary_device_type, profiling_settings, tags):
+                  secondary_device_serial, secondary_device_type, profiling_settings, tags, run_id=None):
         """ Requests the service for a new test run
 
         Parameters:
@@ -157,6 +157,7 @@ class Connector(object):
         request.secondary_device_type = secondary_device_type or ''
         request.profiling_settings = profiling_settings or ''
         request.tags.update(tags or {})
+        request.run_id = run_id
         try:
             response = self._blockingStub.StartRun(request)
             return response.run_id

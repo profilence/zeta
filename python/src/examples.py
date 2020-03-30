@@ -40,7 +40,7 @@ if __name__ == '__main__':
                 print('Successfully pinged the service')
                 runner = DemoRunner('emulator-5554')
                 if PUBLISH_NODE:
-                    listener = DemoListener(client, runner.run_monkey)
+                    listener = DemoListener(client, runner.run_monkey_async)
                     listener.start()
                 else:
                     runner.run_monkey(client, 'runner_demo', '1.1.1.1')
