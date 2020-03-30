@@ -239,7 +239,7 @@ if __name__ == "__main__":
     t = TestNodes(Login(address, username, password))
     nodes = t.list_nodes()
     if len(nodes):
-        run = nodes[0].start_run('Monkey', '1.1.6', r'c:\work\profiling_settings.zip')
+        run = nodes[0].start_run('Monkey', '1.1.6', r'c:\work\test_set_for_my_tool_of_choice.zip')
         if run:
             print('Started test run: %s' % run.test_run_id)
             run.wait_finish()
