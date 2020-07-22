@@ -66,4 +66,34 @@ public interface UseCaseStartRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getRequirementIdBytes();
+
+  /**
+   * <code>int32 test_type = 6;</code>
+   * @return The testType.
+   */
+  int getTestType();
+
+  /**
+   * <code>string test_case_group_name = 7;</code>
+   * @return The testCaseGroupName.
+   */
+  java.lang.String getTestCaseGroupName();
+  /**
+   * <code>string test_case_group_name = 7;</code>
+   * @return The bytes for testCaseGroupName.
+   */
+  com.google.protobuf.ByteString
+      getTestCaseGroupNameBytes();
+
+  /**
+   * <code>string test_set_name = 8;</code>
+   * @return The testSetName.
+   */
+  java.lang.String getTestSetName();
+  /**
+   * <code>string test_set_name = 8;</code>
+   * @return The bytes for testSetName.
+   */
+  com.google.protobuf.ByteString
+      getTestSetNameBytes();
 }

@@ -66,4 +66,19 @@ public interface DynamicProcessSingleSeriesUpdateOrBuilder extends
    * @return The value.
    */
   float getValue();
+
+  /**
+   * <code>.google.protobuf.Int32Value pid = 7;</code>
+   * @return Whether the pid field is set.
+   */
+  boolean hasPid();
+  /**
+   * <code>.google.protobuf.Int32Value pid = 7;</code>
+   * @return The pid.
+   */
+  com.google.protobuf.Int32Value getPid();
+  /**
+   * <code>.google.protobuf.Int32Value pid = 7;</code>
+   */
+  com.google.protobuf.Int32ValueOrBuilder getPidOrBuilder();
 }

@@ -452,6 +452,31 @@ public class Connector {
 			String useCaseID,
 			String targetProcess,
 			String requirementID) {
+		return onUseCaseStart(runID, useCaseName, useCaseID, null, null, TestType.Normal, targetProcess, requirementID);
+	
+	}
+	
+	/**
+	 * Notify server about new use case
+	 * @param runID
+	 * @param useCaseName
+	 * @param useCaseID
+	 * @param testCaseGroupName
+	 * @param testSetName,
+	 * @param testCaseType,
+	 * @param targetProcess
+	 * @param requirementID
+	 * @return True if successfully notified; false otherwise
+	 */
+	public boolean onUseCaseStart(
+			String runID,
+			String useCaseName,
+			String useCaseID,
+			String testCaseGroupName,
+			String testSetName,
+			TestType testCaseType,
+			String targetProcess,
+			String requirementID) {
 		
 		if (runID == null || runID.trim().isEmpty()) {
 			return false;
@@ -466,10 +491,13 @@ public class Connector {
 				
 		UseCaseStartRequest request = UseCaseStartRequest.newBuilder()
 				.setRunId(runID)
-				.setUseCaseName(useCaseName != null ? useCaseName : "")
-				.setUseCaseId(useCaseID != null ? useCaseID : "")
-				.setTargetProcess(targetProcess != null ? targetProcess : "")
-				.setRequirementId(requirementID != null ? requirementID : "")
+				.setUseCaseName(useCaseName != null ? useCaseName.trim() : "")
+				.setTestCaseGroupName(testCaseGroupName != null ? testCaseGroupName.trim() : "")
+				.setTestSetName(testSetName != null ? testSetName.trim() : "")
+				.setTestType(testCaseType.toValue())
+				.setUseCaseId(useCaseID != null ? useCaseID.trim() : "")
+				.setTargetProcess(targetProcess != null ? targetProcess.trim() : "")
+				.setRequirementId(requirementID != null ? requirementID.trim() : "")
 				.build();
 		
 	    try {
@@ -505,7 +533,7 @@ public class Connector {
 				.setRunId(runID)
 				.setResult(result)
 				.setActiveRunTime(activeRunTime)
-				.setFailCause(failCause != null ? failCause : "")
+				.setFailCause(failCause != null ? failCause.trim() : "")
 				.setResetIntended(resetIntended)
 				.build();
 		
@@ -813,6 +841,21 @@ public class Connector {
 	 * @return
 	 */
 	public boolean updateCompositeProcessSeries(String runID, String seriesID, long timestamp, String pkg, String process, Map<String, Float> values) {
+		return updateCompositeProcessSeries(runID, seriesID, timestamp, pkg, process, null, values);
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param seriesID
+	 * @param timestamp
+	 * @param pkg
+	 * @param process
+	 * @param pid
+	 * @param values
+	 * @return
+	 */
+	public boolean updateCompositeProcessSeries(String runID, String seriesID, long timestamp, String pkg, String process, Integer pid, Map<String, Float> values) {
 		
 		if (runID == null || runID.trim().isEmpty()) {
 			return false;
@@ -826,15 +869,22 @@ public class Connector {
 			return false;
 		}
 		
-		DynamicProcessCompositeSeriesUpdate update = DynamicProcessCompositeSeriesUpdate.newBuilder()
+		DynamicProcessCompositeSeriesUpdate.Builder updateBuilder = DynamicProcessCompositeSeriesUpdate.newBuilder()
 				.setRunId(runID)
 				.setSeriesId(seriesID)
 				.setTimestamp(timestamp)
 				.setPackage(pkg != null ? pkg : "")
 				.setProcess(process != null ? process : "")
-				.putAllValues(values != null ? values : new HashMap<>())
-				.build();
+				.putAllValues(values != null ? values : new HashMap<>());
 
+		if (pid != null) {
+			updateBuilder.setPid(Int32Value.newBuilder()
+					.setValue(pid)
+					.build());
+		}
+				
+		DynamicProcessCompositeSeriesUpdate update = updateBuilder.build();
+		
 	    try {
 	    	blockingStub.updateCompositeProcessSeries(update);
 	    	return true;
@@ -931,6 +981,7 @@ public class Connector {
 	    }
 	}
 		
+	
 	/**
 	 * 
 	 * @param runID
@@ -942,6 +993,21 @@ public class Connector {
 	 * @return
 	 */
 	public boolean updateSingleProcessSeries(String runID, String seriesID, String pkg, String process, long timestamp, float value) {
+		return updateSingleProcessSeries(runID, seriesID, pkg, process, null, timestamp, value);
+	}
+	
+	/**
+	 * 
+	 * @param runID
+	 * @param seriesID
+	 * @param pkg
+	 * @param process
+	 * @param pid
+	 * @param timestamp
+	 * @param value
+	 * @return
+	 */
+	public boolean updateSingleProcessSeries(String runID, String seriesID, String pkg, String process, Integer pid, long timestamp, float value) {
 		
 		if (runID == null || runID.trim().isEmpty()) {
 			return false;
@@ -955,14 +1021,22 @@ public class Connector {
 			return false;
 		}
 		
-		DynamicProcessSingleSeriesUpdate update = DynamicProcessSingleSeriesUpdate.newBuilder()
+
+		DynamicProcessSingleSeriesUpdate.Builder updateBuilder = DynamicProcessSingleSeriesUpdate.newBuilder()
 				.setRunId(runID)
 				.setSeriesId(seriesID)
 				.setTimestamp(timestamp)
 				.setPackage(pkg != null ? pkg : "")
 				.setProcess(process != null ? process : "")
-				.setValue(value)
-				.build();
+				.setValue(value);
+		
+		if (pid != null) {
+			updateBuilder.setPid(Int32Value.newBuilder()
+					.setValue(pid)
+					.build());
+		}
+		
+		DynamicProcessSingleSeriesUpdate update = updateBuilder.build();
 		
 	    try {
 	    	blockingStub.updateSingleProcessSeries(update);

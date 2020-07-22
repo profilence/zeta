@@ -40,6 +40,9 @@ message UseCaseStartRequest {
 	string use_case_id = 3;
 	string target_process = 4;
 	string requirement_id = 5;
+	int32 test_type = 6;
+	string test_case_group_name = 7;
+	string test_set_name = 8;
 }
 
 message LogStepRequest {
@@ -145,6 +148,7 @@ message DynamicProcessSingleSeriesUpdate {
 	string process = 4;
 	double timestamp = 5;
 	float value = 6;
+	google.protobuf.Int32Value pid = 7;
 }
 
 message DynamicCompositeSeriesUpdate {
@@ -161,6 +165,7 @@ message DynamicProcessCompositeSeriesUpdate {
 	string process = 4;
 	double timestamp = 5;
 	map<string, float> values = 6;
+	google.protobuf.Int32Value pid = 7;
 }
 
 message DeviceLogEntry {

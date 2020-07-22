@@ -95,6 +95,19 @@ private static final long serialVersionUID = 0L;
                 values__.getKey(), values__.getValue());
             break;
           }
+          case 58: {
+            com.google.protobuf.Int32Value.Builder subBuilder = null;
+            if (pid_ != null) {
+              subBuilder = pid_.toBuilder();
+            }
+            pid_ = input.readMessage(com.google.protobuf.Int32Value.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(pid_);
+              pid_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -369,6 +382,29 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
+  public static final int PID_FIELD_NUMBER = 7;
+  private com.google.protobuf.Int32Value pid_;
+  /**
+   * <code>.google.protobuf.Int32Value pid = 7;</code>
+   * @return Whether the pid field is set.
+   */
+  public boolean hasPid() {
+    return pid_ != null;
+  }
+  /**
+   * <code>.google.protobuf.Int32Value pid = 7;</code>
+   * @return The pid.
+   */
+  public com.google.protobuf.Int32Value getPid() {
+    return pid_ == null ? com.google.protobuf.Int32Value.getDefaultInstance() : pid_;
+  }
+  /**
+   * <code>.google.protobuf.Int32Value pid = 7;</code>
+   */
+  public com.google.protobuf.Int32ValueOrBuilder getPidOrBuilder() {
+    return getPid();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -404,6 +440,9 @@ private static final long serialVersionUID = 0L;
         internalGetValues(),
         ValuesDefaultEntryHolder.defaultEntry,
         6);
+    if (pid_ != null) {
+      output.writeMessage(7, getPid());
+    }
     unknownFields.writeTo(output);
   }
 
@@ -439,6 +478,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, values__);
     }
+    if (pid_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, getPid());
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -467,6 +510,11 @@ private static final long serialVersionUID = 0L;
             other.getTimestamp())) return false;
     if (!internalGetValues().equals(
         other.internalGetValues())) return false;
+    if (hasPid() != other.hasPid()) return false;
+    if (hasPid()) {
+      if (!getPid()
+          .equals(other.getPid())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -492,6 +540,10 @@ private static final long serialVersionUID = 0L;
     if (!internalGetValues().getMap().isEmpty()) {
       hash = (37 * hash) + VALUES_FIELD_NUMBER;
       hash = (53 * hash) + internalGetValues().hashCode();
+    }
+    if (hasPid()) {
+      hash = (37 * hash) + PID_FIELD_NUMBER;
+      hash = (53 * hash) + getPid().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -659,6 +711,12 @@ private static final long serialVersionUID = 0L;
       timestamp_ = 0D;
 
       internalGetMutableValues().clear();
+      if (pidBuilder_ == null) {
+        pid_ = null;
+      } else {
+        pid_ = null;
+        pidBuilder_ = null;
+      }
       return this;
     }
 
@@ -693,6 +751,11 @@ private static final long serialVersionUID = 0L;
       result.timestamp_ = timestamp_;
       result.values_ = internalGetValues();
       result.values_.makeImmutable();
+      if (pidBuilder_ == null) {
+        result.pid_ = pid_;
+      } else {
+        result.pid_ = pidBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -762,6 +825,9 @@ private static final long serialVersionUID = 0L;
       }
       internalGetMutableValues().mergeFrom(
           other.internalGetValues());
+      if (other.hasPid()) {
+        mergePid(other.getPid());
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -1247,6 +1313,125 @@ private static final long serialVersionUID = 0L;
       internalGetMutableValues().getMutableMap()
           .putAll(values);
       return this;
+    }
+
+    private com.google.protobuf.Int32Value pid_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder> pidBuilder_;
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     * @return Whether the pid field is set.
+     */
+    public boolean hasPid() {
+      return pidBuilder_ != null || pid_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     * @return The pid.
+     */
+    public com.google.protobuf.Int32Value getPid() {
+      if (pidBuilder_ == null) {
+        return pid_ == null ? com.google.protobuf.Int32Value.getDefaultInstance() : pid_;
+      } else {
+        return pidBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     */
+    public Builder setPid(com.google.protobuf.Int32Value value) {
+      if (pidBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        pid_ = value;
+        onChanged();
+      } else {
+        pidBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     */
+    public Builder setPid(
+        com.google.protobuf.Int32Value.Builder builderForValue) {
+      if (pidBuilder_ == null) {
+        pid_ = builderForValue.build();
+        onChanged();
+      } else {
+        pidBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     */
+    public Builder mergePid(com.google.protobuf.Int32Value value) {
+      if (pidBuilder_ == null) {
+        if (pid_ != null) {
+          pid_ =
+            com.google.protobuf.Int32Value.newBuilder(pid_).mergeFrom(value).buildPartial();
+        } else {
+          pid_ = value;
+        }
+        onChanged();
+      } else {
+        pidBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     */
+    public Builder clearPid() {
+      if (pidBuilder_ == null) {
+        pid_ = null;
+        onChanged();
+      } else {
+        pid_ = null;
+        pidBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     */
+    public com.google.protobuf.Int32Value.Builder getPidBuilder() {
+      
+      onChanged();
+      return getPidFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     */
+    public com.google.protobuf.Int32ValueOrBuilder getPidOrBuilder() {
+      if (pidBuilder_ != null) {
+        return pidBuilder_.getMessageOrBuilder();
+      } else {
+        return pid_ == null ?
+            com.google.protobuf.Int32Value.getDefaultInstance() : pid_;
+      }
+    }
+    /**
+     * <code>.google.protobuf.Int32Value pid = 7;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder> 
+        getPidFieldBuilder() {
+      if (pidBuilder_ == null) {
+        pidBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder>(
+                getPid(),
+                getParentForChildren(),
+                isClean());
+        pid_ = null;
+      }
+      return pidBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

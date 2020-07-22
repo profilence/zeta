@@ -21,6 +21,8 @@ private static final long serialVersionUID = 0L;
     useCaseId_ = "";
     targetProcess_ = "";
     requirementId_ = "";
+    testCaseGroupName_ = "";
+    testSetName_ = "";
   }
 
   @java.lang.Override
@@ -81,6 +83,23 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             requirementId_ = s;
+            break;
+          }
+          case 48: {
+
+            testType_ = input.readInt32();
+            break;
+          }
+          case 58: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            testCaseGroupName_ = s;
+            break;
+          }
+          case 66: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            testSetName_ = s;
             break;
           }
           default: {
@@ -295,6 +314,88 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int TEST_TYPE_FIELD_NUMBER = 6;
+  private int testType_;
+  /**
+   * <code>int32 test_type = 6;</code>
+   * @return The testType.
+   */
+  public int getTestType() {
+    return testType_;
+  }
+
+  public static final int TEST_CASE_GROUP_NAME_FIELD_NUMBER = 7;
+  private volatile java.lang.Object testCaseGroupName_;
+  /**
+   * <code>string test_case_group_name = 7;</code>
+   * @return The testCaseGroupName.
+   */
+  public java.lang.String getTestCaseGroupName() {
+    java.lang.Object ref = testCaseGroupName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      testCaseGroupName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string test_case_group_name = 7;</code>
+   * @return The bytes for testCaseGroupName.
+   */
+  public com.google.protobuf.ByteString
+      getTestCaseGroupNameBytes() {
+    java.lang.Object ref = testCaseGroupName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      testCaseGroupName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int TEST_SET_NAME_FIELD_NUMBER = 8;
+  private volatile java.lang.Object testSetName_;
+  /**
+   * <code>string test_set_name = 8;</code>
+   * @return The testSetName.
+   */
+  public java.lang.String getTestSetName() {
+    java.lang.Object ref = testSetName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      testSetName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string test_set_name = 8;</code>
+   * @return The bytes for testSetName.
+   */
+  public com.google.protobuf.ByteString
+      getTestSetNameBytes() {
+    java.lang.Object ref = testSetName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      testSetName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -324,6 +425,15 @@ private static final long serialVersionUID = 0L;
     if (!getRequirementIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, requirementId_);
     }
+    if (testType_ != 0) {
+      output.writeInt32(6, testType_);
+    }
+    if (!getTestCaseGroupNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, testCaseGroupName_);
+    }
+    if (!getTestSetNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, testSetName_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -347,6 +457,16 @@ private static final long serialVersionUID = 0L;
     }
     if (!getRequirementIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, requirementId_);
+    }
+    if (testType_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(6, testType_);
+    }
+    if (!getTestCaseGroupNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, testCaseGroupName_);
+    }
+    if (!getTestSetNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, testSetName_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -373,6 +493,12 @@ private static final long serialVersionUID = 0L;
         .equals(other.getTargetProcess())) return false;
     if (!getRequirementId()
         .equals(other.getRequirementId())) return false;
+    if (getTestType()
+        != other.getTestType()) return false;
+    if (!getTestCaseGroupName()
+        .equals(other.getTestCaseGroupName())) return false;
+    if (!getTestSetName()
+        .equals(other.getTestSetName())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -394,6 +520,12 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getTargetProcess().hashCode();
     hash = (37 * hash) + REQUIREMENT_ID_FIELD_NUMBER;
     hash = (53 * hash) + getRequirementId().hashCode();
+    hash = (37 * hash) + TEST_TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getTestType();
+    hash = (37 * hash) + TEST_CASE_GROUP_NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getTestCaseGroupName().hashCode();
+    hash = (37 * hash) + TEST_SET_NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getTestSetName().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -537,6 +669,12 @@ private static final long serialVersionUID = 0L;
 
       requirementId_ = "";
 
+      testType_ = 0;
+
+      testCaseGroupName_ = "";
+
+      testSetName_ = "";
+
       return this;
     }
 
@@ -568,6 +706,9 @@ private static final long serialVersionUID = 0L;
       result.useCaseId_ = useCaseId_;
       result.targetProcess_ = targetProcess_;
       result.requirementId_ = requirementId_;
+      result.testType_ = testType_;
+      result.testCaseGroupName_ = testCaseGroupName_;
+      result.testSetName_ = testSetName_;
       onBuilt();
       return result;
     }
@@ -634,6 +775,17 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getRequirementId().isEmpty()) {
         requirementId_ = other.requirementId_;
+        onChanged();
+      }
+      if (other.getTestType() != 0) {
+        setTestType(other.getTestType());
+      }
+      if (!other.getTestCaseGroupName().isEmpty()) {
+        testCaseGroupName_ = other.testCaseGroupName_;
+        onChanged();
+      }
+      if (!other.getTestSetName().isEmpty()) {
+        testSetName_ = other.testSetName_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -1041,6 +1193,188 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       requirementId_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int testType_ ;
+    /**
+     * <code>int32 test_type = 6;</code>
+     * @return The testType.
+     */
+    public int getTestType() {
+      return testType_;
+    }
+    /**
+     * <code>int32 test_type = 6;</code>
+     * @param value The testType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTestType(int value) {
+      
+      testType_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 test_type = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTestType() {
+      
+      testType_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object testCaseGroupName_ = "";
+    /**
+     * <code>string test_case_group_name = 7;</code>
+     * @return The testCaseGroupName.
+     */
+    public java.lang.String getTestCaseGroupName() {
+      java.lang.Object ref = testCaseGroupName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        testCaseGroupName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string test_case_group_name = 7;</code>
+     * @return The bytes for testCaseGroupName.
+     */
+    public com.google.protobuf.ByteString
+        getTestCaseGroupNameBytes() {
+      java.lang.Object ref = testCaseGroupName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        testCaseGroupName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string test_case_group_name = 7;</code>
+     * @param value The testCaseGroupName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTestCaseGroupName(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      testCaseGroupName_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string test_case_group_name = 7;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTestCaseGroupName() {
+      
+      testCaseGroupName_ = getDefaultInstance().getTestCaseGroupName();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string test_case_group_name = 7;</code>
+     * @param value The bytes for testCaseGroupName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTestCaseGroupNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      testCaseGroupName_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object testSetName_ = "";
+    /**
+     * <code>string test_set_name = 8;</code>
+     * @return The testSetName.
+     */
+    public java.lang.String getTestSetName() {
+      java.lang.Object ref = testSetName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        testSetName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string test_set_name = 8;</code>
+     * @return The bytes for testSetName.
+     */
+    public com.google.protobuf.ByteString
+        getTestSetNameBytes() {
+      java.lang.Object ref = testSetName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        testSetName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string test_set_name = 8;</code>
+     * @param value The testSetName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTestSetName(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      testSetName_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string test_set_name = 8;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTestSetName() {
+      
+      testSetName_ = getDefaultInstance().getTestSetName();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string test_set_name = 8;</code>
+     * @param value The bytes for testSetName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTestSetNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      testSetName_ = value;
       onChanged();
       return this;
     }
