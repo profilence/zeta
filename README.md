@@ -7,6 +7,13 @@ Profilence Zeta-driver is a cross-platform, multi-language library for accessing
 
 2. Easily build a test cloud by publishing any machine as a test node, ready to serve test requests coming from your build system - with your own test automation system.
 
+Architecture
+-----------
+![image1](https://raw.githubusercontent.com/profilence/zeta/master/images/architecture.png)
+
+***Zeta service*** does all the dirty work with data harvesting and clound connectivity - it can be requested by contacting contact@profilence.com.<br>
+This project contains example implementations (Java and Python) for ***Zeta driver***.
+
 Core of the project is the proto file for the GRPC service:
 
 *./proto/connector_service.proto* and its dependency proto files
