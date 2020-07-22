@@ -56,6 +56,10 @@ SeriesType = enum(SINGLE_SERIES=0,
 PingResponseType = enum(FAILED=0,
                         OK=1)
 
+TestType = enum(NORMAL=0,
+                PRE_CONDITION=1,
+                POST_CONDITION=2)
+
 
 class TestRequestListenerBase(object):
     """ Base class for test request handling """

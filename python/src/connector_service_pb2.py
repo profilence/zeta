@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='profilence.zeta',
   syntax='proto3',
   serialized_options=_b('\n\023com.profilence.zetaB\013DriverProtoP\001'),
-  serialized_pb=_b('\n\x17\x63onnector_service.proto\x12\x0fprofilence.zeta\x1a\x0ewrappers.proto\x1a\x0b\x65mpty.proto\"\xe6\x02\n\x0fStartRunRequest\x12\x10\n\x08run_name\x18\x01 \x01(\t\x12\x10\n\x08set_name\x18\x02 \x01(\t\x12\x0f\n\x07project\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\x12\x1d\n\x15primary_device_serial\x18\x05 \x01(\t\x12\x1f\n\x17secondary_device_serial\x18\x06 \x01(\t\x12\x1a\n\x12profiling_settings\x18\x07 \x01(\t\x12\x38\n\x04tags\x18\x08 \x03(\x0b\x32*.profilence.zeta.StartRunRequest.TagsEntry\x12\x1b\n\x13primary_device_type\x18\t \x01(\t\x12\x1d\n\x15secondary_device_type\x18\n \x01(\t\x12\x0e\n\x06run_id\x18\x0b \x01(\t\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\r\n\x0bPingMessage\"\x1d\n\x0bPongMessage\x12\x0e\n\x06result\x18\x01 \x01(\x05\"\"\n\x10StartRunResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\"\x81\x01\n\x13UseCaseStartRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x15\n\ruse_case_name\x18\x02 \x01(\t\x12\x13\n\x0buse_case_id\x18\x03 \x01(\t\x12\x16\n\x0etarget_process\x18\x04 \x01(\t\x12\x16\n\x0erequirement_id\x18\x05 \x01(\t\"v\n\x0eLogStepRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tstep_name\x18\x02 \x01(\t\x12\x0e\n\x06result\x18\x03 \x01(\x08\x12\x17\n\x0ftake_screenshot\x18\x04 \x01(\x08\x12\x18\n\x10screenshot_bytes\x18\x05 \x01(\x0c\"/\n\x0fLogTraceRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\"v\n\x11UseCaseEndRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0e\n\x06result\x18\x02 \x01(\x08\x12\x15\n\ractiveRunTime\x18\x03 \x01(\x03\x12\x12\n\nfail_cause\x18\x04 \x01(\t\x12\x16\n\x0ereset_intended\x18\x05 \x01(\x08\"9\n\x0eStopRunRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x17\n\x0f\x64iscard_results\x18\x02 \x01(\x08\"B\n\x19TestRequestMessageWrapper\x12\x14\n\x0crequest_type\x18\x01 \x01(\x05\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\"0\n\x0fTestStopRequest\x12\x1d\n\x15primary_device_serial\x18\x01 \x01(\t\"d\n\x11TestStartResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x12\n\nfail_cause\x18\x02 \x01(\t\x12\x0b\n\x03log\x18\x03 \x03(\t\x12\x0e\n\x06result\x18\x04 \x01(\x08\x12\x0e\n\x06status\x18\x05 \x01(\t\"\x89\x02\n\x10TestStartRequest\x12\x0e\n\x06run_id\x18\x16 \x01(\t\x12\x10\n\x08run_name\x18\x02 \x01(\t\x12\x0f\n\x07node_id\x18\x05 \x01(\t\x12\x0f\n\x07project\x18\n \x01(\t\x12\x0f\n\x07version\x18\x10 \x01(\t\x12\x1a\n\x12test_set_file_path\x18\x0c \x01(\t\x12\x0f\n\x07payload\x18\x0e \x01(\x0c\x12\x39\n\x04tags\x18\x14 \x03(\x0b\x32+.profilence.zeta.TestStartRequest.TagsEntry\x12\x0b\n\x03log\x18\x18 \x03(\t\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\tNodeAdded\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x0c\n\x04pool\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\x12\x11\n\tvariables\x18\x0c \x01(\t\"\x1e\n\x0bNodeRemoved\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\xca\x02\n\x0bNodeUpdated\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x36\n\x10\x63urrent_use_case\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\trun_state\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x34\n\x0e\x63urrent_run_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\nnode_state\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x04pool\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tvariables\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xcb\x01\n\x18\x44ynamicSeriesInformation\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x13\n\x0bseries_name\x18\x03 \x01(\t\x12\r\n\x05group\x18\x04 \x01(\t\x12\x13\n\x0by_axis_name\x18\x05 \x01(\t\x12\x0c\n\x04unit\x18\x06 \x01(\t\x12\x0c\n\x04type\x18\x07 \x01(\x05\x12\x11\n\tnamespace\x18\x08 \x01(\t\x12\x0f\n\x07process\x18\t \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\"`\n\x19\x44ynamicSingleSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x01\x12\r\n\x05value\x18\x04 \x01(\x02\"\x89\x01\n DynamicProcessSingleSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x0f\n\x07package\x18\x03 \x01(\t\x12\x0f\n\x07process\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\x01\x12\r\n\x05value\x18\x06 \x01(\x02\"\xce\x01\n\x1c\x44ynamicCompositeSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x01\x12I\n\x06values\x18\x04 \x03(\x0b\x32\x39.profilence.zeta.DynamicCompositeSeriesUpdate.ValuesEntry\x1a-\n\x0bValuesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\"\xfe\x01\n#DynamicProcessCompositeSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x0f\n\x07package\x18\x03 \x01(\t\x12\x0f\n\x07process\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\x01\x12P\n\x06values\x18\x06 \x03(\x0b\x32@.profilence.zeta.DynamicProcessCompositeSeriesUpdate.ValuesEntry\x1a-\n\x0bValuesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\"\x8d\x01\n\x0e\x44\x65viceLogEntry\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65vice_index\x18\x02 \x01(\x05\x12\x11\n\ttimestamp\x18\x03 \x01(\x01\x12\x0b\n\x03tag\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\t\x12\x10\n\x08priority\x18\x06 \x01(\x05\x12\x15\n\rsource_buffer\x18\x07 \x01(\x05\"\x9c\x02\n\nResetEntry\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x01\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x39\n\x07reasons\x18\x04 \x03(\x0b\x32(.profilence.zeta.ResetEntry.ReasonsEntry\x12?\n\nproperties\x18\x05 \x03(\x0b\x32+.profilence.zeta.ResetEntry.PropertiesEntry\x1a.\n\x0cReasonsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x9d\x01\n\nEventEntry\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x01\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x19\n\x11is_system_process\x18\x04 \x01(\x08\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x0f\n\x07process\x18\x06 \x01(\t\x12\x16\n\x0e\x65xception_type\x18\x07 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x08 \x03(\t2\xfa\x0c\n\x10\x43onnectorService\x12\x44\n\x04Ping\x12\x1c.profilence.zeta.PingMessage\x1a\x1c.profilence.zeta.PongMessage\"\x00\x12Q\n\x08StartRun\x12 .profilence.zeta.StartRunRequest\x1a!.profilence.zeta.StartRunResponse\"\x00\x12P\n\x0eOnUseCaseStart\x12$.profilence.zeta.UseCaseStartRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\tOnLogStep\x12\x1f.profilence.zeta.LogStepRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\x08LogTrace\x12 .profilence.zeta.LogTraceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12H\n\tLogDevice\x12\x1f.profilence.zeta.DeviceLogEntry\x1a\x16.google.protobuf.Empty\"\x00(\x01\x12\x44\n\x0bNotifyReset\x12\x1b.profilence.zeta.ResetEntry\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\x0bNotifyEvent\x12\x1b.profilence.zeta.EventEntry\x1a\x16.google.protobuf.Empty\"\x00\x12L\n\x0cOnUseCaseEnd\x12\".profilence.zeta.UseCaseEndRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\x07StopRun\x12\x1f.profilence.zeta.StopRunRequest\x1a\x16.google.protobuf.Empty\"\x00\x12W\n\x10\x43reateTimeSeries\x12).profilence.zeta.DynamicSeriesInformation\x1a\x16.google.protobuf.Empty\"\x00\x12`\n\x18UpdateSingleSystemSeries\x12*.profilence.zeta.DynamicSingleSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12h\n\x19UpdateSingleProcessSeries\x12\x31.profilence.zeta.DynamicProcessSingleSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12\x66\n\x1bUpdateCompositeSystemSeries\x12-.profilence.zeta.DynamicCompositeSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12n\n\x1cUpdateCompositeProcessSeries\x12\x34.profilence.zeta.DynamicProcessCompositeSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12\x61\n\x17SubscribeToTestRequests\x12\x16.google.protobuf.Empty\x1a*.profilence.zeta.TestRequestMessageWrapper\"\x00\x30\x01\x12T\n\x14RespondToTestRequest\x12\".profilence.zeta.TestStartResponse\x1a\x16.google.protobuf.Empty\"\x00\x12?\n\x07\x41\x64\x64Node\x12\x1a.profilence.zeta.NodeAdded\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nRemoveNode\x12\x1c.profilence.zeta.NodeRemoved\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nUpdateNode\x12\x1c.profilence.zeta.NodeUpdated\x1a\x16.google.protobuf.Empty\"\x00\x42$\n\x13\x63om.profilence.zetaB\x0b\x44riverProtoP\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x17\x63onnector_service.proto\x12\x0fprofilence.zeta\x1a\x0ewrappers.proto\x1a\x0b\x65mpty.proto\"\xe6\x02\n\x0fStartRunRequest\x12\x10\n\x08run_name\x18\x01 \x01(\t\x12\x10\n\x08set_name\x18\x02 \x01(\t\x12\x0f\n\x07project\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\x12\x1d\n\x15primary_device_serial\x18\x05 \x01(\t\x12\x1f\n\x17secondary_device_serial\x18\x06 \x01(\t\x12\x1a\n\x12profiling_settings\x18\x07 \x01(\t\x12\x38\n\x04tags\x18\x08 \x03(\x0b\x32*.profilence.zeta.StartRunRequest.TagsEntry\x12\x1b\n\x13primary_device_type\x18\t \x01(\t\x12\x1d\n\x15secondary_device_type\x18\n \x01(\t\x12\x0e\n\x06run_id\x18\x0b \x01(\t\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\r\n\x0bPingMessage\"\x1d\n\x0bPongMessage\x12\x0e\n\x06result\x18\x01 \x01(\x05\"\"\n\x10StartRunResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\"\xc9\x01\n\x13UseCaseStartRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x15\n\ruse_case_name\x18\x02 \x01(\t\x12\x13\n\x0buse_case_id\x18\x03 \x01(\t\x12\x16\n\x0etarget_process\x18\x04 \x01(\t\x12\x16\n\x0erequirement_id\x18\x05 \x01(\t\x12\x11\n\ttest_type\x18\x06 \x01(\x05\x12\x1c\n\x14test_case_group_name\x18\x07 \x01(\t\x12\x15\n\rtest_set_name\x18\x08 \x01(\t\"v\n\x0eLogStepRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tstep_name\x18\x02 \x01(\t\x12\x0e\n\x06result\x18\x03 \x01(\x08\x12\x17\n\x0ftake_screenshot\x18\x04 \x01(\x08\x12\x18\n\x10screenshot_bytes\x18\x05 \x01(\x0c\"/\n\x0fLogTraceRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\"v\n\x11UseCaseEndRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x0e\n\x06result\x18\x02 \x01(\x08\x12\x15\n\ractiveRunTime\x18\x03 \x01(\x03\x12\x12\n\nfail_cause\x18\x04 \x01(\t\x12\x16\n\x0ereset_intended\x18\x05 \x01(\x08\"9\n\x0eStopRunRequest\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x17\n\x0f\x64iscard_results\x18\x02 \x01(\x08\"B\n\x19TestRequestMessageWrapper\x12\x14\n\x0crequest_type\x18\x01 \x01(\x05\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\"0\n\x0fTestStopRequest\x12\x1d\n\x15primary_device_serial\x18\x01 \x01(\t\"d\n\x11TestStartResponse\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x12\n\nfail_cause\x18\x02 \x01(\t\x12\x0b\n\x03log\x18\x03 \x03(\t\x12\x0e\n\x06result\x18\x04 \x01(\x08\x12\x0e\n\x06status\x18\x05 \x01(\t\"\x89\x02\n\x10TestStartRequest\x12\x0e\n\x06run_id\x18\x16 \x01(\t\x12\x10\n\x08run_name\x18\x02 \x01(\t\x12\x0f\n\x07node_id\x18\x05 \x01(\t\x12\x0f\n\x07project\x18\n \x01(\t\x12\x0f\n\x07version\x18\x10 \x01(\t\x12\x1a\n\x12test_set_file_path\x18\x0c \x01(\t\x12\x0f\n\x07payload\x18\x0e \x01(\x0c\x12\x39\n\x04tags\x18\x14 \x03(\x0b\x32+.profilence.zeta.TestStartRequest.TagsEntry\x12\x0b\n\x03log\x18\x18 \x03(\t\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"K\n\tNodeAdded\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x0c\n\x04pool\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\x12\x11\n\tvariables\x18\x0c \x01(\t\"\x1e\n\x0bNodeRemoved\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\xca\x02\n\x0bNodeUpdated\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x36\n\x10\x63urrent_use_case\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\trun_state\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x34\n\x0e\x63urrent_run_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\nnode_state\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x04pool\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tvariables\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xcb\x01\n\x18\x44ynamicSeriesInformation\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x13\n\x0bseries_name\x18\x03 \x01(\t\x12\r\n\x05group\x18\x04 \x01(\t\x12\x13\n\x0by_axis_name\x18\x05 \x01(\t\x12\x0c\n\x04unit\x18\x06 \x01(\t\x12\x0c\n\x04type\x18\x07 \x01(\x05\x12\x11\n\tnamespace\x18\x08 \x01(\t\x12\x0f\n\x07process\x18\t \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\"`\n\x19\x44ynamicSingleSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x01\x12\r\n\x05value\x18\x04 \x01(\x02\"\xb3\x01\n DynamicProcessSingleSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x0f\n\x07package\x18\x03 \x01(\t\x12\x0f\n\x07process\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\x01\x12\r\n\x05value\x18\x06 \x01(\x02\x12(\n\x03pid\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"\xce\x01\n\x1c\x44ynamicCompositeSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x01\x12I\n\x06values\x18\x04 \x03(\x0b\x32\x39.profilence.zeta.DynamicCompositeSeriesUpdate.ValuesEntry\x1a-\n\x0bValuesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\"\xa8\x02\n#DynamicProcessCompositeSeriesUpdate\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\tseries_id\x18\x02 \x01(\t\x12\x0f\n\x07package\x18\x03 \x01(\t\x12\x0f\n\x07process\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\x01\x12P\n\x06values\x18\x06 \x03(\x0b\x32@.profilence.zeta.DynamicProcessCompositeSeriesUpdate.ValuesEntry\x12(\n\x03pid\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x1a-\n\x0bValuesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02:\x02\x38\x01\"\x8d\x01\n\x0e\x44\x65viceLogEntry\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65vice_index\x18\x02 \x01(\x05\x12\x11\n\ttimestamp\x18\x03 \x01(\x01\x12\x0b\n\x03tag\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\t\x12\x10\n\x08priority\x18\x06 \x01(\x05\x12\x15\n\rsource_buffer\x18\x07 \x01(\x05\"\x9c\x02\n\nResetEntry\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x01\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x39\n\x07reasons\x18\x04 \x03(\x0b\x32(.profilence.zeta.ResetEntry.ReasonsEntry\x12?\n\nproperties\x18\x05 \x03(\x0b\x32+.profilence.zeta.ResetEntry.PropertiesEntry\x1a.\n\x0cReasonsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x9d\x01\n\nEventEntry\x12\x0e\n\x06run_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x01\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x19\n\x11is_system_process\x18\x04 \x01(\x08\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x0f\n\x07process\x18\x06 \x01(\t\x12\x16\n\x0e\x65xception_type\x18\x07 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x08 \x03(\t2\xfa\x0c\n\x10\x43onnectorService\x12\x44\n\x04Ping\x12\x1c.profilence.zeta.PingMessage\x1a\x1c.profilence.zeta.PongMessage\"\x00\x12Q\n\x08StartRun\x12 .profilence.zeta.StartRunRequest\x1a!.profilence.zeta.StartRunResponse\"\x00\x12P\n\x0eOnUseCaseStart\x12$.profilence.zeta.UseCaseStartRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\tOnLogStep\x12\x1f.profilence.zeta.LogStepRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x46\n\x08LogTrace\x12 .profilence.zeta.LogTraceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12H\n\tLogDevice\x12\x1f.profilence.zeta.DeviceLogEntry\x1a\x16.google.protobuf.Empty\"\x00(\x01\x12\x44\n\x0bNotifyReset\x12\x1b.profilence.zeta.ResetEntry\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\x0bNotifyEvent\x12\x1b.profilence.zeta.EventEntry\x1a\x16.google.protobuf.Empty\"\x00\x12L\n\x0cOnUseCaseEnd\x12\".profilence.zeta.UseCaseEndRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\x07StopRun\x12\x1f.profilence.zeta.StopRunRequest\x1a\x16.google.protobuf.Empty\"\x00\x12W\n\x10\x43reateTimeSeries\x12).profilence.zeta.DynamicSeriesInformation\x1a\x16.google.protobuf.Empty\"\x00\x12`\n\x18UpdateSingleSystemSeries\x12*.profilence.zeta.DynamicSingleSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12h\n\x19UpdateSingleProcessSeries\x12\x31.profilence.zeta.DynamicProcessSingleSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12\x66\n\x1bUpdateCompositeSystemSeries\x12-.profilence.zeta.DynamicCompositeSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12n\n\x1cUpdateCompositeProcessSeries\x12\x34.profilence.zeta.DynamicProcessCompositeSeriesUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12\x61\n\x17SubscribeToTestRequests\x12\x16.google.protobuf.Empty\x1a*.profilence.zeta.TestRequestMessageWrapper\"\x00\x30\x01\x12T\n\x14RespondToTestRequest\x12\".profilence.zeta.TestStartResponse\x1a\x16.google.protobuf.Empty\"\x00\x12?\n\x07\x41\x64\x64Node\x12\x1a.profilence.zeta.NodeAdded\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nRemoveNode\x12\x1c.profilence.zeta.NodeRemoved\x1a\x16.google.protobuf.Empty\"\x00\x12\x44\n\nUpdateNode\x12\x1c.profilence.zeta.NodeUpdated\x1a\x16.google.protobuf.Empty\"\x00\x42$\n\x13\x63om.profilence.zetaB\x0b\x44riverProtoP\x01\x62\x06proto3')
   ,
   dependencies=[wrappers__pb2.DESCRIPTOR,empty__pb2.DESCRIPTOR,])
 
@@ -295,6 +295,27 @@ _USECASESTARTREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='test_type', full_name='profilence.zeta.UseCaseStartRequest.test_type', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='test_case_group_name', full_name='profilence.zeta.UseCaseStartRequest.test_case_group_name', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='test_set_name', full_name='profilence.zeta.UseCaseStartRequest.test_set_name', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -308,7 +329,7 @@ _USECASESTARTREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=517,
-  serialized_end=646,
+  serialized_end=718,
 )
 
 
@@ -366,8 +387,8 @@ _LOGSTEPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=648,
-  serialized_end=766,
+  serialized_start=720,
+  serialized_end=838,
 )
 
 
@@ -404,8 +425,8 @@ _LOGTRACEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=768,
-  serialized_end=815,
+  serialized_start=840,
+  serialized_end=887,
 )
 
 
@@ -463,8 +484,8 @@ _USECASEENDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=817,
-  serialized_end=935,
+  serialized_start=889,
+  serialized_end=1007,
 )
 
 
@@ -501,8 +522,8 @@ _STOPRUNREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=937,
-  serialized_end=994,
+  serialized_start=1009,
+  serialized_end=1066,
 )
 
 
@@ -539,8 +560,8 @@ _TESTREQUESTMESSAGEWRAPPER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=996,
-  serialized_end=1062,
+  serialized_start=1068,
+  serialized_end=1134,
 )
 
 
@@ -570,8 +591,8 @@ _TESTSTOPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1064,
-  serialized_end=1112,
+  serialized_start=1136,
+  serialized_end=1184,
 )
 
 
@@ -629,8 +650,8 @@ _TESTSTARTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1114,
-  serialized_end=1214,
+  serialized_start=1186,
+  serialized_end=1286,
 )
 
 
@@ -753,8 +774,8 @@ _TESTSTARTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1217,
-  serialized_end=1482,
+  serialized_start=1289,
+  serialized_end=1554,
 )
 
 
@@ -805,8 +826,8 @@ _NODEADDED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1484,
-  serialized_end=1559,
+  serialized_start=1556,
+  serialized_end=1631,
 )
 
 
@@ -836,8 +857,8 @@ _NODEREMOVED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1561,
-  serialized_end=1591,
+  serialized_start=1633,
+  serialized_end=1663,
 )
 
 
@@ -909,8 +930,8 @@ _NODEUPDATED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1594,
-  serialized_end=1924,
+  serialized_start=1666,
+  serialized_end=1996,
 )
 
 
@@ -1003,8 +1024,8 @@ _DYNAMICSERIESINFORMATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1927,
-  serialized_end=2130,
+  serialized_start=1999,
+  serialized_end=2202,
 )
 
 
@@ -1055,8 +1076,8 @@ _DYNAMICSINGLESERIESUPDATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2132,
-  serialized_end=2228,
+  serialized_start=2204,
+  serialized_end=2300,
 )
 
 
@@ -1109,6 +1130,13 @@ _DYNAMICPROCESSSINGLESERIESUPDATE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='pid', full_name='profilence.zeta.DynamicProcessSingleSeriesUpdate.pid', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1121,8 +1149,8 @@ _DYNAMICPROCESSSINGLESERIESUPDATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2231,
-  serialized_end=2368,
+  serialized_start=2303,
+  serialized_end=2482,
 )
 
 
@@ -1159,8 +1187,8 @@ _DYNAMICCOMPOSITESERIESUPDATE_VALUESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2532,
-  serialized_end=2577,
+  serialized_start=2646,
+  serialized_end=2691,
 )
 
 _DYNAMICCOMPOSITESERIESUPDATE = _descriptor.Descriptor(
@@ -1210,8 +1238,8 @@ _DYNAMICCOMPOSITESERIESUPDATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2371,
-  serialized_end=2577,
+  serialized_start=2485,
+  serialized_end=2691,
 )
 
 
@@ -1248,8 +1276,8 @@ _DYNAMICPROCESSCOMPOSITESERIESUPDATE_VALUESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2532,
-  serialized_end=2577,
+  serialized_start=2646,
+  serialized_end=2691,
 )
 
 _DYNAMICPROCESSCOMPOSITESERIESUPDATE = _descriptor.Descriptor(
@@ -1301,6 +1329,13 @@ _DYNAMICPROCESSCOMPOSITESERIESUPDATE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='pid', full_name='profilence.zeta.DynamicProcessCompositeSeriesUpdate.pid', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1313,8 +1348,8 @@ _DYNAMICPROCESSCOMPOSITESERIESUPDATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2580,
-  serialized_end=2834,
+  serialized_start=2694,
+  serialized_end=2990,
 )
 
 
@@ -1386,8 +1421,8 @@ _DEVICELOGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2837,
-  serialized_end=2978,
+  serialized_start=2993,
+  serialized_end=3134,
 )
 
 
@@ -1424,8 +1459,8 @@ _RESETENTRY_REASONSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3168,
-  serialized_end=3214,
+  serialized_start=3324,
+  serialized_end=3370,
 )
 
 _RESETENTRY_PROPERTIESENTRY = _descriptor.Descriptor(
@@ -1461,8 +1496,8 @@ _RESETENTRY_PROPERTIESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3216,
-  serialized_end=3265,
+  serialized_start=3372,
+  serialized_end=3421,
 )
 
 _RESETENTRY = _descriptor.Descriptor(
@@ -1519,8 +1554,8 @@ _RESETENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2981,
-  serialized_end=3265,
+  serialized_start=3137,
+  serialized_end=3421,
 )
 
 
@@ -1599,8 +1634,8 @@ _EVENTENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3268,
-  serialized_end=3425,
+  serialized_start=3424,
+  serialized_end=3581,
 )
 
 _STARTRUNREQUEST_TAGSENTRY.containing_type = _STARTRUNREQUEST
@@ -1613,10 +1648,12 @@ _NODEUPDATED.fields_by_name['current_run_id'].message_type = wrappers__pb2._STRI
 _NODEUPDATED.fields_by_name['node_state'].message_type = wrappers__pb2._INT32VALUE
 _NODEUPDATED.fields_by_name['pool'].message_type = wrappers__pb2._STRINGVALUE
 _NODEUPDATED.fields_by_name['variables'].message_type = wrappers__pb2._STRINGVALUE
+_DYNAMICPROCESSSINGLESERIESUPDATE.fields_by_name['pid'].message_type = wrappers__pb2._INT32VALUE
 _DYNAMICCOMPOSITESERIESUPDATE_VALUESENTRY.containing_type = _DYNAMICCOMPOSITESERIESUPDATE
 _DYNAMICCOMPOSITESERIESUPDATE.fields_by_name['values'].message_type = _DYNAMICCOMPOSITESERIESUPDATE_VALUESENTRY
 _DYNAMICPROCESSCOMPOSITESERIESUPDATE_VALUESENTRY.containing_type = _DYNAMICPROCESSCOMPOSITESERIESUPDATE
 _DYNAMICPROCESSCOMPOSITESERIESUPDATE.fields_by_name['values'].message_type = _DYNAMICPROCESSCOMPOSITESERIESUPDATE_VALUESENTRY
+_DYNAMICPROCESSCOMPOSITESERIESUPDATE.fields_by_name['pid'].message_type = wrappers__pb2._INT32VALUE
 _RESETENTRY_REASONSENTRY.containing_type = _RESETENTRY
 _RESETENTRY_PROPERTIESENTRY.containing_type = _RESETENTRY
 _RESETENTRY.fields_by_name['reasons'].message_type = _RESETENTRY_REASONSENTRY
@@ -1878,8 +1915,8 @@ _CONNECTORSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=3428,
-  serialized_end=5086,
+  serialized_start=3584,
+  serialized_end=5242,
   methods=[
   _descriptor.MethodDescriptor(
     name='Ping',

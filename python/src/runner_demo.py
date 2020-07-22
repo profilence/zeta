@@ -6,6 +6,7 @@ from subprocess import Popen, PIPE
 __copyright__ = "Copyright 2020 Profilence"
 __license__ = "Apache License, Version 2.0"
 
+
 class DemoRunner:
 
     def __init__(self, device_id):
@@ -78,4 +79,3 @@ class DemoRunner:
         threading.Thread(target=self.run_monkey,
                          args=[client, run_id, project_name, project_version],
                          daemon=True).start()
-

@@ -7,8 +7,9 @@ import grpc
 
 import connector_service_pb2
 import connector_service_pb2_grpc
+import wrappers_pb2
 import empty_pb2
-from connector_types import PingResponseType, TestRequestListenerBase
+from connector_types import PingResponseType, TestRequestListenerBase, TestType
 from profiling_configuration import ProfilingConfiguration
 
 from os import path
@@ -131,6 +132,7 @@ class Connector(object):
             secondary_device_type (str):            Type of the secondary DUT
             profiling_settings (str/TextIOBase):    Profiling settings as JSON string, or a file handle to JSON file
             tags (dict):                            Tags for the test run
+            run_id (str):                           ID of the test run if the run is requested by the server
 
         Returns:
             Test run id (str) on success; None otherwise
@@ -165,15 +167,19 @@ class Connector(object):
             self._log(2, 'RPC failed: %s' % str(e))
         return None
 
-    def on_use_case_start(self, run_id, use_case_name, use_case_id, target_process, requirement_id):
+    def on_use_case_start(self, run_id, use_case_name, use_case_id, test_case_group_name=None, test_set_name=None,
+                          test_type=TestType.NORMAL, target_process=None, requirement_id=None):
         """ Called to notify the service about start of a new use/test case
 
         Parameters:
-            run_id (str):           ID of the test run
-            use_case_name (str):    Name of the use/test case
-            use_case_id (str):      ID of the use/test case
-            target_process (str):   Name of a process to monitor more closely during the use/test case
-            requirement_id (str):   ID of requirement this use/test case verifies
+            run_id (str):               ID of the test run
+            use_case_name (str):        Name of the use/test case
+            use_case_id (str):          ID of the use/test case
+            test_case_group_name (str): Name of the group the use case belongs to (optional)
+            test_set_name (str):        Name of the test suite the use case belongs to (optional)
+            test_type (int):            Type of the use case: Normal, Precondition, PostCondition (Normal by default)
+            target_process (str):       Name of a process to monitor more closely during the use/test case (optional)
+            requirement_id (str):       ID of requirement this use/test case verifies (optional)
 
         Returns:
             True is notification sent successfully; otherwise False
@@ -193,8 +199,12 @@ class Connector(object):
         request.run_id = run_id
         request.use_case_name = use_case_name or ''
         request.use_case_id = use_case_id or ''
+        request.test_case_group_name = test_case_group_name or ''
+        request.test_set_name = test_set_name or ''
+        request.test_type = test_type
         request.target_process = target_process or ''
         request.requirement_id = requirement_id or ''
+
         try:
             self._blockingStub.OnUseCaseStart(request)
             return True
@@ -492,7 +502,7 @@ class Connector(object):
             self._log(2, 'RPC failed: %s' % str(e))
         return False
 
-    def update_single_process_series(self, run_id, series_id, timestamp, package, process, value):
+    def update_single_process_series(self, run_id, series_id, timestamp, package, process, value, pid=None):
         """ Update process specific single series data
 
         Parameters:
@@ -502,6 +512,7 @@ class Connector(object):
             package (str):      Namespace of the package
             process (str):      Name of the process
             value (float):      Y-value
+            pid (int):          ID of the process (optional)
 
         Returns:
             True is data sent successfully; otherwise False
@@ -521,6 +532,12 @@ class Connector(object):
         request.package = package or ''
         request.process = process or ''
         request.value = value
+
+        if pid is not None:
+            pid_value = wrappers_pb2.Int32Value()
+            pid_value.value = pid
+            request.pid = pid_value
+
         try:
             self._blockingStub.UpdateSingleProcessSeries(request)
             return True
@@ -528,7 +545,7 @@ class Connector(object):
             self._log(2, 'RPC failed: %s' % str(e))
         return False
 
-    def update_composite_process_series(self, run_id, series_id, timestamp, package, process, values):
+    def update_composite_process_series(self, run_id, series_id, timestamp, package, process, values, pid=None):
         """ Update process specific composite series data
 
         Parameters:
@@ -538,6 +555,7 @@ class Connector(object):
             package (str):              Namespace of the package
             process (str):              Name of the process
             values (dict[str, float]):  Y-value per column
+            pid (int):                  ID of the process (optional)
 
         Returns:
             True is data sent successfully; otherwise False
@@ -557,6 +575,12 @@ class Connector(object):
         request.package = package or ''
         request.process = process or ''
         request.values.update(values or {})
+
+        if pid is not None:
+            pid_value = wrappers_pb2.Int32Value()
+            pid_value.value = pid
+            request.pid = pid_value
+
         try:
             self._blockingStub.UpdateCompositeProcessSeries(request)
             return True
