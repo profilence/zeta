@@ -143,6 +143,7 @@ import random
 import time
 
 from connector import Connector
+from connector_types import TestType
 
 Connector.log = lambda x, y: print(y)
 
@@ -170,7 +171,7 @@ try:
                 use_case_name = 'use case %d' % i
                 use_case_id = 'id_%d' % i
                 client.log_trace(test_run_id, 'Starting use case %s from python' % use_case_name)
-                client.on_use_case_start(test_run_id, use_case_name, use_case_id, None, None)
+                client.on_use_case_start(test_run_id, use_case_name, use_case_id, 'Dummy group', test_set_name, TestType.NORMAL, None, None)
                 try:
                     for j in range(1, 21):
                         step_name = 'step_%d' % j
