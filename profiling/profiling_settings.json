@@ -42,9 +42,16 @@
       }
    ],
    "deviceSettings":{
-      "deviceSerialXXX":{
-         "propertyX":"valueX",
-         "propertyXX":10
+      "emulator-5554":{
+         "enableChargingCommand":"echo 1 > /sys/class/power_supply/battery/charging_enabled",
+         "disableChargingCommand":"echo 0 > /sys/class/power_supply/battery/charging_enabled",
+         "isChargingEnabledQuery":"v=$(cat /sys/class/power_supply/battery/charging_enabled); if [[ $v == '1' ]]; then echo true; fi",
+         "isChargingControlSupportedQuery":"if [ -w /sys/class/power_supply/battery/charging_enabled ]; then echo true; fi",
+         "PMICCurrentReadPath":"/sys/class/power_supply/battery/current_now",
+         "PMICSamplingIntervalPath":"/sys/module/qpnp_fg/parameters/sram_update_period_ms",
+         "PMICSamplingIntervalMsValue":1500,
+         "PMICCurrentValuesAreMilliamperes":false,
+         "InvertPMICCurrentValues":false
       },
       "deviceSerialYYY":{
          "propertyY":true,
