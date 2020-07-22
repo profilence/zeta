@@ -7,6 +7,7 @@ import com.profilence.zeta.Connector;
 import com.profilence.zeta.ILogger;
 import com.profilence.zeta.LogLevel;
 import com.profilence.zeta.PingResponseType;
+import com.profilence.zeta.TestType;
 
 public class ClientExample {
 
@@ -45,7 +46,7 @@ public class ClientExample {
                         String useCaseName = "use case " + i;
                         String useCaseID = "id_" + i;
                         client.logTrace(testRunID, "Starting use case " + useCaseName + " from java");
-                        client.onUseCaseStart(testRunID, useCaseName, useCaseID, null, null);
+                        client.onUseCaseStart(testRunID, useCaseName, useCaseID, "Dummy group", testSetName, TestType.Normal, null, null);
                         try {
                             for(int j = 1; j <= 20; j++) {
                                 String stepName = "step_" + j;

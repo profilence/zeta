@@ -27,7 +27,7 @@ class MonkeyResult {
 
 public class ClientExample {
 
-	private static final  String NODE_ID = "monkey_node2";
+	private static final  String NODE_ID = "monkey_node";
 	private static final  String POOL = "monkey_pool";
 	private static final  String TYPE = "Android";
 	private static final  String NODE_VARIABLES = "{ \"region\" : \"FI\", \"platform\" : \"Android\", \"operator\" : \"Elisa\", \"product\" : \"Pixel2\", \"external_devices\" : \"power_measure\" }";
@@ -166,7 +166,7 @@ public class ClientExample {
 			  String useCaseID = "id_" + i;
 			  print(useCaseName);
 			  client.logTrace(testRunID, "Starting use case " + useCaseName + " from java");
-			  client.onUseCaseStart(testRunID, useCaseName, useCaseID, null, null);
+			  client.onUseCaseStart(testRunID, useCaseName, useCaseID, "Monkey group", TEST_SET_NAME, TestType.Normal, null, null);
 			  client.onLogStep(testRunID, "Let the monkey loose!", true, false);
 			  MonkeyResult result = runRandomTests(pkg, client, testRunID);
 			  client.onLogStep(testRunID, "capture", true, true);
