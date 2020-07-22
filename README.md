@@ -11,7 +11,7 @@ Architecture
 -----------
 ![image1](https://raw.githubusercontent.com/profilence/zeta/master/images/architecture.png)
 
-***Zeta service*** does all the dirty work with data harvesting and clound connectivity - it can be requested by contacting contact@profilence.com.<br><br>
+***Zeta service*** does all the dirty work with data harvesting and clound connectivity - it can be requested by contacting <a href="mailto: contact@profilence.com" target="_blank">Profilence</a>.<br><br>
 This project contains example implementations (Java and Python) for ***Zeta driver***, which is the gateway from your testing solution to Zeta service, and finally to Profilence cloud services.
 
 Core of the project is the proto file for the GRPC service:
