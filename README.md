@@ -12,7 +12,7 @@ Architecture
 ![image1](https://raw.githubusercontent.com/profilence/zeta/master/images/architecture.png)
 
 ***Zeta service*** does all the dirty work with data harvesting and clound connectivity - it can be requested by contacting contact@profilence.com.<br>
-This project contains example implementations (Java and Python) for ***Zeta driver***.
+This project contains example implementations (Java and Python) for ***Zeta driver***, which is the gateway from your testing solution to Zeta service, and finally to Profilence cloud services.
 
 Core of the project is the proto file for the GRPC service:
 
@@ -62,6 +62,7 @@ import com.profilence.zeta.Connector;
 import com.profilence.zeta.ILogger;
 import com.profilence.zeta.LogLevel;
 import com.profilence.zeta.PingResponseType;
+import com.profilence.zeta.TestType;
 
 public class ClientExample {
 
@@ -100,7 +101,7 @@ public class ClientExample {
                         String useCaseName = "use case " + i;
                         String useCaseID = "id_" + i;
                         client.logTrace(testRunID, "Starting use case " + useCaseName + " from java");
-                        client.onUseCaseStart(testRunID, useCaseName, useCaseID, null, null);
+                        client.onUseCaseStart(testRunID, useCaseName, useCaseID, "Dummy group", testSetName, TestType.Normal, null, null);
                         try {
                             for(int j = 1; j <= 20; j++) {
                                 String stepName = "step_" + j;
