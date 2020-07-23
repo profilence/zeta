@@ -15,6 +15,7 @@
    "systemMemoryProfiling":false,
    "slabs":false,
    "kmemLeak":false,
+   "enableMTKLogger":false,
    "cpuSampling":false,
    "cpuSamplingGlobalProcess":"com.google.chrome",
    "deviceLog":true,
