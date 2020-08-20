@@ -18,6 +18,8 @@ Core of the project is the proto file for the GRPC service:
 
 *./proto/connector_service.proto* and its dependency proto files
 
+[Appium-Pytest-Zeta integration example](https://github.com/profilence/zeta/tree/master/integration/appium-pytest-zeta)
+
 Java client
 -----------
 
