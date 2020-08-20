@@ -2,6 +2,8 @@
 
 This is an example of how Zeta can be integrated into Appium and Pytest. This will be different with other sequencers, but the Appium integration is more or less the same.
 
+**Note**: You should disable logcat capture from Appium, since Zeta does it's own logcat capturing. For disabling Appium logcat you can use `desired_caps['skipLogcatCapture'] = 'true'` when giving Appium webdriver capabilities.
+
 ## Zeta Integration -files
 
 First, move `zeta_integration.py` and `zeta_webdriver.py` in the same folder where your sequencer is. There is also an example 
@@ -112,7 +114,7 @@ In runner file, modify these code blocks. First, add `zeta` and `webdriver` para
         self.webdriver = webdriver
 
 In the `run()` method, do following changes. 
-This will the Zeta instance to the test suite, which will in turn give it to the test case.
+This will add the Zeta instance to the test suite, which will in turn give it to the test case.
 
     with warnings.catch.warnings():
     ....
