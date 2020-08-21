@@ -1,4 +1,4 @@
-﻿# Zeta - Appium integration
+﻿# Zeta - Appium/Pytest integration
 
 This is an example of how Zeta can be integrated into Appium and Pytest. This will be different with other sequencers, but the Appium integration is more or less the same.
 
