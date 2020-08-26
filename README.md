@@ -18,10 +18,6 @@ Core of the project is the proto file for the GRPC service:
 
 *./proto/connector_service.proto* and its dependency proto files
 
-[Appium-Pytest-Zeta integration example](https://github.com/profilence/zeta/tree/master/integration/appium-pytest-zeta)
-
-[Selenium-Pytest-Zeta integration example](https://github.com/profilence/zeta/tree/master/integration/selenium-pytest-zeta)
-
 Java client
 -----------
 
@@ -326,3 +322,9 @@ Output on web UI
 ![image1](https://raw.githubusercontent.com/profilence/zeta/master/images/nodes.png)
 
 See [example](https://github.com/profilence/zeta/blob/master/request_sender/example.py) (Python 3.x) how to trigger tests e.g. from a version control system.
+
+
+Example integrations
+-----------
+
+[Appium-Pytest-Zeta integration example](https://github.com/profilence/zeta/tree/master/integration/appium-pytest-zeta)

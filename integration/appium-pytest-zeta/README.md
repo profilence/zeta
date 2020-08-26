@@ -1,8 +1,8 @@
-﻿# Zeta - Appium integration
+﻿# Zeta - Appium/Pytest integration
 
 This is an example of how Zeta can be integrated into Appium and Pytest. This will be different with other sequencers, but the Appium integration is more or less the same.
 
-**Note**: You should disable logcat capture from Appium, since Zeta does it's own logcat capturing. For disabling Appium logcat you can use `desired_caps['skipLogcatCapture'] = 'true'` when giving Appium webdriver capabilities.
+**Note**: You should disable device log capture from Appium, since Zeta does its own device log capturing. For disabling Appium logcat you can use `desired_caps['skipLogcatCapture'] = 'true'` and `desired_caps['skipLogCapture'] = 'true'` when giving Appium webdriver capabilities.
 
 ## Zeta Integration -files
 
