@@ -87,6 +87,11 @@ In the `selenium\webdriver\remote\webdriver.py` file, find `execute()` method an
                 self.zeta_client.log_trace(self.zeta_test_run_id,str(logtrace))
             params = self._wrap_value(params)
             response = self.command_executor.execute(driver_command, params)
+
+#### Screenshots
+Continuing on `execute()` method, you can get screenshots of possible errors with `self.get_screenshot_as_png()`. This uses the current webdriver to take a screenshot in byte data (even it says as png). Then, you can directly add this method to 
+`self.zeta_client.on_log_step(self.zeta_test_run_id, errormsg,False, self.get_screenshot_as_png())`. No need to save it as a file anywhere, Zeta will read it directly from byte data.
+
             if response:
                 #zeta error handling
                 if self.zeta is not None:
@@ -119,12 +124,19 @@ Lastly, if you want to get used memory amount and logs, find `close()` method an
         :Usage:
             driver.close()
         """
+#### Memory graph
+
+In the `close()` method, we can update a memory graph each time a test is done. This could also be moved after each action in the `execute()` method, if we want faster updating memory graph.
+
         if self.zeta is not None:
             #Zeta integration: get used memory amount 
             memory = self.execute_script("return window.performance.memory.usedJSHeapSize")
             self.zeta_client.update_single_system_series(self.zeta_test_run_id, "Memory", time.time(), memory)
 
             ##TODO: get cpu
+
+#### Device log and events
+Device logs and events are also fetched in the `close()` method.
 
             #Zeta integration: get browser logs
             datas = self.get_log('browser')
