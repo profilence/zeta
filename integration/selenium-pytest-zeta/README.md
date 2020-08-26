@@ -19,7 +19,7 @@ Also, check the `zeta_webdriver.py` file for any necessary settings/capabilities
 	 - `options = webdriver.ChromeOptions()
 options.add_argument("--enable-precise-memory-info")`
 - Disable W3C compliancy! This is important for getting some of the data and avoid errors: 
-	- `options.add_experimental_option('w3c', False)##disable w3c compliancy to get more data`
+	- `options.add_experimental_option('w3c', False)`
 
 
 
