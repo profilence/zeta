@@ -5,15 +5,15 @@ import inspect
 import webhook_listener
 from zeta_webdriver import ZetaWebDriver
 from connector_types import PingResponseType, TestRequestListenerBase, TestType
-from appium import webdriver
+from selenium import webdriver
 
 """
-    This is an example test runner/sequencer, to show how to interface Pytest testcases and Appium Webdriver with Zeta.
+    This is an example test runner/sequencer, to show how to interface Pytest testcases and Selenium Webdriver with Zeta.
 
     1. Initialize Zeta, then try connecting it. If connection is succesful, we go forward.
     2. Generate Test Run ID. 
     3. Load testsuite by loading all the test cases from a folder.
-    4. Run pytest testsuite X times. Give Zeta to both Pytest and Appium.
+    4. Run pytest testsuite X times. Give Zeta to both Pytest and Selenium.
     5. Stop the test
 
     Zeta is injected into the test suite class, where it travels to the test case class to keep up with the setups and teardowns.
@@ -26,17 +26,19 @@ from appium import webdriver
 
 ##TODO: give tests separate groups, testsets etc. Somekind of property for test scripts, that zeta looks for?
 
+browser = 'Chrome'
+
 if __name__ == '__main__':
-    total_runs = 1 #How many times the suite is run.
+    total_runs = 2 #How many times the suite is run.
 
     #Zeta integration class
-    zeta = zeta_integration.ZetaIntegration(test_run_name='zeta_appium_test', 
-                                test_set_name='hello_world',
-                                test_case_group_name='hello_world_group',
+    zeta = zeta_integration.ZetaIntegration(test_run_name='zeta_selenium_test', 
+                                test_set_name='test_selenium_set',
+                                test_case_group_name='test_selenium_test_case',
                                 project_name='test_project',
-                                project_version='125341',
-                                primary_device_serial='emulator-5554',
-                                primary_device_type='Android')
+                                project_version='321321',
+                                primary_device_serial='',
+                                primary_device_type=browser)
     
     zeta.client = zeta.connect()
     print(zeta.test_run_name +  " " + zeta.test_set_name +  " " + zeta.project_name)
@@ -58,8 +60,8 @@ if __name__ == '__main__':
         for i in range(0,total_runs):
             #create test suite from all tests in tests folder
             suite = unittest.TestLoader().discover(start_dir="./tests")
-            #give zeta object to testrunner and zeta interfaced webdriver to appium
-            testcase = unittest.TextTestRunner(verbosity=2, zeta=zeta, webdriver=ZetaWebDriver(zeta=zeta)).run(suite)
+            #give zeta object to testrunner and zeta interfaced webdriver to Selenium
+            testcase = unittest.TextTestRunner(verbosity=2, zeta=zeta, webdriver=ZetaWebDriver(zeta=zeta, browser=browser)).run(suite)
         print("The test run id was: " + str(zeta.test_run_id))
         zeta.client.stop_run(zeta.test_run_id)
         zeta.disconnect()

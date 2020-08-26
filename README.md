@@ -20,6 +20,8 @@ Core of the project is the proto file for the GRPC service:
 
 [Appium-Pytest-Zeta integration example](https://github.com/profilence/zeta/tree/master/integration/appium-pytest-zeta)
 
+[Selenium-Pytest-Zeta integration example](https://github.com/profilence/zeta/tree/master/integration/selenium-pytest-zeta)
+
 Java client
 -----------
 
