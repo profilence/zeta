@@ -326,7 +326,7 @@ class Connector(object):
 
         Parameters:
             run_id (str):                   ID of the test run
-            timestamp (float):              Time (seconds after epoc) when the reset took place
+            timestamp (float):              Time (milliseconds after epoc) when the reset took place
             reset_type (int):               Type of the reset (use ResetType enum)
             reset_reasons (dict):           Reset reasons if known
             system_properties_after (dict): DUT's system properties after the recovered from the reset
@@ -341,7 +341,7 @@ class Connector(object):
 
         request = connector_service_pb2.ResetEntry()
         request.run_id = run_id
-        request.timestamp = timestamp * 1000.0
+        request.timestamp = timestamp
         request.type = reset_type
         request.reasons.update(reset_reasons or {})
         request.properties.update(system_properties_after or {})
@@ -358,7 +358,7 @@ class Connector(object):
 
         Parameters:
             run_id (str):               ID of the test run
-            timestamp (float):          Time (seconds after epoc) when the event took place
+            timestamp (float):          Time (milliseconds after epoc) when the event took place
             event_type (int):           Type of the event (use EventType enum)
             is_system_process (bool):   True if caused by system process; False otherwise
             name (str):                 Name of the event dump
@@ -376,7 +376,7 @@ class Connector(object):
 
         request = connector_service_pb2.EventEntry()
         request.run_id = run_id
-        request.timestamp = timestamp * 1000.0
+        request.timestamp = timestamp
         request.type = event_type
         request.is_system_process = is_system_process
         request.name = name or ''
@@ -443,7 +443,7 @@ class Connector(object):
         Parameters:
             run_id (str):       ID of the test run
             series_id (str):    Unique ID of the series.
-            timestamp (float):  X-value. Time (seconds after epoc)
+            timestamp (float):  X-value. Time (milliseconds after epoc)
             value (float):      Y-value
 
         Returns:
@@ -460,7 +460,7 @@ class Connector(object):
         request = connector_service_pb2.DynamicSingleSeriesUpdate()
         request.run_id = run_id
         request.series_id = series_id
-        request.timestamp = timestamp * 1000.0
+        request.timestamp = timestamp
         request.value = value
 
         try:
@@ -476,7 +476,7 @@ class Connector(object):
         Parameters:
             run_id (str):               ID of the test run
             series_id (str):            Unique ID of the series.
-            timestamp (float):          X-value. Time (seconds after epoc)
+            timestamp (float):          X-value. Time (milliseconds after epoc)
             values (dict[str, float]):  Y-value per column
 
         Returns:
@@ -493,7 +493,7 @@ class Connector(object):
         request = connector_service_pb2.DynamicCompositeSeriesUpdate()
         request.run_id = run_id
         request.series_id = series_id
-        request.timestamp = timestamp * 1000.0
+        request.timestamp = timestamp
         request.values.update(values or {})
         try:
             self._blockingStub.UpdateCompositeSystemSeries(request)
@@ -508,7 +508,7 @@ class Connector(object):
         Parameters:
             run_id (str):       ID of the test run
             series_id (str):    Unique ID of the series.
-            timestamp (float):  X-value. Time (seconds after epoc)
+            timestamp (float):  X-value. Time (milliseconds after epoc)
             package (str):      Namespace of the package
             process (str):      Name of the process
             value (float):      Y-value
@@ -528,7 +528,7 @@ class Connector(object):
         request = connector_service_pb2.DynamicProcessSingleSeriesUpdate()
         request.run_id = run_id
         request.series_id = series_id
-        request.timestamp = timestamp * 1000.0
+        request.timestamp = timestamp
         request.package = package or ''
         request.process = process or ''
         request.value = value
@@ -551,7 +551,7 @@ class Connector(object):
         Parameters:
             run_id (str):               ID of the test run
             series_id (str):            Unique ID of the series.
-            timestamp (float):          X-value. Time (seconds after epoc)
+            timestamp (float):          X-value. Time (milliseconds after epoc)
             package (str):              Namespace of the package
             process (str):              Name of the process
             values (dict[str, float]):  Y-value per column
@@ -571,7 +571,7 @@ class Connector(object):
         request = connector_service_pb2.DynamicProcessCompositeSeriesUpdate()
         request.run_id = run_id
         request.series_id = series_id
-        request.timestamp = timestamp * 1000.0
+        request.timestamp = timestamp
         request.package = package or ''
         request.process = process or ''
         request.values.update(values or {})
@@ -593,7 +593,7 @@ class Connector(object):
 
         Parameters:
             run_id (str):               ID of the test run
-            timestamp (float):          Time (seconds after epoc)
+            timestamp (float):          Time (milliseconds after epoc)
             log_priority (int):         Priority of the log message (use LogPriority enum)
             source_buffer_type (int):   Source buffer of the log message (use SourceBuffer enum)
             tag (str):                  Tag of the message
@@ -611,7 +611,7 @@ class Connector(object):
 
         Parameters:
             run_id (str):               ID of the test run
-            timestamp (float):          Time (seconds after epoc)
+            timestamp (float):          Time (milliseconds after epoc)
             log_priority (int):         Priority of the log message (use LogPriority enum)
             source_buffer_type (int):   Source buffer of the log message (use SourceBuffer enum)
             tag (str):                  Tag of the message
@@ -632,7 +632,7 @@ class Connector(object):
         entry = connector_service_pb2.DeviceLogEntry()
         entry.run_id = run_id
         entry.device_index = device_index
-        entry.timestamp = timestamp * 1000.0
+        entry.timestamp = timestamp
         entry.priority = log_priority
         entry.source_buffer = source_buffer_type
         entry.tag = tag or ''
