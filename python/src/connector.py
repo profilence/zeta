@@ -243,7 +243,7 @@ class Connector(object):
             self._log(2, 'RPC failed: %s' % str(e))
         return False
 
-    def on_log_step(self, run_id, step_name, result, screenshot):
+    def on_log_step(self, run_id, step_name, result, screenshot, step_type):
         """ Called to notify the service about a new step within the use/test case
 
         Parameters:
@@ -268,9 +268,9 @@ class Connector(object):
             elif isinstance(screenshot, str):
                 screenshot_bytes = get_bytes_from_file(screenshot)
 
-        self._on_log_step(run_id, step_name, result, take_screenshot, screenshot_bytes)
+        self._on_log_step(run_id, step_name, result, take_screenshot, screenshot_bytes, step_type)
 
-    def _on_log_step(self, run_id, step_name, result, take_screenshot, screenshot_bytes):
+    def _on_log_step(self, run_id, step_name, result, take_screenshot, screenshot_bytes, step_type):
 
         if run_id is None or len(run_id.strip()) == 0:
             return False
@@ -284,6 +284,9 @@ class Connector(object):
         request.step_name = step_name or ''
         request.result = result
         request.take_screenshot = take_screenshot
+        if step_type == None:
+            step_type = 1
+        request.stepType = step_type
         if screenshot_bytes:
             request.screenshot_bytes = screenshot_bytes
         try:

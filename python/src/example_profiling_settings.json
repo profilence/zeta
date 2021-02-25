@@ -1,0 +1,36 @@
+{
+   "cpuLoad":false,
+   "cpuLoadInterval":1,
+   "cpuStates":false,
+   "powerMeasure":true, 
+   "powerMeasurePrimaryInstrument":"PMIC",   
+   "frameStats":false,
+   "cpuLoadPerCore":false,
+   "thermal":false,
+   "gpuLoad":false,
+   "gpuStates":false,
+   "lightMemoryProfiling":true,
+   "processMemoryProfiling":false,    
+   "slabs":false,
+   "kmemLeak":false,    
+   "lightCPULoadSampling":true,
+   "deviceLog":true,
+   "device2Log":false,
+   "events":true,
+   "resets":true,    
+   "javaStackSampling":false,
+   "stepsSignalStart":true,
+   "disableBatteryChargingDuringTests":true,
+   "deviceSettings":{
+      "*":{
+         "batteryCapacityReadPath":"/sys/class/power_supply/battery/capacity",
+         "enableChargingCommand":"echo 0 > /sys/class/power_supply/battery/input_suspend",
+         "disableChargingCommand":"echo 1 > /sys/class/power_supply/battery/input_suspend",
+         "isChargingEnabledQuery":"v=$(cat /sys/class/power_supply/battery/input_suspend); if [[ $v == '0' ]]; then echo true; fi",
+         "isChargingControlSupportedQuery":"if [ -w /sys/class/power_supply/battery/input_suspend ]; then echo true; fi",
+         "PMICCurrentReadPath":"/sys/class/power_supply/battery/current_now",
+         "PMICVoltageReadPath":"/sys/class/power_supply/battery/voltage_now",
+         "PMICCurrentValueMultiplier":-0.001          
+      }
+   }
+}

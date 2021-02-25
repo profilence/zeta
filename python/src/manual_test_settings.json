@@ -1,0 +1,31 @@
+{   
+    "project": "Manual testing example project",
+    "profilingSettings": "example_profiling_settings.json",
+    "testSet": "Manual testing example test set",
+    "testRunName": "Manual testing example run",
+    "testCases": [
+        {
+            "testGroup": "Calculator",
+            "tests": [
+                {
+                    "testName": "Calculator - Basic calculation",
+                    "targetProcess": "com.google.android.calculator",
+                    "steps": [
+                        {
+                            "stepName": "Open calculator app",
+                            "stepType": "Setup"
+                        },
+                        {
+                            "stepName": "Verify 1+1=2",
+                            "stepType": "Running"
+                        },
+                        {
+                            "stepName": "Close calculator",
+                            "stepType": "TearDown"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

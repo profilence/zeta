@@ -51,6 +51,18 @@ message LogStepRequest {
 	bool result = 3;
 	bool take_screenshot = 4;
 	bytes screenshot_bytes = 5;
+	enum StepType {
+		Idle = 0;
+		Running = 1;
+		Paused = 2;
+		NotStarted = 3;
+		Setup = 4;
+		TearDown = 5;
+		Finished = 6;
+		Aborted = 7;
+		Faulted = 8;
+	}
+	StepType stepType = 6;
 }
 
 message LogTraceRequest {
