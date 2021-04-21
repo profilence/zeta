@@ -209,6 +209,10 @@ message EventEntry {
 	repeated string data = 8;
 }
 
+message PingRunRequest {	
+	string run_id = 1;
+}
+
 service ConnectorService {
 	rpc Ping(PingMessage) returns (PongMessage) { }
 	rpc StartRun(StartRunRequest) returns (StartRunResponse) { }
@@ -230,4 +234,5 @@ service ConnectorService {
 	rpc AddNode(NodeAdded) returns (google.protobuf.Empty) { }
 	rpc RemoveNode(NodeRemoved) returns (google.protobuf.Empty) { }
 	rpc UpdateNode(NodeUpdated) returns (google.protobuf.Empty) { }
+	rpc PingRun(PingRunRequest) returns (google.protobuf.Empty) { }
 }
