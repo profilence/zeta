@@ -1283,6 +1283,33 @@ public class Connector {
 		    }
 	}
 	
+	
+	/**
+	 * Ping run
+	 * @param runID
+	 * @return
+	 */
+	public boolean pingRun(String runID)
+	{
+		
+		if (runID == null || runID.trim().isEmpty()) {
+			return false;
+		}
+		 
+		PingRunRequest.Builder bob = PingRunRequest.newBuilder().setRunId(runID);
+		 
+		PingRunRequest request = bob.build();
+		 
+		try {
+			blockingStub.pingRun(request);
+			return true;
+		} catch (StatusRuntimeException e) {
+			log(LogLevel.Warning, "RPC failed: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	
 	private static byte[] read(File file) throws IOException {
 
 		byte[] buffer = new byte[(int) file.length()];
