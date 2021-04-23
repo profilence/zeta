@@ -849,7 +849,7 @@ class Connector(object):
         if run_id is None or len(run_id.strip()) == 0:
             return False
         
-        request = connector_service_pb2.PingRun()
+        request = connector_service_pb2.PingRunRequest()
         request.run_id = run_id
         
         try:
