@@ -48,4 +48,15 @@ public interface LogStepRequestOrBuilder extends
    * @return The screenshotBytes.
    */
   com.google.protobuf.ByteString getScreenshotBytes();
+
+  /**
+   * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+   * @return The enum numeric value on the wire for stepType.
+   */
+  int getStepTypeValue();
+  /**
+   * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+   * @return The stepType.
+   */
+  com.profilence.zeta.LogStepRequest.StepType getStepType();
 }

@@ -115,6 +115,11 @@ class ConnectorServiceStub(object):
                 request_serializer=connector__service__pb2.NodeUpdated.SerializeToString,
                 response_deserializer=empty__pb2.Empty.FromString,
                 )
+        self.PingRun = channel.unary_unary(
+                '/profilence.zeta.ConnectorService/PingRun',
+                request_serializer=connector__service__pb2.PingRunRequest.SerializeToString,
+                response_deserializer=empty__pb2.Empty.FromString,
+                )
 
 
 class ConnectorServiceServicer(object):
@@ -240,6 +245,12 @@ class ConnectorServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PingRun(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ConnectorServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -341,6 +352,11 @@ def add_ConnectorServiceServicer_to_server(servicer, server):
             'UpdateNode': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateNode,
                     request_deserializer=connector__service__pb2.NodeUpdated.FromString,
+                    response_serializer=empty__pb2.Empty.SerializeToString,
+            ),
+            'PingRun': grpc.unary_unary_rpc_method_handler(
+                    servicer.PingRun,
+                    request_deserializer=connector__service__pb2.PingRunRequest.FromString,
                     response_serializer=empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -689,6 +705,23 @@ class ConnectorService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/profilence.zeta.ConnectorService/UpdateNode',
             connector__service__pb2.NodeUpdated.SerializeToString,
+            empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PingRun(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/profilence.zeta.ConnectorService/PingRun',
+            connector__service__pb2.PingRunRequest.SerializeToString,
             empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

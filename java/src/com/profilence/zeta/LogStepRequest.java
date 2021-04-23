@@ -19,6 +19,7 @@ private static final long serialVersionUID = 0L;
     runId_ = "";
     stepName_ = "";
     screenshotBytes_ = com.google.protobuf.ByteString.EMPTY;
+    stepType_ = 0;
   }
 
   @java.lang.Override
@@ -78,6 +79,12 @@ private static final long serialVersionUID = 0L;
             screenshotBytes_ = input.readBytes();
             break;
           }
+          case 48: {
+            int rawValue = input.readEnum();
+
+            stepType_ = rawValue;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -108,6 +115,173 @@ private static final long serialVersionUID = 0L;
     return com.profilence.zeta.DriverProto.internal_static_profilence_zeta_LogStepRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.profilence.zeta.LogStepRequest.class, com.profilence.zeta.LogStepRequest.Builder.class);
+  }
+
+  /**
+   * Protobuf enum {@code profilence.zeta.LogStepRequest.StepType}
+   */
+  public enum StepType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>Idle = 0;</code>
+     */
+    Idle(0),
+    /**
+     * <code>Running = 1;</code>
+     */
+    Running(1),
+    /**
+     * <code>Paused = 2;</code>
+     */
+    Paused(2),
+    /**
+     * <code>NotStarted = 3;</code>
+     */
+    NotStarted(3),
+    /**
+     * <code>Setup = 4;</code>
+     */
+    Setup(4),
+    /**
+     * <code>TearDown = 5;</code>
+     */
+    TearDown(5),
+    /**
+     * <code>Finished = 6;</code>
+     */
+    Finished(6),
+    /**
+     * <code>Aborted = 7;</code>
+     */
+    Aborted(7),
+    /**
+     * <code>Faulted = 8;</code>
+     */
+    Faulted(8),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>Idle = 0;</code>
+     */
+    public static final int Idle_VALUE = 0;
+    /**
+     * <code>Running = 1;</code>
+     */
+    public static final int Running_VALUE = 1;
+    /**
+     * <code>Paused = 2;</code>
+     */
+    public static final int Paused_VALUE = 2;
+    /**
+     * <code>NotStarted = 3;</code>
+     */
+    public static final int NotStarted_VALUE = 3;
+    /**
+     * <code>Setup = 4;</code>
+     */
+    public static final int Setup_VALUE = 4;
+    /**
+     * <code>TearDown = 5;</code>
+     */
+    public static final int TearDown_VALUE = 5;
+    /**
+     * <code>Finished = 6;</code>
+     */
+    public static final int Finished_VALUE = 6;
+    /**
+     * <code>Aborted = 7;</code>
+     */
+    public static final int Aborted_VALUE = 7;
+    /**
+     * <code>Faulted = 8;</code>
+     */
+    public static final int Faulted_VALUE = 8;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static StepType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static StepType forNumber(int value) {
+      switch (value) {
+        case 0: return Idle;
+        case 1: return Running;
+        case 2: return Paused;
+        case 3: return NotStarted;
+        case 4: return Setup;
+        case 5: return TearDown;
+        case 6: return Finished;
+        case 7: return Aborted;
+        case 8: return Faulted;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<StepType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        StepType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<StepType>() {
+            public StepType findValueByNumber(int number) {
+              return StepType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.profilence.zeta.LogStepRequest.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final StepType[] VALUES = values();
+
+    public static StepType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private StepType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:profilence.zeta.LogStepRequest.StepType)
   }
 
   public static final int RUN_ID_FIELD_NUMBER = 1;
@@ -212,6 +386,25 @@ private static final long serialVersionUID = 0L;
     return screenshotBytes_;
   }
 
+  public static final int STEPTYPE_FIELD_NUMBER = 6;
+  private int stepType_;
+  /**
+   * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+   * @return The enum numeric value on the wire for stepType.
+   */
+  public int getStepTypeValue() {
+    return stepType_;
+  }
+  /**
+   * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+   * @return The stepType.
+   */
+  public com.profilence.zeta.LogStepRequest.StepType getStepType() {
+    @SuppressWarnings("deprecation")
+    com.profilence.zeta.LogStepRequest.StepType result = com.profilence.zeta.LogStepRequest.StepType.valueOf(stepType_);
+    return result == null ? com.profilence.zeta.LogStepRequest.StepType.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -241,6 +434,9 @@ private static final long serialVersionUID = 0L;
     if (!screenshotBytes_.isEmpty()) {
       output.writeBytes(5, screenshotBytes_);
     }
+    if (stepType_ != com.profilence.zeta.LogStepRequest.StepType.Idle.getNumber()) {
+      output.writeEnum(6, stepType_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -268,6 +464,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(5, screenshotBytes_);
     }
+    if (stepType_ != com.profilence.zeta.LogStepRequest.StepType.Idle.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(6, stepType_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -293,6 +493,7 @@ private static final long serialVersionUID = 0L;
         != other.getTakeScreenshot()) return false;
     if (!getScreenshotBytes()
         .equals(other.getScreenshotBytes())) return false;
+    if (stepType_ != other.stepType_) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -316,6 +517,8 @@ private static final long serialVersionUID = 0L;
         getTakeScreenshot());
     hash = (37 * hash) + SCREENSHOT_BYTES_FIELD_NUMBER;
     hash = (53 * hash) + getScreenshotBytes().hashCode();
+    hash = (37 * hash) + STEPTYPE_FIELD_NUMBER;
+    hash = (53 * hash) + stepType_;
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -459,6 +662,8 @@ private static final long serialVersionUID = 0L;
 
       screenshotBytes_ = com.google.protobuf.ByteString.EMPTY;
 
+      stepType_ = 0;
+
       return this;
     }
 
@@ -490,6 +695,7 @@ private static final long serialVersionUID = 0L;
       result.result_ = result_;
       result.takeScreenshot_ = takeScreenshot_;
       result.screenshotBytes_ = screenshotBytes_;
+      result.stepType_ = stepType_;
       onBuilt();
       return result;
     }
@@ -554,6 +760,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getScreenshotBytes() != com.google.protobuf.ByteString.EMPTY) {
         setScreenshotBytes(other.getScreenshotBytes());
+      }
+      if (other.stepType_ != 0) {
+        setStepTypeValue(other.getStepTypeValue());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -825,6 +1034,58 @@ private static final long serialVersionUID = 0L;
     public Builder clearScreenshotBytes() {
       
       screenshotBytes_ = getDefaultInstance().getScreenshotBytes();
+      onChanged();
+      return this;
+    }
+
+    private int stepType_ = 0;
+    /**
+     * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+     * @return The enum numeric value on the wire for stepType.
+     */
+    public int getStepTypeValue() {
+      return stepType_;
+    }
+    /**
+     * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+     * @param value The enum numeric value on the wire for stepType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStepTypeValue(int value) {
+      stepType_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+     * @return The stepType.
+     */
+    public com.profilence.zeta.LogStepRequest.StepType getStepType() {
+      @SuppressWarnings("deprecation")
+      com.profilence.zeta.LogStepRequest.StepType result = com.profilence.zeta.LogStepRequest.StepType.valueOf(stepType_);
+      return result == null ? com.profilence.zeta.LogStepRequest.StepType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+     * @param value The stepType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStepType(com.profilence.zeta.LogStepRequest.StepType value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      stepType_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.profilence.zeta.LogStepRequest.StepType stepType = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStepType() {
+      
+      stepType_ = 0;
       onChanged();
       return this;
     }

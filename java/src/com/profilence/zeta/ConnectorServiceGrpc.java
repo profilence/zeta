@@ -647,6 +647,37 @@ public final class ConnectorServiceGrpc {
     return getUpdateNodeMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.profilence.zeta.PingRunRequest,
+      com.google.protobuf.Empty> getPingRunMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "PingRun",
+      requestType = com.profilence.zeta.PingRunRequest.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.profilence.zeta.PingRunRequest,
+      com.google.protobuf.Empty> getPingRunMethod() {
+    io.grpc.MethodDescriptor<com.profilence.zeta.PingRunRequest, com.google.protobuf.Empty> getPingRunMethod;
+    if ((getPingRunMethod = ConnectorServiceGrpc.getPingRunMethod) == null) {
+      synchronized (ConnectorServiceGrpc.class) {
+        if ((getPingRunMethod = ConnectorServiceGrpc.getPingRunMethod) == null) {
+          ConnectorServiceGrpc.getPingRunMethod = getPingRunMethod =
+              io.grpc.MethodDescriptor.<com.profilence.zeta.PingRunRequest, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "PingRun"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.profilence.zeta.PingRunRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new ConnectorServiceMethodDescriptorSupplier("PingRun"))
+              .build();
+        }
+      }
+    }
+    return getPingRunMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -835,6 +866,13 @@ public final class ConnectorServiceGrpc {
       asyncUnimplementedUnaryCall(getUpdateNodeMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void pingRun(com.profilence.zeta.PingRunRequest request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getPingRunMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -977,6 +1015,13 @@ public final class ConnectorServiceGrpc {
                 com.profilence.zeta.NodeUpdated,
                 com.google.protobuf.Empty>(
                   this, METHODID_UPDATE_NODE)))
+          .addMethod(
+            getPingRunMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.profilence.zeta.PingRunRequest,
+                com.google.protobuf.Empty>(
+                  this, METHODID_PING_RUN)))
           .build();
     }
   }
@@ -1154,6 +1199,14 @@ public final class ConnectorServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getUpdateNodeMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void pingRun(com.profilence.zeta.PingRunRequest request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getPingRunMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -1302,6 +1355,13 @@ public final class ConnectorServiceGrpc {
     public com.google.protobuf.Empty updateNode(com.profilence.zeta.NodeUpdated request) {
       return blockingUnaryCall(
           getChannel(), getUpdateNodeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty pingRun(com.profilence.zeta.PingRunRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getPingRunMethod(), getCallOptions(), request);
     }
   }
 
@@ -1462,6 +1522,14 @@ public final class ConnectorServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getUpdateNodeMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> pingRun(
+        com.profilence.zeta.PingRunRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getPingRunMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_PING = 0;
@@ -1483,7 +1551,8 @@ public final class ConnectorServiceGrpc {
   private static final int METHODID_ADD_NODE = 16;
   private static final int METHODID_REMOVE_NODE = 17;
   private static final int METHODID_UPDATE_NODE = 18;
-  private static final int METHODID_LOG_DEVICE = 19;
+  private static final int METHODID_PING_RUN = 19;
+  private static final int METHODID_LOG_DEVICE = 20;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1578,6 +1647,10 @@ public final class ConnectorServiceGrpc {
           serviceImpl.updateNode((com.profilence.zeta.NodeUpdated) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
+        case METHODID_PING_RUN:
+          serviceImpl.pingRun((com.profilence.zeta.PingRunRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -1662,6 +1735,7 @@ public final class ConnectorServiceGrpc {
               .addMethod(getAddNodeMethod())
               .addMethod(getRemoveNodeMethod())
               .addMethod(getUpdateNodeMethod())
+              .addMethod(getPingRunMethod())
               .build();
         }
       }
