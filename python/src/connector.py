@@ -836,6 +836,29 @@ class Connector(object):
             self._log(2, 'RPC failed: %s' % str(e))
         return False
 
+    def ping_run(self, run_id):
+
+        """ Ping Run
+
+        Parameters:
+            run_id (str):         ID of the local test run
+
+        Returns:
+            True if request was successfully sent to service; otherwise False
+        """
+        if run_id is None or len(run_id.strip()) == 0:
+            return False
+        
+        request = connector_service_pb2.PingRun()
+        request.run_id = run_id
+        
+        try:
+            self._blockingStub.PingRun(request)
+            return True
+        except grpc.RpcError as e:
+            self._log(2, 'RPC failed: %s' % str(e))
+        return False
+
 
 # noinspection PyBroadException
 def get_bytes_from_file(filename):
