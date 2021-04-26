@@ -254,6 +254,7 @@ class Connector(object):
                                             image bytes or path to image file for sending a local screenshot for
                                             the service. If requesting the service to take a screenshot, make sure
                                             it's supported for the DUT platform by the service.
+            step_type (enum):               Value of step type. Values can be found in connector_service_pb2.py under "StepType"
 
         Returns:
             True is notification sent successfully; otherwise False

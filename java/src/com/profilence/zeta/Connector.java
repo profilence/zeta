@@ -550,29 +550,33 @@ public class Connector {
 	 * Notify server about log step
 	 * @param runID
 	 * @param stepName
+	 * @param stepType
 	 * @param result
 	 * @param takeScreenShot
 	 * @return True if successfully notified; false otherwise
 	 */
 	public boolean onLogStep(
 			String runID, 
-			String stepName, 
+			String stepName,
+			LogStepRequest.StepType stepType,
 			boolean result, 
 			boolean takeScreenShot) {
-		return onLogStep(runID, stepName, result, takeScreenShot, null);
+		return onLogStep(runID, stepName, stepType, result, takeScreenShot, null);
 	}
 	
 	/**
 	 * Notify server about log step
 	 * @param runID
 	 * @param stepName
+	 * @param stepType
 	 * @param result
 	 * @param screenShot
 	 * @return True if successfully notified; false otherwise
 	 */
 	public boolean onLogStep (
 			String runID, 
-			String stepName, 
+			String stepName,
+			LogStepRequest.StepType stepType,
 			boolean result, 
 			File screenShot) throws IOException {
 			
@@ -582,29 +586,32 @@ public class Connector {
 			bytes = read(screenShot);
 		}
 				
-		return onLogStep(runID, stepName, result, bytes);
+		return onLogStep(runID, stepName, stepType, result, bytes);
 	}
 	
 	/**
 	 * Notify server about log step
 	 * @param runID
 	 * @param stepName
+	 * @param stepType
 	 * @param result
 	 * @param screenShotBytes
 	 * @return True if successfully notified; false otherwise
 	 */
 	public boolean onLogStep(
 			String runID, 
-			String stepName, 
+			String stepName,
+			LogStepRequest.StepType stepType,
 			boolean result, 
 			byte[] screenShotBytes) {
-		return onLogStep(runID, stepName, result, false, screenShotBytes);
+		return onLogStep(runID, stepName, stepType, result, false, screenShotBytes);
 	}
 	
 	/**
 	 * Notify server about log step
 	 * @param runID
 	 * @param stepName
+	 * @param stepType
 	 * @param result
 	 * @param takeScreenShot
 	 * @param screenShotBytes
@@ -612,7 +619,8 @@ public class Connector {
 	 */
 	private boolean onLogStep(
 			String runID, 
-			String stepName, 
+			String stepName,
+			LogStepRequest.StepType stepType,
 			boolean result, 
 			boolean takeScreenShot,
 			byte[] screenShotBytes) {
@@ -628,6 +636,7 @@ public class Connector {
 		LogStepRequest request = LogStepRequest.newBuilder()
 				.setRunId(runID)
 				.setStepName(stepName)
+				.setStepType(stepType)
 				.setResult(result)
 				.setTakeScreenshot(takeScreenShot)
 				.setScreenshotBytes(ByteString.copyFrom(screenShotBytes != null ? screenShotBytes : new byte[0]))
