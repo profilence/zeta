@@ -3,11 +3,17 @@ from __future__ import print_function
 import random
 import time
 
+from threading import Thread
 from connector import Connector
 from connector_types import TestType
 Connector.log = lambda x, y: print(y)
 
 client = None
+
+def heartbeat(test_run_id):
+    while True:
+        print("Pinging test run: " + str(client.ping_run(test_run_id)))
+        time.sleep(30)
 
 try:
     client = Connector('localhost', 31312)
@@ -22,11 +28,13 @@ try:
         profiling_settings = open('/home/tests/profiling_settings.json')
 
         test_run_id = client.start_run(test_run_name, test_set_name, project_name, project_version,
-                                       target_device_identifier, target_device_type, None, None, profiling_settings, None)
+                                       target_device_identifier, target_device_type, None, None, profiling_settings, None, "")
 
         print('testRunID: %s' % test_run_id)
 
         if test_run_id:
+            thread = Thread(target=heartbeat, args=(test_run_id, ), daemon=True)
+            thread.start()
             for i in range(1, 11):
                 use_case_name = 'use case %d' % i
                 use_case_id = 'id_%d' % i
