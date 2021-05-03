@@ -13,7 +13,11 @@ import com.profilence.zeta.Connector;
 import com.profilence.zeta.ILogger;
 import com.profilence.zeta.ITestRequestListener;
 import com.profilence.zeta.LogLevel;
+import com.profilence.zeta.LogStepRequest;
 import com.profilence.zeta.PingResponseType;
+import com.profilence.zeta.TestType;
+
+import demo.Example.RunPinger;
 
 interface ITestLauncher {
 	void start(String project, String version, String runId);
@@ -26,7 +30,7 @@ class MonkeyResult {
 }
 
 public class ClientExample {
-
+	
 	private static final  String NODE_ID = "monkey_node";
 	private static final  String POOL = "monkey_pool";
 	private static final  String TYPE = "Android";
@@ -37,6 +41,9 @@ public class ClientExample {
 	private static final String DEVICE_TYPE = "android";
 	private static final String DEVICE_ID =  "emulator-5554";
 	private static final File PROFILING_SETTINGS = null;//new File("C:\\work\\profiling_settings.json");
+	
+	//Thread for ping runner
+	private static Thread t = null;
 	
 	private static final int ITERATIONS = 3;
 	
@@ -49,9 +56,9 @@ public class ClientExample {
 	private static List<String> _recents = new ArrayList<>();
 	private static boolean _keepRunning;
 	
-		
-	public static void main(String[] args) throws InterruptedException, IOException {
 	
+	public static void main(String[] args) throws InterruptedException, IOException {
+		
 		Connector.addLogger(new ILogger() {
 			@Override
 			public void onLogMessage(LogLevel level, String message) {
@@ -59,123 +66,133 @@ public class ClientExample {
 			}
 		});
 		
-		boolean createTestNode = true;
-				
-		final Connector client = new Connector("localhost", 31321);
-		try {
-			  PingResponseType response = client.ping();
-			  if (response == PingResponseType.Ok) {
-				  if (createTestNode) {
-				  	  print("Start test listener");
-					  startListener(client, new ITestLauncher() {
-						  public void start(String x, String y, String z) {
-							  startRunner(client, x, y, z);
-						  }
-						  public void stop() {
-							  stopRunner();
-						  }
-					  });
-				  } else {
-					  print("Let the monkey loose");
-					  startRunner(client, "monkey", "2.0", null);
-				  }
-		      } else {
-		    	  print("Service not responding");
-		      }
-	    } finally {
-	    	print("Shutting down");
-	    	client.shutdown();
-	    }
-    	print("Goodbye");
-	}
+		boolean createTestNode = false;
 		
+		
+		final Connector client = new Connector("127.0.0.1", 31312);
+		try {
+			PingResponseType response = client.ping();
+			if (response == PingResponseType.Ok) {
+				if (createTestNode) {
+					print("Start test listener");
+					startListener(client, new ITestLauncher() {
+						public void start(String x, String y, String z) {
+							startRunner(client, x, y, z);
+						}
+						public void stop() {
+							stopRunner();
+						}
+					});
+				} else {
+					print("Let the monkey loose");
+					startRunner(client, "monkey", "2.0", null);
+				}
+			} else {
+				print("Service not responding");
+			}
+		} finally {
+			print("Shutting down");
+			client.shutdown();
+		}
+		print("Goodbye");
+	}
+	
 	public static void startListener(Connector client, final ITestLauncher launcher) throws InterruptedException, IOException {
-   		
-		  if (client.addNode(NODE_ID, POOL, TYPE, NODE_VARIABLES))  {
-			  client.subscribeToTestRequests(new ITestRequestListener( ) {
-				  @Override
-				  public void onTestStartRequested(com.profilence.zeta.TestStartRequest req) {
-					  final String project = req.getProject();
-					  final String version = req.getVersion();
-					  final String runID = req.getRunId();
-					  print("Received request " + runID + " to test version " + version + " for " + project);
-					  (new Thread(new Runnable() {
-						  public void run() {
-							  launcher.start(project, version, runID);
-						  }
-					  })).start();
-					  client.respondToTestRequest(runID, "Started new monkey run", true, null, null);
-				  }			  
-				  @Override
-				  public void onTestStopRequested(com.profilence.zeta.TestStopRequest req) {
-					  launcher.stop();
-				  }
-				  @Override
-				  public void onError(java.lang.Throwable req) {
-				  }		
-				  @Override
-				  public void onCompleted() {
-				  }
-			  });
-			  			  
-			  final boolean[] doRun = { true };
-			  
-			  Thread heartBeat = new Thread(new Runnable() {
-				  public void run() {
-					  while(doRun[0]) {
-						  try {
+		
+		if (client.addNode(NODE_ID, POOL, TYPE, NODE_VARIABLES))  {
+			client.subscribeToTestRequests(new ITestRequestListener( ) {
+				@Override
+				public void onTestStartRequested(com.profilence.zeta.TestStartRequest req) {
+					final String project = req.getProject();
+					final String version = req.getVersion();
+					final String runID = req.getRunId();
+					print("Received request " + runID + " to test version " + version + " for " + project);
+					(new Thread(new Runnable() {
+						public void run() {
+							launcher.start(project, version, runID);
+						}
+					})).start();
+					client.respondToTestRequest(runID, "Started new monkey run", true, null, null);
+				}			  
+				@Override
+				public void onTestStopRequested(com.profilence.zeta.TestStopRequest req) {
+					launcher.stop();
+				}
+				@Override
+				public void onError(java.lang.Throwable req) {
+				}		
+				@Override
+				public void onCompleted() {
+				}
+			});
+			
+			final boolean[] doRun = { true };
+			
+			Thread heartBeat = new Thread(new Runnable() {
+				public void run() {
+					while(doRun[0]) {
+						try {
 							Thread.sleep(1000 * 60);
 						} catch (Exception e) {
 						}
 						if (doRun[0]) {  
 							client.updateNode(NODE_ID, null, null, null, null, POOL, NODE_VARIABLES);
 						}
-					  }
-					  print("Heartbeat stopped");
-				  }
-			  });
-			  
-			  heartBeat.start();
-			  
-			  print("Press any key to stop");
-			  System.in.read();
-			  print("Exiting ...");
-			  
-			  doRun[0] = false;
-			  heartBeat.interrupt();
-			  
-			  print("Removing node ...");
-			  client.removeNode(NODE_ID);
-		  }
+					}
+					print("Heartbeat stopped");
+				}
+			});
+			
+			heartBeat.start();
+			
+			print("Press any key to stop");
+			System.in.read();
+			print("Exiting ...");
+			
+			doRun[0] = false;
+			heartBeat.interrupt();
+			
+			print("Removing node ...");
+			client.removeNode(NODE_ID);
+		}
 	}
-
+	
 	public static void startRunner(Connector client, String projectName, String projectVersion, String testRunID) {
 		
 		_keepRunning = true;
-	  
+		
 		testRunID = client.startRun(TEST_RUN_NAME, TEST_SET_NAME, projectName, projectVersion, DEVICE_ID, DEVICE_TYPE, null, null, PROFILING_SETTINGS, null, testRunID);
 		
 		print("testRunID: " + testRunID);
 		if (testRunID != null) {
-		  for(int i = 1; i <= ITERATIONS + 1; i++) {		  
-			  if (_keepRunning == false) {
-				  break;
-			  }
-			  String pkg = randomizePackage();
-			  String useCaseName = "Monkey goes bananas with " + pkg;
-			  String useCaseID = "id_" + i;
-			  print(useCaseName);
-			  client.logTrace(testRunID, "Starting use case " + useCaseName + " from java");
-			  client.onUseCaseStart(testRunID, useCaseName, useCaseID, "Monkey group", TEST_SET_NAME, TestType.Normal, null, null);
-			  client.onLogStep(testRunID, "Let the monkey loose!", true, false);
-			  MonkeyResult result = runRandomTests(pkg, client, testRunID);
-			  client.onLogStep(testRunID, "capture", true, true);
-			  print("Ending use case ...");
-			  client.onUseCaseEnd(testRunID, result.success, result.runTime, null, false);
-			  print("End.");
-		  }
-		  print("Stopping test run ...");
-		  print("Successfully stopped test run: " + client.stopRun(testRunID, false));
+			RunPinger runPinger = new RunPinger(client, testRunID);
+			t = new Thread(runPinger);
+			t.start();
+			for(int i = 1; i <= ITERATIONS + 1; i++) {		  
+				if (_keepRunning == false) {
+					break;
+				}
+				String pkg = randomizePackage();
+				String useCaseName = "Monkey goes bananas with " + pkg;
+				String useCaseID = "id_" + i;
+				print(useCaseName);
+				client.logTrace(testRunID, "Starting use case " + useCaseName + " from java");
+				client.onUseCaseStart(testRunID, useCaseName, useCaseID, "Monkey group", TEST_SET_NAME, TestType.Normal, null, null);
+				client.onLogStep(testRunID, "Let the monkey loose!", LogStepRequest.StepType.Running, true, false);
+				MonkeyResult result = runRandomTests(pkg, client, testRunID);
+				client.onLogStep(testRunID, "capture", LogStepRequest.StepType.Running, true, true);
+				print("Ending use case ...");
+				client.onUseCaseEnd(testRunID, result.success, result.runTime, null, false);
+				print("End.");
+			}
+			print("Stopping test run ...");
+			print("Successfully stopped test run: " + client.stopRun(testRunID, false));
+			try {
+				runPinger.running = false;
+				t.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -197,15 +214,15 @@ public class ClientExample {
 	
 	private static void stopMonkey() {
 		
-        try {
-        	Process process = new ProcessBuilder("adb","shell", "pkill", "-9", "monkey").start();
-        	InputStream is = process.getInputStream();
-        	InputStreamReader isr = new InputStreamReader(is);
-        	BufferedReader br = new BufferedReader(isr);
-        	String line;
-        	while ((line = br.readLine()) != null) {
-        	  print(line);
-        	}
+		try {
+			Process process = new ProcessBuilder("adb","shell", "pkill", "-9", "monkey").start();
+			InputStream is = process.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String line;
+			while ((line = br.readLine()) != null) {
+				print(line);
+			}
 		} catch (Exception e) {
 		}
 	}
@@ -237,26 +254,26 @@ public class ClientExample {
 	}
 	
 	public static boolean runMonkey(String pkg, long interactions, int throttle, Connector client, String runId) {
-    	boolean success = true;
-        try {
-        	Process process = new ProcessBuilder("adb","shell", "monkey", "-p", pkg, "--ignore-security-exceptions", "--throttle", Integer.toString(throttle), Long.toString(interactions)).start();
-        	InputStream is = process.getInputStream();
-        	InputStreamReader isr = new InputStreamReader(is);
-        	BufferedReader br = new BufferedReader(isr);
-        	String line;
-        	while ((line = br.readLine()) != null) {
-        		if (line != null && line.isEmpty() == false) {
-        			client.logTrace(runId, line);
-              	  	print(line);
-              	  	if (success && (line.contains("** Monkey aborted") || line.contains("// CRASH:") || line.contains("** System appears to have crashed"))) {
-              	  		success = false;
-              	  	}
-        		}        	  
-        	}
+		boolean success = true;
+		try {
+			Process process = new ProcessBuilder("adb","shell", "monkey", "-p", pkg, "--ignore-security-exceptions", "--throttle", Integer.toString(throttle), Long.toString(interactions)).start();
+			InputStream is = process.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String line;
+			while ((line = br.readLine()) != null) {
+				if (line != null && line.isEmpty() == false) {
+					client.logTrace(runId, line);
+					print(line);
+					if (success && (line.contains("** Monkey aborted") || line.contains("// CRASH:") || line.contains("** System appears to have crashed"))) {
+						success = false;
+					}
+				}        	  
+			}
 		} catch (Exception e) {
 			success = false;
 		}
-        return success;
+		return success;
 	}
 	
 	public static void stopRunner() {
@@ -266,5 +283,36 @@ public class ClientExample {
 	
 	public static void print(Object obj) {
 		System.out.println(obj);
+	}
+	
+	//Pings the testrun to keep it alive
+	public static class RunPinger implements Runnable {
+		
+		public boolean running = true;
+		Connector client = null;
+		String testRunID = "";
+		
+		public RunPinger(Connector client, String testRunID) {
+			this.client = client;
+			this.testRunID = testRunID;
+		}
+		
+		public void run() {
+			
+			while (running)
+			{	
+				try 
+				{
+					boolean returnval = client.pingRun(testRunID);
+					print("Pinging test run: " + String.valueOf(returnval));
+					Thread.sleep(30000);
+				} 
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+			
+		}
 	}
 }
