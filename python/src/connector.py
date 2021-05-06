@@ -2,7 +2,7 @@ from __future__ import print_function
 
 import threading
 from io import TextIOBase
-
+import json
 import grpc
 
 import connector_service_pb2
@@ -143,10 +143,14 @@ class Connector(object):
             profiling_settings = profiling_settings.to_json()
         elif profiling_settings and isinstance(profiling_settings, TextIOBase):
             try:
+                json.load(profiling_settings) #validate json file
                 profiling_settings = profiling_settings.read()
             except IOError as ioe:
-                self._log(2, 'File read failed: %s' % str(ioe))
-                return None
+                self._log(2, 'Profiling settings read failed: %s' % str(ioe))
+                return
+            except json.decoder.JSONDecodeError as jsone:
+                self._log(2, 'Invalid JSON file: %s' % str(jsone))
+                return
 
         request = connector_service_pb2.StartRunRequest()
         request.run_name = run_name or ''
