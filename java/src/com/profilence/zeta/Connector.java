@@ -36,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.gson.*;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Empty;
 import com.google.protobuf.Int32Value;
@@ -341,19 +342,36 @@ public class Connector {
 		String settingsJson = null;
 		if (profilingSettingsFile != null && profilingSettingsFile.exists()) {
 		    StringBuilder contentBuilder = new StringBuilder();
-		    try (BufferedReader br = new BufferedReader(new FileReader(profilingSettingsFile))) 
+		    try
 		    {
+		    	BufferedReader br = new BufferedReader(new FileReader(profilingSettingsFile));
+
 		        String sCurrentLine;
+		        
+		        //Validate json
+		        JsonParser.parseReader(br);
+		        
 		        while ((sCurrentLine = br.readLine()) != null) 
 		        {
 		            contentBuilder.append(sCurrentLine).append("\n");
 		        }
-		    } catch (Exception e) { 
+		        settingsJson = contentBuilder.toString();
+		    
 		    } 
-		    settingsJson = contentBuilder.toString();
+		    catch (Exception e) 
+		    {
+		    	log(LogLevel.Warning,"Problem loading profiling settings: " + e.toString());
+		    	return null;
+		    } 
+		    
 		    if (settingsJson != null && settingsJson.trim().isEmpty()) {
 		    	settingsJson = null;
 		    }
+		}
+		else if (profilingSettingsFile != null && !profilingSettingsFile.exists())
+		{
+	    	log(LogLevel.Warning,"Profiling settings file doesn't exist!");
+	    	return null;
 		}
 		return startRun(runName, setName, project, version, primaryDeviceSerial, primaryDeviceType, secondaryDeviceSerial, secondaryDeviceType, settingsJson, tags, runId);
 	}
