@@ -144,12 +144,16 @@ class Connector(object):
         elif profiling_settings and isinstance(profiling_settings, TextIOBase):
             try:
                 json.load(profiling_settings) #validate json file
+                profiling_settings.seek(0)
                 profiling_settings = profiling_settings.read()
             except IOError as ioe:
                 self._log(2, 'Profiling settings read failed: %s' % str(ioe))
                 return
             except json.decoder.JSONDecodeError as jsone:
                 self._log(2, 'Invalid JSON file: %s' % str(jsone))
+                return
+            except Exception as e:
+                self._log(2, 'Unexpected error when reading profiling settings: %s' % str(e))
                 return
 
         request = connector_service_pb2.StartRunRequest()
