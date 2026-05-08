@@ -27,6 +27,8 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -341,22 +343,14 @@ public class Connector {
 		
 		String settingsJson = null;
 		if (profilingSettingsFile != null && profilingSettingsFile.exists()) {
-		    StringBuilder contentBuilder = new StringBuilder();
 		    try
 		    {
-		    	BufferedReader br = new BufferedReader(new FileReader(profilingSettingsFile));
-
-		        String sCurrentLine;
+				byte[] bytes = Files.readAllBytes(profilingSettingsFile.toPath());
+				String content = new String(bytes, StandardCharsets.UTF_8);
 		        
 		        //Validate json
-		        JsonParser.parseReader(br);
-		        
-		        while ((sCurrentLine = br.readLine()) != null) 
-		        {
-		            contentBuilder.append(sCurrentLine).append("\n");
-		        }
-		        settingsJson = contentBuilder.toString();
-		    
+		        JsonParser.parseString(content);
+				settingsJson = content;
 		    } 
 		    catch (Exception e) 
 		    {
@@ -365,6 +359,7 @@ public class Connector {
 		    } 
 		    
 		    if (settingsJson != null && settingsJson.trim().isEmpty()) {
+				log(LogLevel.Warning,"Profiling settings file is empty!");
 		    	settingsJson = null;
 		    }
 		}
