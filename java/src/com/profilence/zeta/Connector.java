@@ -510,7 +510,7 @@ public class Connector {
 				.setTestType(testCaseType.toValue())
 				.setUseCaseId(useCaseID != null ? useCaseID.trim() : "")
 				.setTargetProcess(targetProcess != null ? targetProcess.trim() : "")
-				.setRequirementId(requirementID != null ? requirementID.trim() : "")
+				.setRequirementId(requirementID != null ? requirementID.trim() : useCaseName.trim())
 				.build();
 		
 	    try {
