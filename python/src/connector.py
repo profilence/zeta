@@ -211,7 +211,7 @@ class Connector(object):
         request.test_set_name = test_set_name or ''
         request.test_type = test_type
         request.target_process = target_process or ''
-        request.requirement_id = requirement_id or ''
+        request.requirement_id = requirement_id or use_case_name
 
         try:
             self._blockingStub.OnUseCaseStart(request)
