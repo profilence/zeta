@@ -204,120 +204,121 @@ public final class DriverProto {
       "\000\022\013\n\007Running\020\001\022\n\n\006Paused\020\002\022\016\n\nNotStarted" +
       "\020\003\022\t\n\005Setup\020\004\022\014\n\010TearDown\020\005\022\014\n\010Finished\020" +
       "\006\022\013\n\007Aborted\020\007\022\013\n\007Faulted\020\010\"/\n\017LogTraceR" +
-      "equest\022\016\n\006run_id\030\001 \001(\t\022\014\n\004data\030\002 \001(\t\"v\n\021" +
-      "UseCaseEndRequest\022\016\n\006run_id\030\001 \001(\t\022\016\n\006res" +
-      "ult\030\002 \001(\010\022\025\n\ractiveRunTime\030\003 \001(\003\022\022\n\nfail" +
-      "_cause\030\004 \001(\t\022\026\n\016reset_intended\030\005 \001(\010\"9\n\016" +
-      "StopRunRequest\022\016\n\006run_id\030\001 \001(\t\022\027\n\017discar" +
-      "d_results\030\002 \001(\010\"B\n\031TestRequestMessageWra" +
-      "pper\022\024\n\014request_type\030\001 \001(\005\022\017\n\007payload\030\002 " +
-      "\001(\014\"0\n\017TestStopRequest\022\035\n\025primary_device" +
-      "_serial\030\001 \001(\t\"d\n\021TestStartResponse\022\016\n\006ru" +
-      "n_id\030\001 \001(\t\022\022\n\nfail_cause\030\002 \001(\t\022\013\n\003log\030\003 " +
-      "\003(\t\022\016\n\006result\030\004 \001(\010\022\016\n\006status\030\005 \001(\t\"\211\002\n\020" +
-      "TestStartRequest\022\016\n\006run_id\030\026 \001(\t\022\020\n\010run_" +
-      "name\030\002 \001(\t\022\017\n\007node_id\030\005 \001(\t\022\017\n\007project\030\n" +
-      " \001(\t\022\017\n\007version\030\020 \001(\t\022\032\n\022test_set_file_p" +
-      "ath\030\014 \001(\t\022\017\n\007payload\030\016 \001(\014\0229\n\004tags\030\024 \003(\013" +
-      "2+.profilence.zeta.TestStartRequest.Tags" +
-      "Entry\022\013\n\003log\030\030 \003(\t\032+\n\tTagsEntry\022\013\n\003key\030\001" +
-      " \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"K\n\tNodeAdded\022\017\n\007" +
-      "node_id\030\001 \001(\t\022\014\n\004pool\030\004 \001(\t\022\014\n\004type\030\005 \001(" +
-      "\t\022\021\n\tvariables\030\014 \001(\t\"\036\n\013NodeRemoved\022\017\n\007n" +
-      "ode_id\030\001 \001(\t\"\312\002\n\013NodeUpdated\022\017\n\007node_id\030" +
-      "\001 \001(\t\0226\n\020current_use_case\030\003 \001(\0132\034.google" +
-      ".protobuf.StringValue\022.\n\trun_state\030\004 \001(\013" +
-      "2\033.google.protobuf.Int32Value\0224\n\016current" +
-      "_run_id\030\005 \001(\0132\034.google.protobuf.StringVa" +
-      "lue\022/\n\nnode_state\030\006 \001(\0132\033.google.protobu" +
-      "f.Int32Value\022*\n\004pool\030\007 \001(\0132\034.google.prot" +
-      "obuf.StringValue\022/\n\tvariables\030\010 \001(\0132\034.go" +
-      "ogle.protobuf.StringValue\"\313\001\n\030DynamicSer" +
-      "iesInformation\022\016\n\006run_id\030\001 \001(\t\022\021\n\tseries" +
-      "_id\030\002 \001(\t\022\023\n\013series_name\030\003 \001(\t\022\r\n\005group\030" +
-      "\004 \001(\t\022\023\n\013y_axis_name\030\005 \001(\t\022\014\n\004unit\030\006 \001(\t" +
-      "\022\014\n\004type\030\007 \001(\005\022\021\n\tnamespace\030\010 \001(\t\022\017\n\007pro" +
-      "cess\030\t \001(\t\022\023\n\013description\030\n \001(\t\"`\n\031Dynam" +
-      "icSingleSeriesUpdate\022\016\n\006run_id\030\001 \001(\t\022\021\n\t" +
-      "series_id\030\002 \001(\t\022\021\n\ttimestamp\030\003 \001(\001\022\r\n\005va" +
-      "lue\030\004 \001(\002\"\263\001\n DynamicProcessSingleSeries" +
-      "Update\022\016\n\006run_id\030\001 \001(\t\022\021\n\tseries_id\030\002 \001(" +
-      "\t\022\017\n\007package\030\003 \001(\t\022\017\n\007process\030\004 \001(\t\022\021\n\tt" +
-      "imestamp\030\005 \001(\001\022\r\n\005value\030\006 \001(\002\022(\n\003pid\030\007 \001" +
-      "(\0132\033.google.protobuf.Int32Value\"\316\001\n\034Dyna" +
-      "micCompositeSeriesUpdate\022\016\n\006run_id\030\001 \001(\t" +
-      "\022\021\n\tseries_id\030\002 \001(\t\022\021\n\ttimestamp\030\003 \001(\001\022I" +
-      "\n\006values\030\004 \003(\01329.profilence.zeta.Dynamic" +
-      "CompositeSeriesUpdate.ValuesEntry\032-\n\013Val" +
-      "uesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001" +
-      "\"\250\002\n#DynamicProcessCompositeSeriesUpdate" +
-      "\022\016\n\006run_id\030\001 \001(\t\022\021\n\tseries_id\030\002 \001(\t\022\017\n\007p" +
-      "ackage\030\003 \001(\t\022\017\n\007process\030\004 \001(\t\022\021\n\ttimesta" +
-      "mp\030\005 \001(\001\022P\n\006values\030\006 \003(\0132@.profilence.ze" +
-      "ta.DynamicProcessCompositeSeriesUpdate.V" +
-      "aluesEntry\022(\n\003pid\030\007 \001(\0132\033.google.protobu" +
-      "f.Int32Value\032-\n\013ValuesEntry\022\013\n\003key\030\001 \001(\t" +
-      "\022\r\n\005value\030\002 \001(\002:\0028\001\"\215\001\n\016DeviceLogEntry\022\016" +
-      "\n\006run_id\030\001 \001(\t\022\024\n\014device_index\030\002 \001(\005\022\021\n\t" +
-      "timestamp\030\003 \001(\001\022\013\n\003tag\030\004 \001(\t\022\014\n\004data\030\005 \001" +
-      "(\t\022\020\n\010priority\030\006 \001(\005\022\025\n\rsource_buffer\030\007 " +
-      "\001(\005\"\234\002\n\nResetEntry\022\016\n\006run_id\030\001 \001(\t\022\021\n\tti" +
-      "mestamp\030\002 \001(\001\022\014\n\004type\030\003 \001(\005\0229\n\007reasons\030\004" +
-      " \003(\0132(.profilence.zeta.ResetEntry.Reason" +
-      "sEntry\022?\n\nproperties\030\005 \003(\0132+.profilence." +
-      "zeta.ResetEntry.PropertiesEntry\032.\n\014Reaso" +
-      "nsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032" +
-      "1\n\017PropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value" +
-      "\030\002 \001(\t:\0028\001\"\235\001\n\nEventEntry\022\016\n\006run_id\030\001 \001(" +
-      "\t\022\021\n\ttimestamp\030\002 \001(\001\022\014\n\004type\030\003 \001(\005\022\031\n\021is" +
-      "_system_process\030\004 \001(\010\022\014\n\004name\030\005 \001(\t\022\017\n\007p" +
-      "rocess\030\006 \001(\t\022\026\n\016exception_type\030\007 \001(\t\022\014\n\004" +
-      "data\030\010 \003(\t\" \n\016PingRunRequest\022\016\n\006run_id\030\001" +
-      " \001(\t2\300\r\n\020ConnectorService\022D\n\004Ping\022\034.prof" +
-      "ilence.zeta.PingMessage\032\034.profilence.zet" +
-      "a.PongMessage\"\000\022Q\n\010StartRun\022 .profilence" +
-      ".zeta.StartRunRequest\032!.profilence.zeta." +
-      "StartRunResponse\"\000\022P\n\016OnUseCaseStart\022$.p" +
-      "rofilence.zeta.UseCaseStartRequest\032\026.goo" +
-      "gle.protobuf.Empty\"\000\022F\n\tOnLogStep\022\037.prof" +
-      "ilence.zeta.LogStepRequest\032\026.google.prot" +
-      "obuf.Empty\"\000\022F\n\010LogTrace\022 .profilence.ze" +
-      "ta.LogTraceRequest\032\026.google.protobuf.Emp" +
-      "ty\"\000\022H\n\tLogDevice\022\037.profilence.zeta.Devi" +
-      "ceLogEntry\032\026.google.protobuf.Empty\"\000(\001\022D" +
-      "\n\013NotifyReset\022\033.profilence.zeta.ResetEnt" +
-      "ry\032\026.google.protobuf.Empty\"\000\022D\n\013NotifyEv" +
-      "ent\022\033.profilence.zeta.EventEntry\032\026.googl" +
-      "e.protobuf.Empty\"\000\022L\n\014OnUseCaseEnd\022\".pro" +
-      "filence.zeta.UseCaseEndRequest\032\026.google." +
-      "protobuf.Empty\"\000\022D\n\007StopRun\022\037.profilence" +
-      ".zeta.StopRunRequest\032\026.google.protobuf.E" +
-      "mpty\"\000\022W\n\020CreateTimeSeries\022).profilence." +
-      "zeta.DynamicSeriesInformation\032\026.google.p" +
-      "rotobuf.Empty\"\000\022`\n\030UpdateSingleSystemSer" +
-      "ies\022*.profilence.zeta.DynamicSingleSerie" +
-      "sUpdate\032\026.google.protobuf.Empty\"\000\022h\n\031Upd" +
-      "ateSingleProcessSeries\0221.profilence.zeta" +
-      ".DynamicProcessSingleSeriesUpdate\032\026.goog" +
-      "le.protobuf.Empty\"\000\022f\n\033UpdateCompositeSy" +
-      "stemSeries\022-.profilence.zeta.DynamicComp" +
-      "ositeSeriesUpdate\032\026.google.protobuf.Empt" +
-      "y\"\000\022n\n\034UpdateCompositeProcessSeries\0224.pr" +
-      "ofilence.zeta.DynamicProcessCompositeSer" +
-      "iesUpdate\032\026.google.protobuf.Empty\"\000\022a\n\027S" +
-      "ubscribeToTestRequests\022\026.google.protobuf" +
-      ".Empty\032*.profilence.zeta.TestRequestMess" +
-      "ageWrapper\"\0000\001\022T\n\024RespondToTestRequest\022\"" +
-      ".profilence.zeta.TestStartResponse\032\026.goo" +
-      "gle.protobuf.Empty\"\000\022?\n\007AddNode\022\032.profil" +
-      "ence.zeta.NodeAdded\032\026.google.protobuf.Em" +
-      "pty\"\000\022D\n\nRemoveNode\022\034.profilence.zeta.No" +
-      "deRemoved\032\026.google.protobuf.Empty\"\000\022D\n\nU" +
-      "pdateNode\022\034.profilence.zeta.NodeUpdated\032" +
-      "\026.google.protobuf.Empty\"\000\022D\n\007PingRun\022\037.p" +
-      "rofilence.zeta.PingRunRequest\032\026.google.p" +
-      "rotobuf.Empty\"\000B$\n\023com.profilence.zetaB\013" +
-      "DriverProtoP\001b\006proto3"
+      "equest\022\016\n\006run_id\030\001 \001(\t\022\014\n\004data\030\002 \001(\t\"\251\001\n" +
+      "\021UseCaseEndRequest\022\016\n\006run_id\030\001 \001(\t\022\016\n\006re" +
+      "sult\030\002 \001(\010\022\025\n\ractiveRunTime\030\003 \001(\003\022\022\n\nfai" +
+      "l_cause\030\004 \001(\t\022\026\n\016reset_intended\030\005 \001(\010\022\027\n" +
+      "\017take_screenshot\030\006 \001(\010\022\030\n\020screenshot_byt" +
+      "es\030\007 \001(\014\"9\n\016StopRunRequest\022\016\n\006run_id\030\001 \001" +
+      "(\t\022\027\n\017discard_results\030\002 \001(\010\"B\n\031TestReque" +
+      "stMessageWrapper\022\024\n\014request_type\030\001 \001(\005\022\017" +
+      "\n\007payload\030\002 \001(\014\"0\n\017TestStopRequest\022\035\n\025pr" +
+      "imary_device_serial\030\001 \001(\t\"d\n\021TestStartRe" +
+      "sponse\022\016\n\006run_id\030\001 \001(\t\022\022\n\nfail_cause\030\002 \001" +
+      "(\t\022\013\n\003log\030\003 \003(\t\022\016\n\006result\030\004 \001(\010\022\016\n\006statu" +
+      "s\030\005 \001(\t\"\211\002\n\020TestStartRequest\022\016\n\006run_id\030\026" +
+      " \001(\t\022\020\n\010run_name\030\002 \001(\t\022\017\n\007node_id\030\005 \001(\t\022" +
+      "\017\n\007project\030\n \001(\t\022\017\n\007version\030\020 \001(\t\022\032\n\022tes" +
+      "t_set_file_path\030\014 \001(\t\022\017\n\007payload\030\016 \001(\014\0229" +
+      "\n\004tags\030\024 \003(\0132+.profilence.zeta.TestStart" +
+      "Request.TagsEntry\022\013\n\003log\030\030 \003(\t\032+\n\tTagsEn" +
+      "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"K\n\tN" +
+      "odeAdded\022\017\n\007node_id\030\001 \001(\t\022\014\n\004pool\030\004 \001(\t\022" +
+      "\014\n\004type\030\005 \001(\t\022\021\n\tvariables\030\014 \001(\t\"\036\n\013Node" +
+      "Removed\022\017\n\007node_id\030\001 \001(\t\"\312\002\n\013NodeUpdated" +
+      "\022\017\n\007node_id\030\001 \001(\t\0226\n\020current_use_case\030\003 " +
+      "\001(\0132\034.google.protobuf.StringValue\022.\n\trun" +
+      "_state\030\004 \001(\0132\033.google.protobuf.Int32Valu" +
+      "e\0224\n\016current_run_id\030\005 \001(\0132\034.google.proto" +
+      "buf.StringValue\022/\n\nnode_state\030\006 \001(\0132\033.go" +
+      "ogle.protobuf.Int32Value\022*\n\004pool\030\007 \001(\0132\034" +
+      ".google.protobuf.StringValue\022/\n\tvariable" +
+      "s\030\010 \001(\0132\034.google.protobuf.StringValue\"\313\001" +
+      "\n\030DynamicSeriesInformation\022\016\n\006run_id\030\001 \001" +
+      "(\t\022\021\n\tseries_id\030\002 \001(\t\022\023\n\013series_name\030\003 \001" +
+      "(\t\022\r\n\005group\030\004 \001(\t\022\023\n\013y_axis_name\030\005 \001(\t\022\014" +
+      "\n\004unit\030\006 \001(\t\022\014\n\004type\030\007 \001(\005\022\021\n\tnamespace\030" +
+      "\010 \001(\t\022\017\n\007process\030\t \001(\t\022\023\n\013description\030\n " +
+      "\001(\t\"`\n\031DynamicSingleSeriesUpdate\022\016\n\006run_" +
+      "id\030\001 \001(\t\022\021\n\tseries_id\030\002 \001(\t\022\021\n\ttimestamp" +
+      "\030\003 \001(\001\022\r\n\005value\030\004 \001(\002\"\263\001\n DynamicProcess" +
+      "SingleSeriesUpdate\022\016\n\006run_id\030\001 \001(\t\022\021\n\tse" +
+      "ries_id\030\002 \001(\t\022\017\n\007package\030\003 \001(\t\022\017\n\007proces" +
+      "s\030\004 \001(\t\022\021\n\ttimestamp\030\005 \001(\001\022\r\n\005value\030\006 \001(" +
+      "\002\022(\n\003pid\030\007 \001(\0132\033.google.protobuf.Int32Va" +
+      "lue\"\316\001\n\034DynamicCompositeSeriesUpdate\022\016\n\006" +
+      "run_id\030\001 \001(\t\022\021\n\tseries_id\030\002 \001(\t\022\021\n\ttimes" +
+      "tamp\030\003 \001(\001\022I\n\006values\030\004 \003(\01329.profilence." +
+      "zeta.DynamicCompositeSeriesUpdate.Values" +
+      "Entry\032-\n\013ValuesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
+      "ue\030\002 \001(\002:\0028\001\"\250\002\n#DynamicProcessComposite" +
+      "SeriesUpdate\022\016\n\006run_id\030\001 \001(\t\022\021\n\tseries_i" +
+      "d\030\002 \001(\t\022\017\n\007package\030\003 \001(\t\022\017\n\007process\030\004 \001(" +
+      "\t\022\021\n\ttimestamp\030\005 \001(\001\022P\n\006values\030\006 \003(\0132@.p" +
+      "rofilence.zeta.DynamicProcessCompositeSe" +
+      "riesUpdate.ValuesEntry\022(\n\003pid\030\007 \001(\0132\033.go" +
+      "ogle.protobuf.Int32Value\032-\n\013ValuesEntry\022" +
+      "\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\"\215\001\n\016Devi" +
+      "ceLogEntry\022\016\n\006run_id\030\001 \001(\t\022\024\n\014device_ind" +
+      "ex\030\002 \001(\005\022\021\n\ttimestamp\030\003 \001(\001\022\013\n\003tag\030\004 \001(\t" +
+      "\022\014\n\004data\030\005 \001(\t\022\020\n\010priority\030\006 \001(\005\022\025\n\rsour" +
+      "ce_buffer\030\007 \001(\005\"\234\002\n\nResetEntry\022\016\n\006run_id" +
+      "\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\001\022\014\n\004type\030\003 \001(\005\022" +
+      "9\n\007reasons\030\004 \003(\0132(.profilence.zeta.Reset" +
+      "Entry.ReasonsEntry\022?\n\nproperties\030\005 \003(\0132+" +
+      ".profilence.zeta.ResetEntry.PropertiesEn" +
+      "try\032.\n\014ReasonsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005valu" +
+      "e\030\002 \001(\t:\0028\001\0321\n\017PropertiesEntry\022\013\n\003key\030\001 " +
+      "\001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\235\001\n\nEventEntry\022\016\n" +
+      "\006run_id\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\001\022\014\n\004type" +
+      "\030\003 \001(\005\022\031\n\021is_system_process\030\004 \001(\010\022\014\n\004nam" +
+      "e\030\005 \001(\t\022\017\n\007process\030\006 \001(\t\022\026\n\016exception_ty" +
+      "pe\030\007 \001(\t\022\014\n\004data\030\010 \003(\t\" \n\016PingRunRequest" +
+      "\022\016\n\006run_id\030\001 \001(\t2\300\r\n\020ConnectorService\022D\n" +
+      "\004Ping\022\034.profilence.zeta.PingMessage\032\034.pr" +
+      "ofilence.zeta.PongMessage\"\000\022Q\n\010StartRun\022" +
+      " .profilence.zeta.StartRunRequest\032!.prof" +
+      "ilence.zeta.StartRunResponse\"\000\022P\n\016OnUseC" +
+      "aseStart\022$.profilence.zeta.UseCaseStartR" +
+      "equest\032\026.google.protobuf.Empty\"\000\022F\n\tOnLo" +
+      "gStep\022\037.profilence.zeta.LogStepRequest\032\026" +
+      ".google.protobuf.Empty\"\000\022F\n\010LogTrace\022 .p" +
+      "rofilence.zeta.LogTraceRequest\032\026.google." +
+      "protobuf.Empty\"\000\022H\n\tLogDevice\022\037.profilen" +
+      "ce.zeta.DeviceLogEntry\032\026.google.protobuf" +
+      ".Empty\"\000(\001\022D\n\013NotifyReset\022\033.profilence.z" +
+      "eta.ResetEntry\032\026.google.protobuf.Empty\"\000" +
+      "\022D\n\013NotifyEvent\022\033.profilence.zeta.EventE" +
+      "ntry\032\026.google.protobuf.Empty\"\000\022L\n\014OnUseC" +
+      "aseEnd\022\".profilence.zeta.UseCaseEndReque" +
+      "st\032\026.google.protobuf.Empty\"\000\022D\n\007StopRun\022" +
+      "\037.profilence.zeta.StopRunRequest\032\026.googl" +
+      "e.protobuf.Empty\"\000\022W\n\020CreateTimeSeries\022)" +
+      ".profilence.zeta.DynamicSeriesInformatio" +
+      "n\032\026.google.protobuf.Empty\"\000\022`\n\030UpdateSin" +
+      "gleSystemSeries\022*.profilence.zeta.Dynami" +
+      "cSingleSeriesUpdate\032\026.google.protobuf.Em" +
+      "pty\"\000\022h\n\031UpdateSingleProcessSeries\0221.pro" +
+      "filence.zeta.DynamicProcessSingleSeriesU" +
+      "pdate\032\026.google.protobuf.Empty\"\000\022f\n\033Updat" +
+      "eCompositeSystemSeries\022-.profilence.zeta" +
+      ".DynamicCompositeSeriesUpdate\032\026.google.p" +
+      "rotobuf.Empty\"\000\022n\n\034UpdateCompositeProces" +
+      "sSeries\0224.profilence.zeta.DynamicProcess" +
+      "CompositeSeriesUpdate\032\026.google.protobuf." +
+      "Empty\"\000\022a\n\027SubscribeToTestRequests\022\026.goo" +
+      "gle.protobuf.Empty\032*.profilence.zeta.Tes" +
+      "tRequestMessageWrapper\"\0000\001\022T\n\024RespondToT" +
+      "estRequest\022\".profilence.zeta.TestStartRe" +
+      "sponse\032\026.google.protobuf.Empty\"\000\022?\n\007AddN" +
+      "ode\022\032.profilence.zeta.NodeAdded\032\026.google" +
+      ".protobuf.Empty\"\000\022D\n\nRemoveNode\022\034.profil" +
+      "ence.zeta.NodeRemoved\032\026.google.protobuf." +
+      "Empty\"\000\022D\n\nUpdateNode\022\034.profilence.zeta." +
+      "NodeUpdated\032\026.google.protobuf.Empty\"\000\022D\n" +
+      "\007PingRun\022\037.profilence.zeta.PingRunReques" +
+      "t\032\026.google.protobuf.Empty\"\000B$\n\023com.profi" +
+      "lence.zetaB\013DriverProtoP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -378,7 +379,7 @@ public final class DriverProto {
     internal_static_profilence_zeta_UseCaseEndRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_profilence_zeta_UseCaseEndRequest_descriptor,
-        new java.lang.String[] { "RunId", "Result", "ActiveRunTime", "FailCause", "ResetIntended", });
+        new java.lang.String[] { "RunId", "Result", "ActiveRunTime", "FailCause", "ResetIntended", "TakeScreenshot", "ScreenshotBytes", });
     internal_static_profilence_zeta_StopRunRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_profilence_zeta_StopRunRequest_fieldAccessorTable = new

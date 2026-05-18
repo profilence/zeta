@@ -220,7 +220,7 @@ class Connector(object):
             self._log(2, 'RPC failed: %s' % str(e))
         return False
 
-    def on_use_case_end(self, run_id, result, active_run_time, fail_cause, reset_intended):
+    def on_use_case_end(self, run_id, result, active_run_time, fail_cause, reset_intended, screenshot=None):
         """ Called to notify the service about end of the use/test case
 
         Parameters:
@@ -229,6 +229,8 @@ class Connector(object):
             active_run_time (long):     Time (milliseconds) used active testing during the test
             fail_cause (str):           Fail cause, if any
             reset_intended (bool):      True if a DUT reset was caused by the test; otherwise False
+            screenshot (bool/bytes/str): True to request the service to take a screenshot;
+                                        image bytes or path to image file to send a local screenshot.
 
         Returns:
             True is notification sent successfully; otherwise False
@@ -238,12 +240,23 @@ class Connector(object):
         if run_id is None or len(run_id.strip()) == 0:
             return False
 
+        take_screenshot = isinstance(screenshot, bool) and screenshot is True
+        screenshot_bytes = None
+        if not take_screenshot:
+            if isinstance(screenshot, bytes) and len(screenshot):
+                screenshot_bytes = screenshot
+            elif isinstance(screenshot, str):
+                screenshot_bytes = get_bytes_from_file(screenshot)
+
         request = connector_service_pb2.UseCaseEndRequest()
         request.run_id = run_id
         request.result = result
         request.activeRunTime = int(active_run_time)
         request.fail_cause = fail_cause or ''
         request.reset_intended = reset_intended
+        request.take_screenshot = take_screenshot
+        if screenshot_bytes:
+            request.screenshot_bytes = screenshot_bytes
         try:
             self._blockingStub.OnUseCaseEnd(request)
             return True

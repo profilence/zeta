@@ -76,6 +76,8 @@ message UseCaseEndRequest {
 	int64 activeRunTime = 3;
 	string fail_cause = 4;
 	bool reset_intended = 5;
+	bool take_screenshot = 6;
+	bytes screenshot_bytes = 7;
 }
 
 message StopRunRequest {

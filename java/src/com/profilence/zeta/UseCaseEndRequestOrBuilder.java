@@ -48,4 +48,16 @@ public interface UseCaseEndRequestOrBuilder extends
    * @return The resetIntended.
    */
   boolean getResetIntended();
+
+  /**
+   * <code>bool take_screenshot = 6;</code>
+   * @return The takeScreenshot.
+   */
+  boolean getTakeScreenshot();
+
+  /**
+   * <code>bytes screenshot_bytes = 7;</code>
+   * @return The screenshotBytes.
+   */
+  com.google.protobuf.ByteString getScreenshotBytes();
 }

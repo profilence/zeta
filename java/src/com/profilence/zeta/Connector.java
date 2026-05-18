@@ -537,6 +537,81 @@ public class Connector {
 			long activeRunTime,
 			String failCause,
 			boolean resetIntended) {
+		return onUseCaseEnd(runID, result, activeRunTime, failCause, resetIntended, false, null);
+	}
+
+	/**
+	 * Notify server about use case end
+	 * @param runID
+	 * @param result
+	 * @param activeRunTime
+	 * @param failCause
+	 * @param resetIntended
+	 * @param takeScreenShot True to request the service to take a screenshot
+	 * @return True if successfully notified; false otherwise
+	 */
+	public boolean onUseCaseEnd(
+			String runID,
+			boolean result,
+			long activeRunTime,
+			String failCause,
+			boolean resetIntended,
+			boolean takeScreenShot) {
+		return onUseCaseEnd(runID, result, activeRunTime, failCause, resetIntended, takeScreenShot, null);
+	}
+
+	/**
+	 * Notify server about use case end
+	 * @param runID
+	 * @param result
+	 * @param activeRunTime
+	 * @param failCause
+	 * @param resetIntended
+	 * @param screenShot Screenshot image file to attach
+	 * @return True if successfully notified; false otherwise
+	 */
+	public boolean onUseCaseEnd(
+			String runID,
+			boolean result,
+			long activeRunTime,
+			String failCause,
+			boolean resetIntended,
+			File screenShot) throws IOException {
+		byte[] bytes = null;
+		if (screenShot != null && screenShot.exists() && screenShot.length() > 0) {
+			bytes = read(screenShot);
+		}
+		return onUseCaseEnd(runID, result, activeRunTime, failCause, resetIntended, false, bytes);
+	}
+
+	/**
+	 * Notify server about use case end
+	 * @param runID
+	 * @param result
+	 * @param activeRunTime
+	 * @param failCause
+	 * @param resetIntended
+	 * @param screenShotBytes Screenshot image bytes to attach
+	 * @return True if successfully notified; false otherwise
+	 */
+	public boolean onUseCaseEnd(
+			String runID,
+			boolean result,
+			long activeRunTime,
+			String failCause,
+			boolean resetIntended,
+			byte[] screenShotBytes) {
+		return onUseCaseEnd(runID, result, activeRunTime, failCause, resetIntended, false, screenShotBytes);
+	}
+
+	private boolean onUseCaseEnd(
+			String runID,
+			boolean result,
+			long activeRunTime,
+			String failCause,
+			boolean resetIntended,
+			boolean takeScreenShot,
+			byte[] screenShotBytes) {
 		
 		if (runID == null || runID.trim().isEmpty()) {
 			return false;
@@ -548,6 +623,8 @@ public class Connector {
 				.setActiveRunTime(activeRunTime)
 				.setFailCause(failCause != null ? failCause.trim() : "")
 				.setResetIntended(resetIntended)
+				.setTakeScreenshot(takeScreenShot)
+				.setScreenshotBytes(ByteString.copyFrom(screenShotBytes != null ? screenShotBytes : new byte[0]))
 				.build();
 		
 	    try {
