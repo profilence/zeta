@@ -21,8 +21,8 @@ Core of the project is the proto file for the GRPC service:
 Java client
 -----------
 
-Standalone JAR for the client API can be found at
-./java/bin/zeta-connector-api-1.0.0.jar. The file bundles all the dependency
+Standalone JAR for the client API can be found on
+the releases page. The file bundles all the dependency
 libraries as well. The library can imported to a java project, but can also be
 executed as such for testing the connection to the Zeta service, i.e:
 
@@ -52,7 +52,7 @@ Python driver and code generator have dependency to grpcio-tools package ($ pip 
 Example - Java: integrate analytics to simple sequencer
 -----------
 
-```
+```java
 package demo;
 
 import java.io.File;
@@ -136,7 +136,7 @@ public class ClientExample {
 Example - Python: integrate analytics to simple sequencer
 -----------
 
-```
+```python
 from __future__ import print_function
 
 import random
@@ -200,7 +200,7 @@ finally:
 Example - Java: publish a test cloud node
 -----------
 
-```
+```java
 public static void startListener(Connector client, final ITestLauncher launcher) throws InterruptedException, IOException {
 
       if (client.addNode(NODE_ID, POOL, TYPE, NODE_VARIABLES))  {
@@ -267,7 +267,7 @@ See full Java example from [here](https://github.com/profilence/zeta/blob/master
 Example - Python: publish a test cloud node
 -----------
 
-```
+```python
 import json
 import threading
 import time
